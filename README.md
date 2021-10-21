@@ -84,7 +84,7 @@ CAPES... but for the dining halls.
 
 ## Wireframes
 [Add picture of your hand sketched wireframes in this section]
-<img src="YOUR_WIREFRAME_IMAGE_URL" width=600>
+<img src="![image](https://user-images.githubusercontent.com/67304773/138205046-53a99249-e5d8-431e-b4ba-170782add86b.png)" width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
 
