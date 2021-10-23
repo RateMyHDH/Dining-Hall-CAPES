@@ -15,12 +15,12 @@ CAPES... but for the dining halls.
 
 ### App Evaluation
 [Evaluation of your app across the following attributes]
-- **Category:**
-- **Mobile:**
-- **Story:**
-- **Market:**
-- **Habit:**
-- **Scope:**
+- **Category:** Social
+- **Mobile:** We might adjust the app to include more features.
+- **Story:** This app provides an outlet for students to discuss dining hall quality. Although there are other forms of social media, this app allows students to rate the dining halls and displays the average rating. Wouldn't it be fun to see how much the ratings vary?
+- **Market:** The scale of this app would probably be limited to UCSD students that go to the dining halls. If we manage to implement one of the stretch stories, the scale theoretically would expand to any college/university.
+- **Habit:** The average user may just scroll through discussion threads, but they do have the opportunity to contribute to threads if they find any nice surprises in the dining halls (good or bad, we don't know).
+- **Scope:** The required stories can be completed by the end of the program with reasonable dedication.
 
 ## Product Spec
 
