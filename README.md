@@ -83,18 +83,52 @@ CAPES... but for the dining halls.
     * Home
 
 ## Wireframes
-[Add picture of your hand sketched wireframes in this section]
 <img src="wireframe_img1.png" width=600>
-
-### [BONUS] Digital Wireframes & Mockups
 
 ### [BONUS] Interactive Prototype
 
-## Schema 
-[This section will be completed in Unit 9]
+## Schema
 ### Models
-[Add table of models]
+
+**Post**
+| Property | Type  | Description |
+| -------- | -------- | -------- |
+| id       | String   | unique id for the user post |
+| author   | Pointer to user | post author |
+| image (stretch, also optional) | File | user inputted image |
+
+**Dining Hall**
+| Property | Type  | Description |
+| -------- | -------- | -------- |
+| id (may delete) | String | unique id for the dining hall |
+| rating   | float  | (weighted) average rating of the vendors in the dining hall |
+
+**Vendor**
+| Property | Type  | Description |
+| -------- | -------- | -------- |
+| id (may delete) | String | unique id for the vendor |
+| discussionThread | List<Post> | vendor comments section |
+| rating   | float  | rating of the vendor as a whole |
+
+**User**
+| Property | Type  | Description |
+| -------- | -------- | -------- |
+| id | String | unique id for users |
+| username | String | username |
+| password (biiig stretch) | String | password |
+| image | File | user profile image |
+| postedRatings | Map<Pointer to Dining Hall, integer> | A list of ratings that a user holds for the dining halls |
+
 ### Networking
-- [Add list of network requests by screen ]
+- Home Screen
+    - (Read/GET) Query dining halls, vendors and their ratings
+- Detail Screen
+    - (Delete) Delete existing comment
+- Creation Screen
+    - (Create/POST) Create a new comment on a post
+- Profile Screen
+    - (Read/GET) Query user objects
+    - (Update/PUT) User updates profile image
+
 - [Create basic snippets for each Parse network request]
 - [OPTIONAL: List endpoints if using existing API such as Yelp]
