@@ -50,13 +50,13 @@ CAPES... but for the dining halls.
        * Each dining hall is followed by a list of their respective vendors, which acts as a button into a comment section
     * Profile Fragment (stretch)
         * User can change profile picture and bio
+        * User can change theme, username, password
         * User can logout
-    * Settings Fragment
-        * User can change theme, password, username, profile picture
-* Detail
-    * Upon clicking into individual dining halls, users can rate them individually, view posts
-* Creation
-    * Users can add posts into a dining hall vendor's thread
+* Detail (might be refactored into separate activities)
+    * Posts Fragment
+        * Upon clicking into individual dining halls, users can rate them individually, view posts
+    * Creation Fragment
+        * Users can add posts into a dining hall vendor's thread
 
 ### 3. Navigation
 
@@ -64,7 +64,10 @@ CAPES... but for the dining halls.
 
 * Stream
 * Profile
-* Settings
+
+(These might be removed and refactored into separate activities)
+* Posts
+* Creation
 
 **Flow Navigation** (Screen to Screen)
 
@@ -78,12 +81,10 @@ CAPES... but for the dining halls.
         * Detail
     * Profile Fragment
         * Change name/picture screen (stretch)
-    * Settings Fragment
 * Detail Screen
-    * Creation
-    * Home
-* Creation Screen
-    * Detail
+    * Posts Fragment
+        * Home
+    * Creation Fragment (may change to new activity if switching BottomNavigationViews is tricky)
 
 ## Wireframes
 <img src="unknown.png" width=600>
