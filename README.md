@@ -29,12 +29,13 @@ CAPES... but for the dining halls.
 **Required Must-have Stories**
 
 * Login system for users
-* User can see the individual and average ratings of dining hall places
-* User can click into the dining halls and rate them individually, publish comments, or view discussion threads (like Reddit)
-* Individual restaurant ratings determine the average dining hall rating
+* User can see the ratings of vendors and the average ratings for dining halls
+* User can click into the dining halls and rate them individually, make posts (maybe with pictures)
 
 **Optional Nice-to-have Stories**
 
+* Like system for posts
+* Authenticate user emails with the university
 * Scale to other universities and other dining hall systems
 * Login system redirects users to their appropriate school
 
@@ -42,26 +43,28 @@ CAPES... but for the dining halls.
 
 * Login/Register
    * Login system for users
-   * ...
+   * Register the user if they are not already in the system
 * Home
-   * Dining halls with average ratings
-   * Either list the places at the dining hall underneath, or be able to click into a list of places at the specific dining hall
-   * ...
+    * Stream Fragment
+       * Dining halls with average ratings
+       * Each dining hall is followed by a list of their respective vendors, which acts as a button into a comment section
+    * Profile Fragment (stretch)
+        * User can change profile picture and bio
+        * User can logout
+    * Settings Fragment
+        * User can change theme, password, username, profile picture
 * Detail
-    * Upon clicking into individual dining halls, users can rate them individually, view discussions
+    * Upon clicking into individual dining halls, users can rate them individually, view posts
 * Creation
-    * Users can add comments to discussions
-* Profile (stretch)
-    * User can change profile picture and bio
-* Settings (stretch)
-    * User can change theme
+    * Users can add posts into a dining hall vendor's thread
 
 ### 3. Navigation
 
 **Tab Navigation** (Tab to Screen)
 
-* Home
+* Stream
 * Profile
+* Settings
 
 **Flow Navigation** (Screen to Screen)
 
@@ -71,16 +74,16 @@ CAPES... but for the dining halls.
 * Registration Screen
     * Home
 * Home Screen
-    * Detail
+    * Stream Fragment
+        * Detail
+    * Profile Fragment
+        * Change name/picture screen (stretch)
+    * Settings Fragment
 * Detail Screen
     * Creation
+    * Home
 * Creation Screen
     * Detail
-* Profile Screen
-    * Home
-    * Change name/picture screen (stretch)
-* Settings Screen
-    * Home
 
 ## Wireframes
 <img src="wireframe_img1.png" width=600>
@@ -96,12 +99,14 @@ CAPES... but for the dining halls.
 | id       | String   | unique id for the user post |
 | author   | Pointer to user | post author |
 | image (stretch, also optional) | File | user inputted image |
+| countLikes | int    | like count for a post |
 
 **Dining Hall**
 | Property | Type  | Description |
 | -------- | -------- | -------- |
-| id (may delete) | String | unique id for the dining hall |
+| id | String | unique id for the dining hall |
 | rating   | float  | (weighted) average rating of the vendors in the dining hall |
+| vendors  | List<Pointer to Vendor> | a list of vendors at this dining hall |
 
 **Vendor**
 | Property | Type  | Description |
@@ -115,7 +120,7 @@ CAPES... but for the dining halls.
 | -------- | -------- | -------- |
 | id | String | unique id for users |
 | username | String | username |
-| password (biiig stretch) | String | password |
+| password | String | password |
 | image | File | user profile image |
 | postedRatings | Map<Pointer to Dining Hall, integer> | A list of ratings that a user holds for the dining halls |
 
