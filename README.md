@@ -86,7 +86,7 @@ CAPES... but for the dining halls.
     * Detail
 
 ## Wireframes
-<img src="wireframe_img1.png" width=600>
+<img src="https://imgur.com/a/7CPokgi.jpg" width=600>
 
 ### [BONUS] Interactive Prototype
 
