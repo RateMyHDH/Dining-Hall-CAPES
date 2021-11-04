@@ -3,8 +3,6 @@ package com.example.dining_hall_capes.models;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
-import java.util.List;
-
 @ParseClassName("Vendor")
 public class Vendor extends ParseObject {
 
