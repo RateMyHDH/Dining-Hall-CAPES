@@ -11,6 +11,7 @@ public class Post extends ParseObject {
     public static final String KEY_AUTHOR = "author";
     public static final String KEY_IMAGE = "image";
     public static final String KEY_LIKES = "likes";
+    public static final String KEY_VENDOR = "vendor";
 
     public ParseUser getAuthor() {
         return getParseUser(KEY_AUTHOR);
@@ -34,5 +35,13 @@ public class Post extends ParseObject {
 
     public void setLikes(int likes) {
         put(KEY_LIKES, likes);
+    }
+
+    public ParseObject getVendor() {
+        return getParseObject(KEY_VENDOR);
+    }
+
+    public void setVendor(ParseObject vendor) {
+        put(KEY_VENDOR, vendor);
     }
 }
