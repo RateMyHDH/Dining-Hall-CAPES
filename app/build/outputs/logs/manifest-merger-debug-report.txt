@@ -1,0 +1,255 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:2:1-48:12
+INJECTED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:2:1-48:12
+INJECTED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:2:1-48:12
+INJECTED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:2:1-48:12
+MERGED from [com.google.android.material:material:1.4.0] /Users/alex/.gradle/caches/transforms-3/6f489c911fc9c57927341cda8b3b93f6/transformed/material-1.4.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.1] /Users/alex/.gradle/caches/transforms-3/e2087825bc3474b0471599f6ac05105a/transformed/constraintlayout-2.1.1/AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.appcompat:appcompat:1.3.1] /Users/alex/.gradle/caches/transforms-3/665423287bc7b2f3b0a78c9032552559/transformed/appcompat-1.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/alex/.gradle/caches/transforms-3/d02f93daa877a1eda30fffc98d9ec9bf/transformed/legacy-support-v4-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.github.parse-community.Parse-SDK-Android:parse:1.26.0] /Users/alex/.gradle/caches/transforms-3/11eb63106c06717e931925006485fea7/transformed/jetified-parse-1.26.0/AndroidManifest.xml:10:1-24:12
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/alex/.gradle/caches/transforms-3/6e3df01a939ad1b4ea39edacdc930ed2/transformed/jetified-viewpager2-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.fragment:fragment:1.3.6] /Users/alex/.gradle/caches/transforms-3/65c403d18daf06faa50813cdbfbbd8ef/transformed/fragment-1.3.6/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.activity:activity:1.2.4] /Users/alex/.gradle/caches/transforms-3/d6ffa73f056d3dcef36b6811f92eba86/transformed/jetified-activity-1.2.4/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat-resources:1.3.1] /Users/alex/.gradle/caches/transforms-3/0c053d563567c0716d24c618d794dc28/transformed/jetified-appcompat-resources-1.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/alex/.gradle/caches/transforms-3/f5e82b5ab141053d49f40c4b8b3d544d/transformed/legacy-support-core-ui-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/alex/.gradle/caches/transforms-3/0c06fc1eb743d4b84bee8a66b0a89f4b/transformed/drawerlayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/alex/.gradle/caches/transforms-3/e8f4021d3f059dcd883cb37bb0cb11ee/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/alex/.gradle/caches/transforms-3/6777fb414ed7e2f4f3e7ffe76b5a03ef/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.transition:transition:1.2.0] /Users/alex/.gradle/caches/transforms-3/62462913a0b9c544931a23975026a8f2/transformed/transition-1.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/alex/.gradle/caches/transforms-3/f34853e607c3ebf184f0da73bc243067/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/alex/.gradle/caches/transforms-3/49c2544d790f46c781ee7810c542add2/transformed/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.media:media:1.0.0] /Users/alex/.gradle/caches/transforms-3/9ce015c9a5e44ce3947557a78abe83df/transformed/media-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/alex/.gradle/caches/transforms-3/f19b5f748d7d1d97468b08f74dbdd152/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/alex/.gradle/caches/transforms-3/49fc60d486707e2d1df8d570235b8838/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /Users/alex/.gradle/caches/transforms-3/e61806ed8eb96acf9553472a47b8f1a6/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/alex/.gradle/caches/transforms-3/71674edd512e83cecd532a9b691b46c2/transformed/recyclerview-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/alex/.gradle/caches/transforms-3/1764d1988480dded4cca40ecf3e81df1/transformed/slidingpanelayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.0.0] /Users/alex/.gradle/caches/transforms-3/01297393b40b5fb0f5fbaeb70178c4ee/transformed/customview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/alex/.gradle/caches/transforms-3/1e8166e97559d7a03115453d2e4b7d58/transformed/swiperefreshlayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/alex/.gradle/caches/transforms-3/a4cfbfabb695fdc78988834845b2b6dd/transformed/asynclayoutinflater-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.5.0] /Users/alex/.gradle/caches/transforms-3/b74a31ca681fdeead3d347fa0e5e57c2/transformed/core-1.5.0/AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/alex/.gradle/caches/transforms-3/153bee2db2933c879c45a6cfa4572b71/transformed/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] /Users/alex/.gradle/caches/transforms-3/956f78a7b845c654163848c022cab634/transformed/jetified-lifecycle-viewmodel-savedstate-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.savedstate:savedstate:1.1.0] /Users/alex/.gradle/caches/transforms-3/1c404fed66c07feeb59e00b4bbcc60aa/transformed/jetified-savedstate-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.1] /Users/alex/.gradle/caches/transforms-3/57c11164bea9d4488c5e1dd4cc3567ba/transformed/lifecycle-runtime-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] /Users/alex/.gradle/caches/transforms-3/46e91077f8c922d521937292dd68b4a6/transformed/lifecycle-viewmodel-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/alex/.gradle/caches/transforms-3/390398441a335215ce873c7659736da5/transformed/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/alex/.gradle/caches/transforms-3/3d99575493e1661089e8a315c08ab227/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/alex/.gradle/caches/transforms-3/19fc9dd9fbaa3c0fa5b4ad19b0a59ae3/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/alex/.gradle/caches/transforms-3/da5810129abceafd73b469c870016f45/transformed/lifecycle-livedata-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.1] /Users/alex/.gradle/caches/transforms-3/9259edf8322135f9db0fa3f2d4f857a6/transformed/lifecycle-livedata-core-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/alex/.gradle/caches/transforms-3/a185f461435fe559515c228ff04f4ee9/transformed/core-runtime-2.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/alex/.gradle/caches/transforms-3/0642566505e5b110c9500498a96ce70d/transformed/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/alex/.gradle/caches/transforms-3/110305a92cbadbf9313057a6e2a547fd/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /Users/alex/.gradle/caches/transforms-3/7a40751a7bd275fb0df570e6800b1a7b/transformed/print-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/alex/.gradle/caches/transforms-3/4c4a01ae442d452083fc9825d136cdf7/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.annotation:annotation-experimental:1.0.0] /Users/alex/.gradle/caches/transforms-3/6d52cc146772f4413acb755f0f3986c3/transformed/jetified-annotation-experimental-1.0.0/AndroidManifest.xml:17:1-24:12
+INJECTED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:2:1-48:12
+INJECTED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:2:1-48:12
+INJECTED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:2:1-48:12
+	package
+		ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:3:5-44
+		INJECTED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml
+		ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:2:1-48:12
+		INJECTED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml
+		ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:2:1-48:12
+		INJECTED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:5:5-79
+MERGED from [com.github.parse-community.Parse-SDK-Android:parse:1.26.0] /Users/alex/.gradle/caches/transforms-3/11eb63106c06717e931925006485fea7/transformed/jetified-parse-1.26.0/AndroidManifest.xml:20:5-79
+MERGED from [com.github.parse-community.Parse-SDK-Android:parse:1.26.0] /Users/alex/.gradle/caches/transforms-3/11eb63106c06717e931925006485fea7/transformed/jetified-parse-1.26.0/AndroidManifest.xml:20:5-79
+	android:name
+		ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:5:22-76
+uses-permission#android.permission.INTERNET
+ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:6:5-67
+MERGED from [com.github.parse-community.Parse-SDK-Android:parse:1.26.0] /Users/alex/.gradle/caches/transforms-3/11eb63106c06717e931925006485fea7/transformed/jetified-parse-1.26.0/AndroidManifest.xml:19:5-67
+MERGED from [com.github.parse-community.Parse-SDK-Android:parse:1.26.0] /Users/alex/.gradle/caches/transforms-3/11eb63106c06717e931925006485fea7/transformed/jetified-parse-1.26.0/AndroidManifest.xml:19:5-67
+	android:name
+		ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:6:22-64
+application
+ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:8:5-46:19
+MERGED from [com.google.android.material:material:1.4.0] /Users/alex/.gradle/caches/transforms-3/6f489c911fc9c57927341cda8b3b93f6/transformed/material-1.4.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.4.0] /Users/alex/.gradle/caches/transforms-3/6f489c911fc9c57927341cda8b3b93f6/transformed/material-1.4.0/AndroidManifest.xml:22:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.1] /Users/alex/.gradle/caches/transforms-3/e2087825bc3474b0471599f6ac05105a/transformed/constraintlayout-2.1.1/AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.1] /Users/alex/.gradle/caches/transforms-3/e2087825bc3474b0471599f6ac05105a/transformed/constraintlayout-2.1.1/AndroidManifest.xml:9:5-20
+MERGED from [com.github.parse-community.Parse-SDK-Android:parse:1.26.0] /Users/alex/.gradle/caches/transforms-3/11eb63106c06717e931925006485fea7/transformed/jetified-parse-1.26.0/AndroidManifest.xml:22:5-20
+MERGED from [com.github.parse-community.Parse-SDK-Android:parse:1.26.0] /Users/alex/.gradle/caches/transforms-3/11eb63106c06717e931925006485fea7/transformed/jetified-parse-1.26.0/AndroidManifest.xml:22:5-20
+MERGED from [androidx.core:core:1.5.0] /Users/alex/.gradle/caches/transforms-3/b74a31ca681fdeead3d347fa0e5e57c2/transformed/core-1.5.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.5.0] /Users/alex/.gradle/caches/transforms-3/b74a31ca681fdeead3d347fa0e5e57c2/transformed/core-1.5.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/alex/.gradle/caches/transforms-3/3d99575493e1661089e8a315c08ab227/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/alex/.gradle/caches/transforms-3/3d99575493e1661089e8a315c08ab227/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.5.0] /Users/alex/.gradle/caches/transforms-3/b74a31ca681fdeead3d347fa0e5e57c2/transformed/core-1.5.0/AndroidManifest.xml:24:18-86
+	android:supportsRtl
+		ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:14:9-35
+	android:label
+		ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:11:9-41
+	android:roundIcon
+		ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:13:9-54
+	android:icon
+		ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:10:9-43
+	android:allowBackup
+		ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:9:9-35
+	android:theme
+		ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:15:9-53
+	android:name
+		ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:12:9-41
+activity#com.example.dining_hall_capes.RegisterAccountActivity
+ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:16:9-18:39
+	android:exported
+		ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:18:13-36
+	android:name
+		ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:17:13-52
+activity#com.example.dining_hall_capes.DetailActivity
+ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:19:9-21:39
+	android:exported
+		ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:21:13-36
+	android:name
+		ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:20:13-43
+activity#com.example.dining_hall_capes.LoginActivity
+ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:22:9-30:20
+	android:exported
+		ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:24:13-36
+	android:name
+		ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:23:13-42
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:25:13-29:29
+action#android.intent.action.MAIN
+ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:26:17-69
+	android:name
+		ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:26:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:28:17-77
+	android:name
+		ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:28:27-74
+activity#com.example.dining_hall_capes.MainActivity
+ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:31:9-34:20
+	android:exported
+		ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:33:13-36
+	android:name
+		ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:32:13-41
+meta-data#com.parse.SERVER_URL
+ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:36:9-38:59
+	android:value
+		ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:38:13-56
+	android:name
+		ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:37:13-48
+meta-data#com.parse.APPLICATION_ID
+ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:39:9-41:55
+	android:value
+		ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:41:13-52
+	android:name
+		ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:40:13-52
+meta-data#com.parse.CLIENT_KEY
+ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:42:9-44:59
+	android:value
+		ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:44:13-56
+	android:name
+		ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:43:13-48
+uses-sdk
+INJECTED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml
+INJECTED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml
+MERGED from [com.google.android.material:material:1.4.0] /Users/alex/.gradle/caches/transforms-3/6f489c911fc9c57927341cda8b3b93f6/transformed/material-1.4.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.4.0] /Users/alex/.gradle/caches/transforms-3/6f489c911fc9c57927341cda8b3b93f6/transformed/material-1.4.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.1] /Users/alex/.gradle/caches/transforms-3/e2087825bc3474b0471599f6ac05105a/transformed/constraintlayout-2.1.1/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.1] /Users/alex/.gradle/caches/transforms-3/e2087825bc3474b0471599f6ac05105a/transformed/constraintlayout-2.1.1/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.appcompat:appcompat:1.3.1] /Users/alex/.gradle/caches/transforms-3/665423287bc7b2f3b0a78c9032552559/transformed/appcompat-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat:1.3.1] /Users/alex/.gradle/caches/transforms-3/665423287bc7b2f3b0a78c9032552559/transformed/appcompat-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/alex/.gradle/caches/transforms-3/d02f93daa877a1eda30fffc98d9ec9bf/transformed/legacy-support-v4-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/alex/.gradle/caches/transforms-3/d02f93daa877a1eda30fffc98d9ec9bf/transformed/legacy-support-v4-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.github.parse-community.Parse-SDK-Android:parse:1.26.0] /Users/alex/.gradle/caches/transforms-3/11eb63106c06717e931925006485fea7/transformed/jetified-parse-1.26.0/AndroidManifest.xml:15:5-17:41
+MERGED from [com.github.parse-community.Parse-SDK-Android:parse:1.26.0] /Users/alex/.gradle/caches/transforms-3/11eb63106c06717e931925006485fea7/transformed/jetified-parse-1.26.0/AndroidManifest.xml:15:5-17:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/alex/.gradle/caches/transforms-3/6e3df01a939ad1b4ea39edacdc930ed2/transformed/jetified-viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/alex/.gradle/caches/transforms-3/6e3df01a939ad1b4ea39edacdc930ed2/transformed/jetified-viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.3.6] /Users/alex/.gradle/caches/transforms-3/65c403d18daf06faa50813cdbfbbd8ef/transformed/fragment-1.3.6/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.3.6] /Users/alex/.gradle/caches/transforms-3/65c403d18daf06faa50813cdbfbbd8ef/transformed/fragment-1.3.6/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.2.4] /Users/alex/.gradle/caches/transforms-3/d6ffa73f056d3dcef36b6811f92eba86/transformed/jetified-activity-1.2.4/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.2.4] /Users/alex/.gradle/caches/transforms-3/d6ffa73f056d3dcef36b6811f92eba86/transformed/jetified-activity-1.2.4/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.3.1] /Users/alex/.gradle/caches/transforms-3/0c053d563567c0716d24c618d794dc28/transformed/jetified-appcompat-resources-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.3.1] /Users/alex/.gradle/caches/transforms-3/0c053d563567c0716d24c618d794dc28/transformed/jetified-appcompat-resources-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/alex/.gradle/caches/transforms-3/f5e82b5ab141053d49f40c4b8b3d544d/transformed/legacy-support-core-ui-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/alex/.gradle/caches/transforms-3/f5e82b5ab141053d49f40c4b8b3d544d/transformed/legacy-support-core-ui-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/alex/.gradle/caches/transforms-3/0c06fc1eb743d4b84bee8a66b0a89f4b/transformed/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/alex/.gradle/caches/transforms-3/0c06fc1eb743d4b84bee8a66b0a89f4b/transformed/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/alex/.gradle/caches/transforms-3/e8f4021d3f059dcd883cb37bb0cb11ee/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/alex/.gradle/caches/transforms-3/e8f4021d3f059dcd883cb37bb0cb11ee/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/alex/.gradle/caches/transforms-3/6777fb414ed7e2f4f3e7ffe76b5a03ef/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/alex/.gradle/caches/transforms-3/6777fb414ed7e2f4f3e7ffe76b5a03ef/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.transition:transition:1.2.0] /Users/alex/.gradle/caches/transforms-3/62462913a0b9c544931a23975026a8f2/transformed/transition-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.2.0] /Users/alex/.gradle/caches/transforms-3/62462913a0b9c544931a23975026a8f2/transformed/transition-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/alex/.gradle/caches/transforms-3/f34853e607c3ebf184f0da73bc243067/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/alex/.gradle/caches/transforms-3/f34853e607c3ebf184f0da73bc243067/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/alex/.gradle/caches/transforms-3/49c2544d790f46c781ee7810c542add2/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/alex/.gradle/caches/transforms-3/49c2544d790f46c781ee7810c542add2/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media:media:1.0.0] /Users/alex/.gradle/caches/transforms-3/9ce015c9a5e44ce3947557a78abe83df/transformed/media-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.0.0] /Users/alex/.gradle/caches/transforms-3/9ce015c9a5e44ce3947557a78abe83df/transformed/media-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/alex/.gradle/caches/transforms-3/f19b5f748d7d1d97468b08f74dbdd152/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/alex/.gradle/caches/transforms-3/f19b5f748d7d1d97468b08f74dbdd152/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/alex/.gradle/caches/transforms-3/49fc60d486707e2d1df8d570235b8838/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/alex/.gradle/caches/transforms-3/49fc60d486707e2d1df8d570235b8838/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/alex/.gradle/caches/transforms-3/e61806ed8eb96acf9553472a47b8f1a6/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/alex/.gradle/caches/transforms-3/e61806ed8eb96acf9553472a47b8f1a6/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/alex/.gradle/caches/transforms-3/71674edd512e83cecd532a9b691b46c2/transformed/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/alex/.gradle/caches/transforms-3/71674edd512e83cecd532a9b691b46c2/transformed/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/alex/.gradle/caches/transforms-3/1764d1988480dded4cca40ecf3e81df1/transformed/slidingpanelayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/alex/.gradle/caches/transforms-3/1764d1988480dded4cca40ecf3e81df1/transformed/slidingpanelayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/alex/.gradle/caches/transforms-3/01297393b40b5fb0f5fbaeb70178c4ee/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/alex/.gradle/caches/transforms-3/01297393b40b5fb0f5fbaeb70178c4ee/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/alex/.gradle/caches/transforms-3/1e8166e97559d7a03115453d2e4b7d58/transformed/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/alex/.gradle/caches/transforms-3/1e8166e97559d7a03115453d2e4b7d58/transformed/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/alex/.gradle/caches/transforms-3/a4cfbfabb695fdc78988834845b2b6dd/transformed/asynclayoutinflater-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/alex/.gradle/caches/transforms-3/a4cfbfabb695fdc78988834845b2b6dd/transformed/asynclayoutinflater-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.5.0] /Users/alex/.gradle/caches/transforms-3/b74a31ca681fdeead3d347fa0e5e57c2/transformed/core-1.5.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.5.0] /Users/alex/.gradle/caches/transforms-3/b74a31ca681fdeead3d347fa0e5e57c2/transformed/core-1.5.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/alex/.gradle/caches/transforms-3/153bee2db2933c879c45a6cfa4572b71/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/alex/.gradle/caches/transforms-3/153bee2db2933c879c45a6cfa4572b71/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] /Users/alex/.gradle/caches/transforms-3/956f78a7b845c654163848c022cab634/transformed/jetified-lifecycle-viewmodel-savedstate-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] /Users/alex/.gradle/caches/transforms-3/956f78a7b845c654163848c022cab634/transformed/jetified-lifecycle-viewmodel-savedstate-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.1.0] /Users/alex/.gradle/caches/transforms-3/1c404fed66c07feeb59e00b4bbcc60aa/transformed/jetified-savedstate-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.1.0] /Users/alex/.gradle/caches/transforms-3/1c404fed66c07feeb59e00b4bbcc60aa/transformed/jetified-savedstate-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.1] /Users/alex/.gradle/caches/transforms-3/57c11164bea9d4488c5e1dd4cc3567ba/transformed/lifecycle-runtime-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.1] /Users/alex/.gradle/caches/transforms-3/57c11164bea9d4488c5e1dd4cc3567ba/transformed/lifecycle-runtime-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] /Users/alex/.gradle/caches/transforms-3/46e91077f8c922d521937292dd68b4a6/transformed/lifecycle-viewmodel-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] /Users/alex/.gradle/caches/transforms-3/46e91077f8c922d521937292dd68b4a6/transformed/lifecycle-viewmodel-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/alex/.gradle/caches/transforms-3/390398441a335215ce873c7659736da5/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/alex/.gradle/caches/transforms-3/390398441a335215ce873c7659736da5/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/alex/.gradle/caches/transforms-3/3d99575493e1661089e8a315c08ab227/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/alex/.gradle/caches/transforms-3/3d99575493e1661089e8a315c08ab227/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/alex/.gradle/caches/transforms-3/19fc9dd9fbaa3c0fa5b4ad19b0a59ae3/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/alex/.gradle/caches/transforms-3/19fc9dd9fbaa3c0fa5b4ad19b0a59ae3/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/alex/.gradle/caches/transforms-3/da5810129abceafd73b469c870016f45/transformed/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/alex/.gradle/caches/transforms-3/da5810129abceafd73b469c870016f45/transformed/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.1] /Users/alex/.gradle/caches/transforms-3/9259edf8322135f9db0fa3f2d4f857a6/transformed/lifecycle-livedata-core-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.1] /Users/alex/.gradle/caches/transforms-3/9259edf8322135f9db0fa3f2d4f857a6/transformed/lifecycle-livedata-core-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/alex/.gradle/caches/transforms-3/a185f461435fe559515c228ff04f4ee9/transformed/core-runtime-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/alex/.gradle/caches/transforms-3/a185f461435fe559515c228ff04f4ee9/transformed/core-runtime-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/alex/.gradle/caches/transforms-3/0642566505e5b110c9500498a96ce70d/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/alex/.gradle/caches/transforms-3/0642566505e5b110c9500498a96ce70d/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/alex/.gradle/caches/transforms-3/110305a92cbadbf9313057a6e2a547fd/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/alex/.gradle/caches/transforms-3/110305a92cbadbf9313057a6e2a547fd/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/alex/.gradle/caches/transforms-3/7a40751a7bd275fb0df570e6800b1a7b/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/alex/.gradle/caches/transforms-3/7a40751a7bd275fb0df570e6800b1a7b/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/alex/.gradle/caches/transforms-3/4c4a01ae442d452083fc9825d136cdf7/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/alex/.gradle/caches/transforms-3/4c4a01ae442d452083fc9825d136cdf7/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.0.0] /Users/alex/.gradle/caches/transforms-3/6d52cc146772f4413acb755f0f3986c3/transformed/jetified-annotation-experimental-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.annotation:annotation-experimental:1.0.0] /Users/alex/.gradle/caches/transforms-3/6d52cc146772f4413acb755f0f3986c3/transformed/jetified-annotation-experimental-1.0.0/AndroidManifest.xml:20:5-22:41
+INJECTED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml
+INJECTED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml
+		ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml
+		ADDED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml

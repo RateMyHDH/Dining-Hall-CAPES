@@ -1,0 +1,97 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.dining_hall_capes"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+8-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="30" />
+9-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+11-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:5:5-79
+11-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:5:22-76
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:6:5-67
+12-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:6:22-64
+13
+14    <application
+14-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:8:5-46:19
+15        android:name="com.example.dining_hall_capes.ParseApplication"
+15-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:12:9-41
+16        android:allowBackup="true"
+16-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:9:9-35
+17        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+17-->[androidx.core:core:1.5.0] /Users/alex/.gradle/caches/transforms-3/b74a31ca681fdeead3d347fa0e5e57c2/transformed/core-1.5.0/AndroidManifest.xml:24:18-86
+18        android:debuggable="true"
+19        android:icon="@mipmap/ic_launcher"
+19-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:10:9-43
+20        android:label="@string/app_name"
+20-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:11:9-41
+21        android:roundIcon="@mipmap/ic_launcher_round"
+21-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:13:9-54
+22        android:supportsRtl="true"
+22-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:14:9-35
+23        android:testOnly="true"
+24        android:theme="@style/Theme.DiningHallCapes" >
+24-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:15:9-53
+25        <activity
+25-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:16:9-18:39
+26            android:name="com.example.dining_hall_capes.RegisterAccountActivity"
+26-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:17:13-52
+27            android:exported="true" />
+27-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:18:13-36
+28        <activity
+28-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:19:9-21:39
+29            android:name="com.example.dining_hall_capes.DetailActivity"
+29-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:20:13-43
+30            android:exported="true" />
+30-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:21:13-36
+31        <activity
+31-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:22:9-30:20
+32            android:name="com.example.dining_hall_capes.LoginActivity"
+32-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:23:13-42
+33            android:exported="true" >
+33-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:24:13-36
+34            <intent-filter>
+34-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:25:13-29:29
+35                <action android:name="android.intent.action.MAIN" />
+35-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:26:17-69
+35-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:26:25-66
+36
+37                <category android:name="android.intent.category.LAUNCHER" />
+37-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:28:17-77
+37-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:28:27-74
+38            </intent-filter>
+39        </activity>
+40        <activity
+40-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:31:9-34:20
+41            android:name="com.example.dining_hall_capes.MainActivity"
+41-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:32:13-41
+42            android:exported="true" >
+42-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:33:13-36
+43        </activity>
+44
+45        <meta-data
+45-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:36:9-38:59
+46            android:name="com.parse.SERVER_URL"
+46-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:37:13-48
+47            android:value="@string/back4app_server_url" />
+47-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:38:13-56
+48        <meta-data
+48-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:39:9-41:55
+49            android:name="com.parse.APPLICATION_ID"
+49-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:40:13-52
+50            android:value="@string/back4app_app_id" />
+50-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:41:13-52
+51        <meta-data
+51-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:42:9-44:59
+52            android:name="com.parse.CLIENT_KEY"
+52-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:43:13-48
+53            android:value="@string/back4app_client_key" />
+53-->/Users/alex/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/AndroidManifest.xml:44:13-56
+54    </application>
+55
+56</manifest>
