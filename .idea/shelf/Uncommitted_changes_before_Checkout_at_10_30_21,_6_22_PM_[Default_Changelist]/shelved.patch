@@ -1,0 +1,19 @@
+Index: app/src/main/java/com/example/dining_hall_capes/LoginActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.dining_hall_capes;\n\nimport androidx.appcompat.app.AppCompatActivity;\n\nimport android.os.Bundle;\n\n// this is the LoginActivity\npublic class LoginActivity extends AppCompatActivity {\n\n    @Override\n    protected void onCreate(Bundle savedInstanceState) {\n        super.onCreate(savedInstanceState);\n        setContentView(R.layout.activity_login);\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/dining_hall_capes/LoginActivity.java b/app/src/main/java/com/example/dining_hall_capes/LoginActivity.java
+--- a/app/src/main/java/com/example/dining_hall_capes/LoginActivity.java	(revision 05d5ef78d0738a7d2ebfd05e410e0ad9e047e040)
++++ b/app/src/main/java/com/example/dining_hall_capes/LoginActivity.java	(date 1635643194827)
+@@ -4,7 +4,7 @@
+ 
+ import android.os.Bundle;
+ 
+-// this is the LoginActivity
++// this is a comment on the LoginActivity
+ public class LoginActivity extends AppCompatActivity {
+ 
+     @Override
