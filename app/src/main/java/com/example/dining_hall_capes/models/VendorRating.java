@@ -4,10 +4,10 @@ import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
-@ParseClassName("Rating")
-public class Rating extends ParseObject {
+@ParseClassName("VendorRating")
+public class VendorRating extends ParseObject {
 
-    public static final String KEY_RATING_VALUE = "value";
+    public static final String KEY_RATING_VALUE = "rating";
     // May remove if we can have the user track their own ratings
     public static final String KEY_USER = "user";
     public static final String KEY_VENDOR = "vendor";
