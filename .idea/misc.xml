@@ -5,7 +5,12 @@
       <map>
         <entry key="..\:/Users/tzw20/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/res/layout/activity_detail.xml" value="0.1796875" />
         <entry key="..\:/Users/tzw20/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/res/layout/activity_login.xml" value="0.1796875" />
+        <entry key="..\:/Users/tzw20/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/tzw20/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/res/layout/activity_register_account.xml" value="0.1" />
         <entry key="..\:/Users/tzw20/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/res/layout/fragment_creation.xml" value="0.22" />
+        <entry key="..\:/Users/tzw20/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/res/layout/fragment_posts.xml" value="0.1" />
+        <entry key="..\:/Users/tzw20/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/res/layout/fragment_profile.xml" value="0.1" />
+        <entry key="..\:/Users/tzw20/AndroidStudioProjects/Dining-Hall-CAPES/app/src/main/res/layout/fragment_stream.xml" value="0.1" />
       </map>
     </option>
   </component>
