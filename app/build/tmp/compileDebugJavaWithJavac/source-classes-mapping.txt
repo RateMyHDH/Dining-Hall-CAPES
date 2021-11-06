@@ -22,9 +22,9 @@ com/example/dining_hall_capes/models/DiningHall.java
  com.example.dining_hall_capes.models.DiningHall
 com/example/dining_hall_capes/fragments/ProfileFragment.java
  com.example.dining_hall_capes.fragments.ProfileFragment
-com/example/dining_hall_capes/fragments/PostsFragment.java
- com.example.dining_hall_capes.fragments.PostsFragment
 com/example/dining_hall_capes/LoginActivity.java
  com.example.dining_hall_capes.LoginActivity
  com.example.dining_hall_capes.LoginActivity$1
  com.example.dining_hall_capes.LoginActivity$2
+com/example/dining_hall_capes/fragments/PostsFragment.java
+ com.example.dining_hall_capes.fragments.PostsFragment
