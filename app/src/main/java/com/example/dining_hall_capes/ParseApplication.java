@@ -2,12 +2,23 @@ package com.example.dining_hall_capes;
 
 import android.app.Application;
 
+import com.example.dining_hall_capes.models.DiningHall;
+import com.example.dining_hall_capes.models.Post;
+import com.example.dining_hall_capes.models.Vendor;
+import com.example.dining_hall_capes.models.VendorRating;
 import com.parse.Parse;
+import com.parse.ParseObject;
 
 public class ParseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        ParseObject.registerSubclass(DiningHall.class);
+        ParseObject.registerSubclass(Vendor.class);
+        ParseObject.registerSubclass(Post.class);
+        ParseObject.registerSubclass(VendorRating.class);
+
         Parse.initialize(new Parse.Configuration.Builder(this)
                 .applicationId(getString(R.string.back4app_app_id))
                 .clientKey(getString(R.string.back4app_client_key))
