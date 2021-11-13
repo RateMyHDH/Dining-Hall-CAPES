@@ -40,4 +40,8 @@ dependencies {
     // Parse back4app
     implementation "com.github.parse-community.Parse-SDK-Android:parse:1.26.0"
     implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1' // for logging API calls to LogCat
+
+    // Bottom Navigation
+    implementation "androidx.appcompat:appcompat:${appCompatVersion}"
+    implementation "com.google.android.material:material:${designSupportVersion}"
 }
