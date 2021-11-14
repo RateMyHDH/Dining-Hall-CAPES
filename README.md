@@ -143,5 +143,5 @@ CAPES... but for the dining halls.
 <img src='Sprint1Walkthrough.gif' title='Sprint1 Walkthrough' width='' alt='Video Walkthrough' />
 
 ### Sprint 2 Progress
-<img src='Sprint2.gif' title='Sprint 2 Walkthrough' width='' alt='Video Walkthrough' />
+<img src='sprint2.gif' title='Sprint 2 Walkthrough' width='' alt='Video Walkthrough' />
 
