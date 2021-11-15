@@ -6,8 +6,17 @@ import com.parse.ParseObject;
 @ParseClassName("Vendor")
 public class Vendor extends ParseObject {
 
+    public static final String KEY_NAME = "name";
     public static final String KEY_RATING = "rating";
     public static final String KEY_DINING_HALL = "diningHall";
+
+    public String getName() {
+        return getString(KEY_NAME);
+    }
+
+    public void setName(String name) {
+        put(name, KEY_NAME);
+    }
 
     public double getRating() {
         return getDouble(KEY_RATING);
