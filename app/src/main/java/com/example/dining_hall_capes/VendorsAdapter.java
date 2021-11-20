@@ -40,16 +40,28 @@ public class VendorsAdapter extends RecyclerView.Adapter<VendorsAdapter.ViewHold
         return vendors.size();
     }
 
+    public void clear() {
+        vendors.clear();
+    }
+
+    public void addAll(List<Vendor> newVendors) {
+        vendors.addAll(newVendors);
+        notifyDataSetChanged();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvName;
+        TextView tvVendorName;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            tvVendorName = itemView.findViewById(R.id.tvVendorName);
         }
 
         public void bind(Vendor vendor) {
-            // TODO
+            tvVendorName.setText(vendor.getName());
+            // TODO: add ratings
         }
     }
 }

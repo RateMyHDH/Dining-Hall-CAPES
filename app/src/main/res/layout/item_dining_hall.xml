@@ -5,10 +5,10 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/tvTitle"
+        android:id="@+id/tvDiningHallName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="tvDiningHallName"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="30sp"
         tools:layout_editor_absoluteX="92dp"
@@ -18,13 +18,13 @@
         android:id="@+id/rvVendors"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/ratingBar"
+        android:layout_below="@+id/rbDiningHall"
         android:layout_marginTop="0dp" />
 
     <RatingBar
-        android:id="@+id/ratingBar"
+        android:id="@+id/rbDiningHall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvTitle"
+        android:layout_below="@+id/tvDiningHallName"
         android:layout_marginTop="0dp" />
 </RelativeLayout>
