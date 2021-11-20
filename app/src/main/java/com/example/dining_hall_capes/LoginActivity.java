@@ -1,6 +1,8 @@
 package com.example.dining_hall_capes;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,18 +16,26 @@ import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
+import com.example.dining_hall_capes.models.Post;
+
+import java.util.ArrayList;
+import java.util.List;
+
 // this is the LoginActivity
 public class LoginActivity extends AppCompatActivity {
+
 
     public static final String TAG = "Login Activity";
     private EditText etNewEmail;
     private EditText etPassword;
     private Button btnLogin;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
 
         if(ParseUser.getCurrentUser() != null){
             goMainActivity();
@@ -67,5 +77,6 @@ public class LoginActivity extends AppCompatActivity {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
         finish();
+
     }
-}
+}//DEL EVERYTHING BELOW SCV

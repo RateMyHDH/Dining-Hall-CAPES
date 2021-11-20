@@ -5,6 +5,9 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import java.util.Date;
+import org.parceler.Parcel;
+
 @ParseClassName("Post")
 public class Post extends ParseObject {
 
@@ -12,6 +15,8 @@ public class Post extends ParseObject {
     public static final String KEY_IMAGE = "image";
     public static final String KEY_LIKES = "likes";
     public static final String KEY_VENDOR = "vendor";
+    public static final String KEY_REVIEW = "review";
+    public static final String KEY_CREATED_AT = "createdAt";
 
     public ParseUser getAuthor() {
         return getParseUser(KEY_AUTHOR);
@@ -19,6 +24,14 @@ public class Post extends ParseObject {
 
     public void setAuthor(ParseUser author) {
         put(KEY_AUTHOR, author);
+    }
+
+    public String getReview(){
+        return getString(KEY_REVIEW);
+    }
+
+    public void setReview(String review){
+        put(KEY_REVIEW, review);
     }
 
     public ParseFile getImage() {
@@ -43,5 +56,9 @@ public class Post extends ParseObject {
 
     public void setVendor(ParseObject vendor) {
         put(KEY_VENDOR, vendor);
+    }
+
+    public String getTime(){
+        return getString(KEY_CREATED_AT);
     }
 }
