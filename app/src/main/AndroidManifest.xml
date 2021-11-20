@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DiningHallCapes">
         <activity
+            android:name=".CreationActivity"
+            android:exported="false" />
+        <activity
             android:name=".PostActivity"
             android:exported="false" />
         <activity
@@ -44,6 +47,17 @@
         <meta-data
             android:name="com.parse.CLIENT_KEY"
             android:value="@string/back4app_client_key" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.codepath.fileprovider.pictures"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/fileprovider" />
+        </provider>
+
     </application>
 
 </manifest>
