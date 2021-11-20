@@ -1,19 +1,27 @@
 package com.example.dining_hall_capes.models;
 
+import android.os.Parcelable;
+
 import com.parse.ParseClassName;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import org.parceler.Parcel;
+
 @ParseClassName("Post")
-public class Post extends ParseObject {
+@Parcel
+public class Post extends ParseObject  {
 
     public static final String KEY_AUTHOR = "author";
     public static final String KEY_IMAGE = "image";
     public static final String KEY_LIKES = "likes";
     public static final String KEY_VENDOR = "vendor";
     public static final String KEY_REVIEW = "review";
+//Empty constsuctor for parceler
+    public  Post(){
 
+    }
     public ParseUser getAuthor() {
         return getParseUser(KEY_AUTHOR);
     }
