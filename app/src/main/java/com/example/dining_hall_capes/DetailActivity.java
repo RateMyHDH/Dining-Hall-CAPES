@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.dining_hall_capes.models.Post;
 
 import org.parceler.Parcels;
@@ -28,8 +29,16 @@ public class DetailActivity extends AppCompatActivity {
         ivProfileImage = findViewById(R.id.ivProfileImage);
         tvBody = findViewById(R.id.tvBody);
         ivReviewImage = findViewById(R.id.ivReviewImage);
+
+        Post post = Parcels.unwrap(getIntent().getParcelableExtra("post"));
+        tvUsername.setText(post.getAuthor().getUsername());
+        tvTimestamp.setText(post.getTime());
+        if(post.getAuthor().getParseFile("profilePic") != null){
+            Glide.with(this).load(post.getAuthor().getParseFile("profilePic").getUrl()).into(ivProfileImage);
+        }
+        tvBody.setText(post.getReview());
+        if(post.getParseFile("image") != null){
+            Glide.with(this).load(post.getAuthor().getParseFile("profilePic").getUrl()).into(ivReviewImage);
+        }
     }
-
-    Post post = Parcels.unwrap(getIntent().getParcelableExtra("post"));
-
 }
