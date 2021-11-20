@@ -20,6 +20,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
+
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -40,5 +41,8 @@
         android:layout_marginEnd="89dp"
         android:text="Dining Hall"
         android:textSize="30sp" />
+=======
+        android:layout_height="match_parent" />
+
 
 </RelativeLayout>

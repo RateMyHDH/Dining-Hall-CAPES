@@ -15,8 +15,13 @@ public class Post extends ParseObject {
     public static final String KEY_IMAGE = "image";
     public static final String KEY_LIKES = "likes";
     public static final String KEY_VENDOR = "vendor";
+
 //EMPTY CONSTRUCTOR FOR PARCEL
     public Post(){
+} 
+
+    public static final String KEY_REVIEW = "review";
+
 
     }
     public ParseUser getAuthor() {
@@ -25,6 +30,14 @@ public class Post extends ParseObject {
 
     public void setAuthor(ParseUser author) {
         put(KEY_AUTHOR, author);
+    }
+
+    public String getReview(){
+        return getString(KEY_REVIEW);
+    }
+
+    public void setReview(String review){
+        put(KEY_REVIEW, review);
     }
 
     public ParseFile getImage() {
