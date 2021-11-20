@@ -10,13 +10,22 @@ import org.parceler.Parcel;
 
 @ParseClassName("Post")
 public class Post extends ParseObject {
-
+//LOWER CASE AUTHOR HERE
     public static final String KEY_AUTHOR = "author";
     public static final String KEY_IMAGE = "image";
     public static final String KEY_LIKES = "likes";
     public static final String KEY_VENDOR = "vendor";
-    public static final String KEY_REVIEW = "review";
+
+
+//EMPTY CONSTRUCTOR FOR PARCEL
+    public Post(){
+} 
+
+    public static final String KEY_REVIEW = "reviewBody";
+
+
     public static final String KEY_CREATED_AT = "createdAt";
+
 
     public ParseUser getAuthor() {
         return getParseUser(KEY_AUTHOR);
