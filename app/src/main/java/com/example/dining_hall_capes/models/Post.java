@@ -8,7 +8,7 @@ import com.parse.ParseUser;
 import org.parceler.Parcel;
 
 @ParseClassName("Post")
-@Parcel
+@Parcel(analyze = Post.class)
 public class Post extends ParseObject {
 
     public static final String KEY_AUTHOR = "author";
@@ -22,8 +22,6 @@ public class Post extends ParseObject {
 
     public static final String KEY_REVIEW = "review";
 
-
-    }
     public ParseUser getAuthor() {
         return getParseUser(KEY_AUTHOR);
     }
