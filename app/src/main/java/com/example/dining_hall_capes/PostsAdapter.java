@@ -4,6 +4,7 @@ import com.example.dining_hall_capes.models.*;
 import com.example.*;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcel;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.parse.ParseFile;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,12 +55,14 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
         private TextView tvComment;
         private ImageView pfpImage;
         private RelativeLayout container;
+        private TextView postTime;
     public ViewHolder(@NonNull View itemView){
         super(itemView);
         container = itemView.findViewById(R.id.itemContainer);
         tvUsername = itemView.findViewById(R.id.tvUsername);
         tvComment = itemView.findViewById(R.id.tvComment);
         pfpImage = itemView.findViewById(R.id.ivPFP);
+        postTime = itemView.findViewById(R.id.postTime);
     }
     public void bind(Post post){
         //get post text: tvComment.setText(post.getComment)
@@ -71,7 +76,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
         public void onClick(View view) {
         Intent i = new Intent(context,DetailActivity.class);
         //MAKE OBJECT INTO A PARCELABLE?
-        i.putExtra("post",post);
+        i.putExtra("post", Parcels.wrap(post));
         context.startActivity(i);
         }
 

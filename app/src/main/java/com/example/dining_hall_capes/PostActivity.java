@@ -33,3 +33,6 @@ public class PostActivity extends AppCompatActivity {
         rvPosts.setLayoutManager(new LinearLayoutManager(this));
     }
 }
+//how would i query the posts for the specific dining hall? what would you pass into the intetn
+//Pas in the id of the Vendor and thend o \
+//UJSE VENDOR KEY and given
