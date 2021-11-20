@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import com.example.dining_hall_capes.models.Post;
 
+import org.parceler.Parcels;
+
 public class DetailActivity extends AppCompatActivity {
 
     TextView tvUsername;
@@ -28,7 +30,6 @@ public class DetailActivity extends AppCompatActivity {
         ivReviewImage = findViewById(R.id.ivReviewImage);
     }
 
-    /*Post post = Parcels.unwrap(getIntent().getParcelableExtra("post"));
-    tvUsername.setText(post.getAuthor());
-    tvTimestamp.setText(post.getTime());*/
+    Post post = Parcels.unwrap(getIntent().getParcelableExtra("post"));
+
 }
