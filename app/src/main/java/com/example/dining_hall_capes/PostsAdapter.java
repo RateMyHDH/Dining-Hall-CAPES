@@ -1,18 +1,23 @@
 package com.example.dining_hall_capes;
 import com.example.dining_hall_capes.*;
+import com.example.dining_hall_capes.models.*;
+import com.example.*;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import com.example.dining_hall_capes.models.*;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.parse.ParseFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
@@ -33,22 +38,23 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-    Post post = posts.get(position);
+    Post post  = posts.get(position);
     holder.bind(post);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return posts.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
         private TextView tvUsername;
         private TextView tvComment;
         private ImageView pfpImage;
-
+        private RelativeLayout container;
     public ViewHolder(@NonNull View itemView){
         super(itemView);
+        container = itemView.findViewById(R.id.itemContainer);
         tvUsername = itemView.findViewById(R.id.tvUsername);
         tvComment = itemView.findViewById(R.id.tvComment);
         pfpImage = itemView.findViewById(R.id.ivPFP);
@@ -60,6 +66,17 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
         if(image != null){
             Glide.with(context).load(post.getImage().getUrl()).into(pfpImage);
         }
+    container.setOnClickListener(new View.OnClickListener(){
+        @Override
+        public void onClick(View view) {
+        Intent i = new Intent(context,DetailActivity.class);
+        //MAKE OBJECT INTO A PARCELABLE?
+        i.putExtra("post",post);
+        context.startActivity(i);
+        }
+
+    });
+
     }
 
     }
