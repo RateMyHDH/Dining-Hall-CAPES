@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginStart="20dp"
-    android:layout_marginEnd="20dp"
-    tools:context=".LoginActivity">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        tools:context=".LoginActivity">
 
     <EditText
         android:id="@+id/etNewEmail"
@@ -16,6 +16,7 @@
         android:ems="10"
         android:hint="Username"
         android:inputType="textPersonName"
+        android:minHeight="48dp"
         android:singleLine="false" />
 
     <EditText
@@ -27,15 +28,16 @@
         android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="Password"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:minHeight="48dp" />
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/etPassword"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#00629B"
-        android:text="Login" />
-</RelativeLayout>
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etPassword"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#00629B"
+            android:text="Login" />
+    </RelativeLayout>
