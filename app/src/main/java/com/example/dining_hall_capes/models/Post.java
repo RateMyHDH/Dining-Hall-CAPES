@@ -10,7 +10,7 @@ import org.parceler.Parcel;
 @ParseClassName("Post")
 @Parcel(analyze = Post.class)
 public class Post extends ParseObject {
-
+//LOWER CASE AUTHOR HERE
     public static final String KEY_AUTHOR = "author";
     public static final String KEY_IMAGE = "image";
     public static final String KEY_LIKES = "likes";
@@ -20,7 +20,7 @@ public class Post extends ParseObject {
     public Post(){
 } 
 
-    public static final String KEY_REVIEW = "review";
+    public static final String KEY_REVIEW = "reviewBody";
 
     public ParseUser getAuthor() {
         return getParseUser(KEY_AUTHOR);
