@@ -5,15 +5,25 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import org.parceler.Parcel;
+
 @ParseClassName("Post")
+@Parcel
 public class Post extends ParseObject {
 
     public static final String KEY_AUTHOR = "author";
     public static final String KEY_IMAGE = "image";
     public static final String KEY_LIKES = "likes";
     public static final String KEY_VENDOR = "vendor";
+
+//EMPTY CONSTRUCTOR FOR PARCEL
+    public Post(){
+} 
+
     public static final String KEY_REVIEW = "review";
 
+
+    }
     public ParseUser getAuthor() {
         return getParseUser(KEY_AUTHOR);
     }
