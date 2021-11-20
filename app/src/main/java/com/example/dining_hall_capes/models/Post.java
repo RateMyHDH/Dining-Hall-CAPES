@@ -6,6 +6,7 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 import java.util.Date;
+import org.parceler.Parcel;
 
 @ParseClassName("Post")
 public class Post extends ParseObject {

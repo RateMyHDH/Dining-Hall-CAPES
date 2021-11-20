@@ -17,6 +17,9 @@
             android:name=".CreationActivity"
             android:exported="false" />
         <activity
+            android:name=".PostActivity"
+            android:exported="false" />
+        <activity
             android:name=".RegisterAccountActivity"
             android:exported="true" />
         <activity
