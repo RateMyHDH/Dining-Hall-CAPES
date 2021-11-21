@@ -8,7 +8,10 @@ import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dining_hall_capes.models.DiningHall;
@@ -61,7 +64,7 @@ public class DiningHallsAdapter extends RecyclerView.Adapter<DiningHallsAdapter.
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvTitle;
-        RatingBar rbDiningHall;
+        TextView tvDiningHallRating;
         List<Vendor> vendors;
         RecyclerView rvVendors;
         VendorsAdapter vendorsAdapter;
@@ -70,40 +73,30 @@ public class DiningHallsAdapter extends RecyclerView.Adapter<DiningHallsAdapter.
             super(itemView);
 
             tvTitle = itemView.findViewById(R.id.tvDiningHallName);
-            rbDiningHall= itemView.findViewById(R.id.rbDiningHall);
+            tvDiningHallRating = itemView.findViewById(R.id.tvDiningHallRating);
             vendors = new ArrayList<>();
-            rvVendors = itemView.findViewById(R.id.rvVendors);
             vendorsAdapter = new VendorsAdapter(itemView.getContext(), vendors);
+            rvVendors = itemView.findViewById(R.id.rvVendors);
+            rvVendors.setAdapter(vendorsAdapter);
+            rvVendors.setLayoutManager(new LinearLayoutManager(itemView.getContext()));
         }
 
         public void bind(DiningHall hall) {
             tvTitle.setText(hall.getName());
-            queryVendors(vendorsAdapter, hall);
-            // TODO: add ratings
-        }
-    }
-
-    private void queryVendors(VendorsAdapter vendorsAdapter, DiningHall hall) {
-
-        ParseQuery<Vendor> vendorQuery = ParseQuery.getQuery(Vendor.class);
-
-        vendorQuery.whereEqualTo(Vendor.KEY_DINING_HALL, hall.getObjectId());
-        vendorQuery.addAscendingOrder(Vendor.KEY_NAME);
-
-        vendorQuery.findInBackground(new FindCallback<Vendor>() {
-            @Override
-            public void done(List<Vendor> fetchedVendors, ParseException e) {
-                if (e != null) {
-                    Log.e(TAG, "Issue with getting vendors for " + hall.getName(), e);
-                    return;
-                }
-
-                for (Vendor v : fetchedVendors) {
-                    Log.i(TAG, "Vendor: " + v.getName());
-                }
-
-                vendorsAdapter.addAll(fetchedVendors);
+            tvDiningHallRating.setText(String.format("%.1f", hall.rating));
+            int color;
+            if (hall.rating < 2f) {
+                color = R.color.red;
+            } else if (hall.rating < 3f) {
+                color = R.color.orange;
+            } else if (hall.rating < 4f) {
+                color = R.color.yellow;
+            } else {
+                color = R.color.lime;
             }
-        });
+            tvDiningHallRating.setTextColor(color);
+            hall.vendors = vendors;
+            hall.vendorsAdapter = vendorsAdapter;
+        }
     }
 }

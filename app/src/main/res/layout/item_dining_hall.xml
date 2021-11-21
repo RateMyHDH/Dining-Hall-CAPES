@@ -8,6 +8,8 @@
         android:id="@+id/tvDiningHallName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="5dp"
         android:text="tvDiningHallName"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="30sp"
@@ -17,14 +19,23 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvVendors"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/rbDiningHall"
-        android:layout_marginTop="0dp" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvDiningHallName"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="5dp" />
 
-    <RatingBar
-        android:id="@+id/rbDiningHall"
+    <TextView
+        android:id="@+id/tvDiningHallRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvDiningHallName"
-        android:layout_marginTop="0dp" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="5dp"
+        android:text="0.0"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/red"
+        android:textSize="30sp" />
+
 </RelativeLayout>

@@ -7,5 +7,17 @@
         android:id="@+id/tvVendorName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="tvVendorName" />
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="5dp"
+        android:text="tvVendorName"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvVendorRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="5dp"
+        android:text="0.0"
+        android:textSize="18sp" />
 </RelativeLayout>

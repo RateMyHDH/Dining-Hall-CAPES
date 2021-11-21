@@ -7,7 +7,6 @@ import com.parse.ParseObject;
 public class Vendor extends ParseObject {
 
     public static final String KEY_NAME = "name";
-    public static final String KEY_RATING = "rating";
     public static final String KEY_DINING_HALL = "diningHall";
 
     public String getName() {
@@ -15,15 +14,7 @@ public class Vendor extends ParseObject {
     }
 
     public void setName(String name) {
-        put(name, KEY_NAME);
-    }
-
-    public double getRating() {
-        return getDouble(KEY_RATING);
-    }
-
-    public void setRating(double rating) {
-        put(KEY_RATING, rating);
+        put(KEY_NAME, name);
     }
 
     public ParseObject getDiningHall() {
@@ -33,4 +24,7 @@ public class Vendor extends ParseObject {
     public void setDiningHall(ParseObject diningHall) {
         put(KEY_DINING_HALL, diningHall);
     }
+
+    // The following var is used to assist with local data caching
+    public float rating = 0f;
 }

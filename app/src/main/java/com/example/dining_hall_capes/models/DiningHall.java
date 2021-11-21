@@ -1,5 +1,6 @@
 package com.example.dining_hall_capes.models;
 
+import com.example.dining_hall_capes.VendorsAdapter;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
@@ -15,11 +16,11 @@ public class DiningHall extends ParseObject {
     }
 
     public void setName(String name) {
-        put(name, KEY_NAME);
+        put(KEY_NAME, name);
     }
 
-    // Some data stored with this class does not get stored in Parse
-    // Any object relations to a DiningHall are stored in the child objects
-
-    List<Vendor> vendors;
+    // The following vars are used to assist with local data caching
+    public List<Vendor> vendors;
+    public VendorsAdapter vendorsAdapter;
+    public float rating = 0f;
 }

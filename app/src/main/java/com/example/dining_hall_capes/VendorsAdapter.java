@@ -52,16 +52,29 @@ public class VendorsAdapter extends RecyclerView.Adapter<VendorsAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvVendorName;
+        TextView tvVendorRating;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvVendorName = itemView.findViewById(R.id.tvVendorName);
+            tvVendorRating = itemView.findViewById(R.id.tvVendorRating);
         }
 
         public void bind(Vendor vendor) {
             tvVendorName.setText(vendor.getName());
-            // TODO: add ratings
+            tvVendorRating.setText(String.format("%.1f", vendor.rating));
+            int color;
+            if (vendor.rating < 2f) {
+                color = R.color.red;
+            } else if (vendor.rating < 3f) {
+                color = R.color.orange;
+            } else if (vendor.rating < 4f) {
+                color = R.color.yellow;
+            } else {
+                color = R.color.lime;
+            }
+            tvVendorRating.setTextColor(color);
         }
     }
 }

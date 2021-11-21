@@ -15,13 +15,20 @@ import android.view.ViewGroup;
 
 import com.example.dining_hall_capes.DiningHallsAdapter;
 import com.example.dining_hall_capes.R;
+import com.example.dining_hall_capes.VendorsAdapter;
 import com.example.dining_hall_capes.models.DiningHall;
+import com.example.dining_hall_capes.models.Vendor;
 import com.parse.FindCallback;
+import com.parse.FunctionCallback;
+import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class StreamFragment extends Fragment {
 
@@ -57,7 +64,6 @@ public class StreamFragment extends Fragment {
         rvDiningHalls.setAdapter(diningHallsAdapter);
         rvDiningHalls.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // TODO: load all dining halls
         queryDiningHalls();
     }
 
@@ -80,6 +86,66 @@ public class StreamFragment extends Fragment {
                 }
 
                 diningHallsAdapter.addAll(fetchedDiningHalls);
+                queryVendors();
+            }
+        });
+    }
+
+    private void queryVendors() {
+
+        ParseQuery<Vendor> vendorQuery = ParseQuery.getQuery(Vendor.class);
+
+        vendorQuery.addAscendingOrder(Vendor.KEY_NAME);
+
+        vendorQuery.findInBackground(new FindCallback<Vendor>() {
+            @Override
+            public void done(List<Vendor> fetchedVendors, ParseException e) {
+                if (e != null) {
+                    Log.e(TAG, "Issue with getting vendors");
+                    return;
+                }
+
+                for (Vendor v : fetchedVendors) {
+                    Log.i(TAG, "Vendor: " + v.getName());
+
+                    DiningHall dh = (DiningHall) v.getDiningHall();
+                    dh.vendors.add(v);
+                }
+
+                for (DiningHall dh : diningHalls) {
+                    dh.vendorsAdapter.notifyDataSetChanged();
+                }
+
+                queryRatings();
+            }
+        });
+    }
+
+    private void queryRatings() {
+
+        HashMap<String, Object> params = new HashMap<>();
+
+        ParseCloud.callFunctionInBackground("getVendorRatings", params, new FunctionCallback<Map<Vendor, Float>>() {
+            @Override
+            public void done(Map<Vendor, Float> avgRatings, ParseException e) {
+                if (e != null) {
+                    Log.e(TAG, "Error getting ratings");
+                    return;
+                }
+
+                Log.i(TAG, "Got ratings");
+                for (Vendor v : avgRatings.keySet()) {
+                    Float r = avgRatings.get(v);
+                    v.rating = r == null ? 0 : r;
+
+                    if (r == null) {
+                        Log.e(TAG, "Null rating for " + v.getName());
+                    }
+                }
+
+                for (DiningHall dh : diningHalls) {
+                    dh.vendorsAdapter.notifyDataSetChanged();
+                }
             }
         });
     }
