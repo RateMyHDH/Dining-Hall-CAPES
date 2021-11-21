@@ -65,20 +65,14 @@ public class DiningHallsAdapter extends RecyclerView.Adapter<DiningHallsAdapter.
 
         TextView tvTitle;
         TextView tvDiningHallRating;
-        List<Vendor> vendors;
         RecyclerView rvVendors;
-        VendorsAdapter vendorsAdapter;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvTitle = itemView.findViewById(R.id.tvDiningHallName);
             tvDiningHallRating = itemView.findViewById(R.id.tvDiningHallRating);
-            vendors = new ArrayList<>();
-            vendorsAdapter = new VendorsAdapter(itemView.getContext(), vendors);
             rvVendors = itemView.findViewById(R.id.rvVendors);
-            rvVendors.setAdapter(vendorsAdapter);
-            rvVendors.setLayoutManager(new LinearLayoutManager(itemView.getContext()));
         }
 
         public void bind(DiningHall hall) {
@@ -95,8 +89,9 @@ public class DiningHallsAdapter extends RecyclerView.Adapter<DiningHallsAdapter.
                 color = R.color.lime;
             }
             tvDiningHallRating.setTextColor(color);
-            hall.vendors = vendors;
-            hall.vendorsAdapter = vendorsAdapter;
+
+            rvVendors.setAdapter(hall.vendorsAdapter);
+            rvVendors.setLayoutManager(new LinearLayoutManager(itemView.getContext()));
         }
     }
 }

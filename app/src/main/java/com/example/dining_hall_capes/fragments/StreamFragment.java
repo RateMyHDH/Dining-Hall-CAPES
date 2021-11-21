@@ -83,6 +83,8 @@ public class StreamFragment extends Fragment {
 
                 for (DiningHall hall : fetchedDiningHalls) {
                     Log.i(TAG, "Dining Hall: " + hall.getName());
+                    hall.vendors = new ArrayList<>();
+                    hall.vendorsAdapter = new VendorsAdapter(getContext(), hall.vendors);
                 }
 
                 diningHallsAdapter.addAll(fetchedDiningHalls);
