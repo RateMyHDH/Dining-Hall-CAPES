@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -65,14 +67,14 @@ public class DiningHallsAdapter extends RecyclerView.Adapter<DiningHallsAdapter.
 
         TextView tvTitle;
         TextView tvDiningHallRating;
-        RecyclerView rvVendors;
+        LinearLayout llVendors;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvTitle = itemView.findViewById(R.id.tvDiningHallName);
             tvDiningHallRating = itemView.findViewById(R.id.tvDiningHallRating);
-            rvVendors = itemView.findViewById(R.id.rvVendors);
+            llVendors = itemView.findViewById(R.id.llVendors);
         }
 
         public void bind(DiningHall hall) {
@@ -90,8 +92,13 @@ public class DiningHallsAdapter extends RecyclerView.Adapter<DiningHallsAdapter.
             }
             tvDiningHallRating.setTextColor(color);
 
-            rvVendors.setAdapter(hall.vendorsAdapter);
-            rvVendors.setLayoutManager(new LinearLayoutManager(itemView.getContext()));
+            // TODO: llVendors adapter
+            llVendors.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
         }
     }
 }

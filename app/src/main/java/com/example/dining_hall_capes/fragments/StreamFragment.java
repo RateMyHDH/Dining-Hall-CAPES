@@ -37,6 +37,7 @@ public class StreamFragment extends Fragment {
     RecyclerView rvDiningHalls;
     List<DiningHall> diningHalls;
     DiningHallsAdapter diningHallsAdapter;
+    HashMap<String, DiningHall> diningHallIndex;
 
     public StreamFragment() {
         // Required empty public constructor
@@ -63,6 +64,7 @@ public class StreamFragment extends Fragment {
         rvDiningHalls = view.findViewById(R.id.rvDiningHalls);
         rvDiningHalls.setAdapter(diningHallsAdapter);
         rvDiningHalls.setLayoutManager(new LinearLayoutManager(getContext()));
+        diningHallIndex = new HashMap<>();
 
         queryDiningHalls();
     }
@@ -70,9 +72,7 @@ public class StreamFragment extends Fragment {
     private void queryDiningHalls() {
 
         ParseQuery<DiningHall> hallQuery = ParseQuery.getQuery(DiningHall.class);
-
         hallQuery.addAscendingOrder(DiningHall.KEY_NAME);
-
         hallQuery.findInBackground(new FindCallback<DiningHall>() {
             @Override
             public void done(List<DiningHall> fetchedDiningHalls, ParseException e) {
@@ -83,6 +83,7 @@ public class StreamFragment extends Fragment {
 
                 for (DiningHall hall : fetchedDiningHalls) {
                     Log.i(TAG, "Dining Hall: " + hall.getName());
+                    diningHallIndex.put(hall.getObjectId(), hall);
                     hall.vendors = new ArrayList<>();
                     hall.vendorsAdapter = new VendorsAdapter(getContext(), hall.vendors);
                 }
@@ -96,9 +97,7 @@ public class StreamFragment extends Fragment {
     private void queryVendors() {
 
         ParseQuery<Vendor> vendorQuery = ParseQuery.getQuery(Vendor.class);
-
         vendorQuery.addAscendingOrder(Vendor.KEY_NAME);
-
         vendorQuery.findInBackground(new FindCallback<Vendor>() {
             @Override
             public void done(List<Vendor> fetchedVendors, ParseException e) {
@@ -110,12 +109,13 @@ public class StreamFragment extends Fragment {
                 for (Vendor v : fetchedVendors) {
                     Log.i(TAG, "Vendor: " + v.getName());
 
-                    DiningHall dh = (DiningHall) v.getDiningHall();
-                    dh.vendors.add(v);
-                }
-
-                for (DiningHall dh : diningHalls) {
-                    dh.vendorsAdapter.notifyDataSetChanged();
+                    DiningHall hall = (DiningHall) v.getDiningHall();
+                    if (hall == null || !diningHallIndex.containsKey(hall.getObjectId())) {
+                        Log.e(TAG, "Queried stray vendor for " + hall.getName());
+                    } else {
+                        Log.i(TAG, "Got vendor " + v.getName() + " for " + hall.getName());
+                        hall.vendors.add(v);
+                    }
                 }
 
                 queryRatings();
@@ -126,7 +126,6 @@ public class StreamFragment extends Fragment {
     private void queryRatings() {
 
         HashMap<String, Object> params = new HashMap<>();
-
         ParseCloud.callFunctionInBackground("getVendorRatings", params, new FunctionCallback<Map<Vendor, Float>>() {
             @Override
             public void done(Map<Vendor, Float> avgRatings, ParseException e) {
@@ -146,8 +145,15 @@ public class StreamFragment extends Fragment {
                 }
 
                 for (DiningHall dh : diningHalls) {
-                    dh.vendorsAdapter.notifyDataSetChanged();
+                    float ratingSum = 0;
+                    for (Vendor v : dh.vendors) {
+                        ratingSum += v.rating;
+                    }
+
+                    dh.rating = ratingSum / dh.vendors.size();
                 }
+
+                diningHallsAdapter.notifyDataSetChanged();
             }
         });
     }

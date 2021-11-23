@@ -1,6 +1,7 @@
 package com.example.dining_hall_capes;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,16 @@ public class VendorsAdapter extends RecyclerView.Adapter<VendorsAdapter.ViewHold
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_vendor, parent, false);
-        return new ViewHolder(view);
+        ViewHolder vh = new ViewHolder(view);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), PostActivity.class);
+                i.putExtra("id", vh.vendorID);
+                v.getContext().startActivity(i);
+            }
+        });
+        return vh;
     }
 
     @Override
@@ -51,6 +61,7 @@ public class VendorsAdapter extends RecyclerView.Adapter<VendorsAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        String vendorID;
         TextView tvVendorName;
         TextView tvVendorRating;
 
@@ -62,6 +73,7 @@ public class VendorsAdapter extends RecyclerView.Adapter<VendorsAdapter.ViewHold
         }
 
         public void bind(Vendor vendor) {
+            vendorID = vendor.getObjectId();
             tvVendorName.setText(vendor.getName());
             tvVendorRating.setText(String.format("%.1f", vendor.rating));
             int color;
