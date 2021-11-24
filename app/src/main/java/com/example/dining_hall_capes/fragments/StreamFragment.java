@@ -34,6 +34,8 @@ import java.util.Map;
 public class StreamFragment extends Fragment {
 
     public static final String TAG = "StreamFragment";
+    public static final String EXTRA_VENDOR_ID = "id";
+    public static final String EXTRA_VENDOR_NAME = "name";
 
     RecyclerView rvDiningHalls;
     List<DiningHall> diningHalls;
