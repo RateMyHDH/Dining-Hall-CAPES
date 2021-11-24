@@ -25,6 +25,6 @@ public class Vendor extends ParseObject {
         put(KEY_DINING_HALL, diningHall);
     }
 
-    // The following var is used to assist with local data caching
+    // The following var does not get stored in Parse
     public float rating = 0f;
 }

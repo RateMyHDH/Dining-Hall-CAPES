@@ -67,38 +67,32 @@ public class DiningHallsAdapter extends RecyclerView.Adapter<DiningHallsAdapter.
 
         TextView tvTitle;
         TextView tvDiningHallRating;
-        LinearLayout llVendors;
+        RecyclerView rvVendors;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvTitle = itemView.findViewById(R.id.tvDiningHallName);
             tvDiningHallRating = itemView.findViewById(R.id.tvDiningHallRating);
-            llVendors = itemView.findViewById(R.id.llVendors);
+            rvVendors = itemView.findViewById(R.id.rvVendors);
         }
 
         public void bind(DiningHall hall) {
             tvTitle.setText(hall.getName());
             tvDiningHallRating.setText(String.format("%.1f", hall.rating));
             int color;
-            if (hall.rating < 2f) {
+            if (hall.rating < 4f) {
                 color = R.color.red;
-            } else if (hall.rating < 3f) {
+            } else if (hall.rating < 6f) {
                 color = R.color.orange;
-            } else if (hall.rating < 4f) {
+            } else if (hall.rating < 8f) {
                 color = R.color.yellow;
             } else {
                 color = R.color.lime;
             }
             tvDiningHallRating.setTextColor(color);
-
-            // TODO: llVendors adapter
-            llVendors.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
+            rvVendors.setAdapter(hall.vendorsAdapter);
+            rvVendors.setLayoutManager(new LinearLayoutManager(context));
         }
     }
 }

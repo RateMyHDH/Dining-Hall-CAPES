@@ -19,7 +19,7 @@ public class DiningHall extends ParseObject {
         put(KEY_NAME, name);
     }
 
-    // The following vars are used to assist with local data caching
+    // The following vars do not get stored in Parse
     public List<Vendor> vendors;
     public VendorsAdapter vendorsAdapter;
     public float rating = 0f;

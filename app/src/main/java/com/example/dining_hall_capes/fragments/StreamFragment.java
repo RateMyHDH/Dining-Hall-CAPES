@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.dining_hall_capes.DiningHallsAdapter;
 import com.example.dining_hall_capes.R;
@@ -58,6 +59,8 @@ public class StreamFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        Toast.makeText(getContext(), "Stream", Toast.LENGTH_SHORT).show();
 
         diningHalls = new ArrayList<>();
         diningHallsAdapter = new DiningHallsAdapter(getContext(), diningHalls);
@@ -111,8 +114,9 @@ public class StreamFragment extends Fragment {
 
                     DiningHall hall = (DiningHall) v.getDiningHall();
                     if (hall == null || !diningHallIndex.containsKey(hall.getObjectId())) {
-                        Log.e(TAG, "Queried stray vendor for " + hall.getName());
+                        Log.e(TAG, "Queried stray vendor: " + v.getName());
                     } else {
+                        hall = diningHallIndex.get(hall.getObjectId());
                         Log.i(TAG, "Got vendor " + v.getName() + " for " + hall.getName());
                         hall.vendors.add(v);
                     }

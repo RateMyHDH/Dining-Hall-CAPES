@@ -32,9 +32,9 @@ public class VendorsAdapter extends RecyclerView.Adapter<VendorsAdapter.ViewHold
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), PostActivity.class);
+                Intent i = new Intent(context, PostActivity.class);
                 i.putExtra("id", vh.vendorID);
-                v.getContext().startActivity(i);
+                context.startActivity(i);
             }
         });
         return vh;
@@ -61,7 +61,7 @@ public class VendorsAdapter extends RecyclerView.Adapter<VendorsAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        String vendorID;
+        String vendorID;    // For passing data to the PostActivity
         TextView tvVendorName;
         TextView tvVendorRating;
 
@@ -77,11 +77,11 @@ public class VendorsAdapter extends RecyclerView.Adapter<VendorsAdapter.ViewHold
             tvVendorName.setText(vendor.getName());
             tvVendorRating.setText(String.format("%.1f", vendor.rating));
             int color;
-            if (vendor.rating < 2f) {
+            if (vendor.rating < 4f) {
                 color = R.color.red;
-            } else if (vendor.rating < 3f) {
+            } else if (vendor.rating < 6f) {
                 color = R.color.orange;
-            } else if (vendor.rating < 4f) {
+            } else if (vendor.rating < 8f) {
                 color = R.color.yellow;
             } else {
                 color = R.color.lime;
