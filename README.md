@@ -28,9 +28,9 @@ CAPES... but for the dining halls.
 
 **Required Must-have Stories**
 
-* Login system for users
-* User can see the ratings of vendors and the average ratings for dining halls
-* User can click into the dining halls and rate them individually, make posts (maybe with pictures)
+- [X] Login system for users
+- [ ] User can see the ratings of vendors and the average ratings for dining halls
+- [ ] User can click into the dining halls and rate them individually, make posts (maybe with pictures)
 
 **Optional Nice-to-have Stories**
 
@@ -138,3 +138,10 @@ CAPES... but for the dining halls.
 
 - [Create basic snippets for each Parse network request]
 - [OPTIONAL: List endpoints if using existing API such as Yelp]
+
+### Sprint 1 Progress
+<img src='Sprint1Walkthrough.gif' title='Sprint1 Walkthrough' width='' alt='Video Walkthrough' />
+
+### Sprint 2 Progress
+<img src='sprint2.gif' title='Sprint 2 Walkthrough' width='' alt='Video Walkthrough' />
+
