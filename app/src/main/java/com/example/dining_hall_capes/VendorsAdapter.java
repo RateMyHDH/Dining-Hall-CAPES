@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.dining_hall_capes.fragments.StreamFragment;
 import com.example.dining_hall_capes.models.Vendor;
 
 import java.util.List;
@@ -33,7 +34,8 @@ public class VendorsAdapter extends RecyclerView.Adapter<VendorsAdapter.ViewHold
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, PostActivity.class);
-                i.putExtra("id", vh.vendorID);
+                i.putExtra(StreamFragment.EXTRA_VENDOR_ID, vh.vendorID);
+                i.putExtra(StreamFragment.EXTRA_VENDOR_NAME, vh.tvVendorName.getText());
                 context.startActivity(i);
             }
         });
