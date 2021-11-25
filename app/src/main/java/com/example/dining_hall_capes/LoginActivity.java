@@ -26,9 +26,10 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public static final String TAG = "Login Activity";
-    private EditText etNewEmail;
+    private EditText etEmail;
     private EditText etPassword;
     private Button btnLogin;
+    private Button btnRegister;
 
 
     @Override
@@ -41,17 +42,26 @@ public class LoginActivity extends AppCompatActivity {
             goMainActivity();
         }
 
-        etNewEmail = findViewById(R.id.etNewEmail);
+        etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
+        btnRegister = findViewById(R.id.btnRegister);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i(TAG, "onClick login button");
-                String newEmail = etNewEmail.getText().toString();
+                String newEmail = etEmail.getText().toString();
                 String password = etPassword.getText().toString();
                 loginUser(newEmail, password);
+            }
+        });
+
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG, "Register account button");
+                goRegisterAccountActivity();
             }
         });
     }
@@ -75,6 +85,13 @@ public class LoginActivity extends AppCompatActivity {
 
     private void goMainActivity() {
         Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+        finish();
+
+    }
+
+    private void goRegisterAccountActivity() {
+        Intent i = new Intent(this, RegisterAccountActivity.class);
         startActivity(i);
         finish();
 

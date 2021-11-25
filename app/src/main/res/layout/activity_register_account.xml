@@ -9,7 +9,7 @@
     tools:context=".RegisterAccountActivity">
 
     <EditText
-        android:id="@+id/etNewEmail"
+        android:id="@+id/etEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="false"
@@ -22,7 +22,7 @@
         android:id="@+id/etNewPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etNewEmail"
+        android:layout_below="@+id/etEmail"
         android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="Phone Number"
@@ -49,7 +49,7 @@
         android:inputType="textPersonName" />
 
     <CheckBox
-        android:id="@+id/etCheckTerms"
+        android:id="@+id/cbCheckTerms"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/etNewPassword"
@@ -60,7 +60,7 @@
         android:id="@+id/btnCreateAccount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etCheckTerms"
+        android:layout_below="@+id/cbCheckTerms"
         android:layout_marginTop="20dp"
         android:backgroundTint="#00629B"
         android:text="Create Account" />
