@@ -38,7 +38,7 @@ public class DetailActivity extends AppCompatActivity {
         }
         tvBody.setText(post.getReview());
         if(post.getParseFile("image") != null){
-            Glide.with(this).load(post.getAuthor().getParseFile("profilePic").getUrl()).into(ivReviewImage);
+            Glide.with(this).load(post.getParseFile("image").getUrl()).into(ivReviewImage);
         }
     }
 }

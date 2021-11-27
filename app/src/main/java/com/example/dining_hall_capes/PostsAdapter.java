@@ -44,7 +44,11 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Post post  = posts.get(position);
-        holder.bind(post);
+        try {
+            holder.bind(post);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -66,23 +70,17 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
             pfpImage = itemView.findViewById(R.id.ivPFP);
             postTime = itemView.findViewById(R.id.postTime);
         }
-        public void bind(Post post){
+        public void bind(Post post) throws ParseException {
             //get post text: tvComment.setText(post.getComment)
             String name = "";
-            try {
-                name = post.fetchIfNeeded().getString("author".toString());
-
-
-            } catch (ParseException i) {
-               // Log.v("LOG_TAG", i.toString());
-                //i.printStackTrace();
-            }
+            name = post.getAuthor().fetchIfNeeded().getUsername();
             //Log.i("tttt","Post" + name);
             tvUsername.setText(name);
             tvComment.setText(post.getReview());
-            ParseFile image = post.getImage();
-            if(image != null){
-                Glide.with(context).load(post.getImage().getUrl()).into(pfpImage);
+            postTime.setText(post.getTime());
+            // Getting profile picture of user who posted if needed
+            if(post.getAuthor().fetchIfNeeded().getParseFile("profilePic") != null){
+                Glide.with(context).load(post.getAuthor().getParseFile("profilePic").getUrl()).into(pfpImage);
             }
             container.setOnClickListener(new View.OnClickListener(){
                 @Override

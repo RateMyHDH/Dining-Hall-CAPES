@@ -66,25 +66,18 @@ public class PostActivity extends AppCompatActivity {
                     return ;
 
                 }
-                for (Post post:posts) {
-                    //uncomment if statement and allposts.add(post) once vendor id field is added to posts
-//                    if (post.getVendor().getObjectId().equals("vendorID")) {
-
-
-                        String name = "";
-                        try {
-                            name = post.fetchIfNeeded().getString("author");
-
-
-                        } catch (ParseException i) {
-                            Log.v("LOG_TAG", i.toString());
-                            i.printStackTrace();
-                        }
-                        Log.i("tttt", "Post" + name);
-                        Log.i("tttt", "Post" + post.getReview());
-                        //Log.i("tttt","Post" + post.get);
-                        //allposts.add(post);
-                    }
+//                for (Post post:posts) {
+//                    //uncomment if statement and allposts.add(post) once vendor id field is added to posts
+////                    if (post.getVendor().getObjectId().equals("vendorID")) {
+//
+//
+//                        String name = "";
+//                    name = post.getAuthor().getUsername();
+//
+//
+//                    Log.i("tttt", "Post" + name);
+//                        Log.i("tttt", "Post" + post.getReview());
+//                    }
                     allposts.addAll(posts);
                     postsAdapter.notifyDataSetChanged();
                 //}
