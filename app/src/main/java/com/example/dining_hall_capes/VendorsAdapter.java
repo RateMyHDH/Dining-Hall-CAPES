@@ -16,6 +16,7 @@ import com.example.dining_hall_capes.fragments.StreamFragment;
 import com.example.dining_hall_capes.models.Vendor;
 
 import java.util.List;
+import java.util.Locale;
 
 public class VendorsAdapter extends RecyclerView.Adapter<VendorsAdapter.ViewHolder> {
 
@@ -81,13 +82,12 @@ public class VendorsAdapter extends RecyclerView.Adapter<VendorsAdapter.ViewHold
         public void bind(Vendor vendor) {
             vendorID = vendor.getObjectId();
             tvVendorName.setText(vendor.getName());
-            float rating = (float) (Math.random() * 5);
-            tvVendorRating.setText(String.format("%.1f", rating));
-            if (rating < 2f) {
+            tvVendorRating.setText(String.format(Locale.US, "%.1f", vendor.rating));
+            if (vendor.rating < 2f) {
                 tvVendorRating.setTextColor(context.getColor(R.color.red));
-            } else if (rating < 3f) {
+            } else if (vendor.rating < 3f) {
                 tvVendorRating.setTextColor(context.getColor(R.color.orange));
-            } else if (rating < 4f) {
+            } else if (vendor.rating < 4f) {
                 tvVendorRating.setTextColor(context.getColor(R.color.yellow));
             } else {
                 tvVendorRating.setTextColor(context.getColor(R.color.lime));
