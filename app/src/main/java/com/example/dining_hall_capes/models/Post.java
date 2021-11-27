@@ -15,6 +15,7 @@ public class Post extends ParseObject {
     public static final String KEY_IMAGE = "image";
     public static final String KEY_LIKES = "likes";
     public static final String KEY_VENDOR = "vendor";
+    public static final String KEY_VENDOR_ID = "vendorID";
 
 
     //EMPTY CONSTRUCTOR FOR PARCEL
@@ -66,6 +67,8 @@ public class Post extends ParseObject {
     public void setVendor(ParseObject vendor) {
         put(KEY_VENDOR, vendor);
     }
+
+    public void setVendorID(String vendorID) {put(KEY_VENDOR_ID, vendorID); }
 
     public String getTime(){
         return getString(KEY_CREATED_AT);

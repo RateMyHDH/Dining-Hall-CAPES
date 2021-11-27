@@ -17,6 +17,7 @@ import com.example.dining_hall_capes.models.Post;
 import com.example.dining_hall_capes.models.Vendor;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
@@ -51,6 +52,7 @@ public class PostActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(PostActivity.this,CreationActivity.class);
+                i.putExtra("vendorID",vendorID);
                 startActivity(i);
             }
         });
@@ -62,13 +64,14 @@ public class PostActivity extends AppCompatActivity {
 
 
         queryPosts();
-         postsAdapter = new PostsAdapter(this,allposts);
+        postsAdapter = new PostsAdapter(this,allposts);
 
         rvPosts.setAdapter(postsAdapter);
         rvPosts.setLayoutManager(new LinearLayoutManager(this));
     }
     public void queryPosts() {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+        query.whereEqualTo(Post.KEY_VENDOR_ID, vendorID);
         //query.include(Post.KEY_AUTHOR);
         query.findInBackground(new FindCallback<Post>() {
             @Override
@@ -78,17 +81,17 @@ public class PostActivity extends AppCompatActivity {
                     return ;
 
                 }
-                for (Post post:posts) {
-                    //uncomment if statement and allposts.add(post) once vendor id field is added to posts
-                    if (post.getVendor().getObjectId().equals(vendorID)) {
-
-                        //name is just used for logging purposes
-
-                        allposts.add(post);
-                    }
-                    //allposts.addAll(posts);
-                    //postsAdapter.notifyDataSetChanged();
-                }
+//                for (Post post:posts) {
+//                    //uncomment if statement and allposts.add(post) once vendor id field is added to posts
+//                    if (post.getVendor().getObjectId().equals(vendorID)) {
+//
+//                        //name is just used for logging purposes
+//
+//                        allposts.add(post);
+//                    }
+                allposts.addAll(posts);
+                postsAdapter.notifyDataSetChanged();
+//                }
                 postsAdapter.notifyDataSetChanged();
                 //postsAdapter.
             }

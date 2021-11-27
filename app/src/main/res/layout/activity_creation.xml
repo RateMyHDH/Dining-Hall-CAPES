@@ -29,7 +29,7 @@
         android:layout_centerHorizontal="false"
         android:layout_marginTop="10dp"
         android:backgroundTint="#00629B"
-        tools:text="Capture Image (Optional)" />
+        android:text="Capture Image (Optional)" />
 
     <ImageView
         android:id="@+id/ivPostImage"
@@ -47,6 +47,5 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ivPostImage"
         android:backgroundTint="#00629B"
-        android:text="Button"
-        tools:text="Submit" />
+        android:text="Submit" />
 </RelativeLayout>
