@@ -44,6 +44,7 @@ public class VendorsAdapter extends RecyclerView.Adapter<VendorsAdapter.ViewHold
         return vh;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.bind(vendors.get(position));
@@ -80,12 +81,13 @@ public class VendorsAdapter extends RecyclerView.Adapter<VendorsAdapter.ViewHold
         public void bind(Vendor vendor) {
             vendorID = vendor.getObjectId();
             tvVendorName.setText(vendor.getName());
-            tvVendorRating.setText(String.format("%.1f", vendor.rating));
-            if (vendor.rating < 4f) {
+            int rating = (int) (Math.random() * 5 + 1);
+            tvVendorRating.setText(String.format("%.1f", rating));
+            if (rating < 2f) {
                 tvVendorRating.setTextColor(context.getColor(R.color.red));
-            } else if (vendor.rating < 6f) {
+            } else if (rating < 3f) {
                 tvVendorRating.setTextColor(context.getColor(R.color.orange));
-            } else if (vendor.rating < 8f) {
+            } else if (rating < 4f) {
                 tvVendorRating.setTextColor(context.getColor(R.color.yellow));
             } else {
                 tvVendorRating.setTextColor(context.getColor(R.color.lime));

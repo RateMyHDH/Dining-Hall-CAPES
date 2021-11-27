@@ -46,6 +46,7 @@ public class DiningHallsAdapter extends RecyclerView.Adapter<DiningHallsAdapter.
         return new ViewHolder(view);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.bind(diningHalls.get(position));
@@ -82,12 +83,13 @@ public class DiningHallsAdapter extends RecyclerView.Adapter<DiningHallsAdapter.
         @RequiresApi(api = Build.VERSION_CODES.M)
         public void bind(DiningHall hall) {
             tvTitle.setText(hall.getName());
-            tvDiningHallRating.setText(String.format("%.1f", hall.rating));
-            if (hall.rating < 4f) {
+            int rating =  (int) (Math.random() * 5 + 1);
+            tvDiningHallRating.setText(String.format("%.1f", rating));
+            if (rating < 2f) {
                 tvDiningHallRating.setTextColor(context.getColor(R.color.red));
-            } else if (hall.rating < 6f) {
+            } else if (rating < 3f) {
                 tvDiningHallRating.setTextColor(context.getColor(R.color.orange));
-            } else if (hall.rating < 8f) {
+            } else if (rating < 4f) {
                 tvDiningHallRating.setTextColor(context.getColor(R.color.yellow));
             } else {
                 tvDiningHallRating.setTextColor(context.getColor(R.color.lime));
