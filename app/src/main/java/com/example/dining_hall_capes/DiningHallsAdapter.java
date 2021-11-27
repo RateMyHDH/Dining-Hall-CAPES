@@ -83,7 +83,7 @@ public class DiningHallsAdapter extends RecyclerView.Adapter<DiningHallsAdapter.
         @RequiresApi(api = Build.VERSION_CODES.M)
         public void bind(DiningHall hall) {
             tvTitle.setText(hall.getName());
-            int rating =  (int) (Math.random() * 5 + 1);
+            float rating = (float) (Math.random() * 5);
             tvDiningHallRating.setText(String.format("%.1f", rating));
             if (rating < 2f) {
                 tvDiningHallRating.setTextColor(context.getColor(R.color.red));

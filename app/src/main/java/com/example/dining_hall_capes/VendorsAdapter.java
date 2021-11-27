@@ -81,7 +81,7 @@ public class VendorsAdapter extends RecyclerView.Adapter<VendorsAdapter.ViewHold
         public void bind(Vendor vendor) {
             vendorID = vendor.getObjectId();
             tvVendorName.setText(vendor.getName());
-            int rating = (int) (Math.random() * 5 + 1);
+            float rating = (float) (Math.random() * 5);
             tvVendorRating.setText(String.format("%.1f", rating));
             if (rating < 2f) {
                 tvVendorRating.setTextColor(context.getColor(R.color.red));
