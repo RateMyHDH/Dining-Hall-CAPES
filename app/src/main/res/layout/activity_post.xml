@@ -16,7 +16,6 @@
         android:layout_alignParentStart="false"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="6dp"
-        android:numStars="2.5"
         android:rating="3.5" />
 
     <androidx.recyclerview.widget.RecyclerView
