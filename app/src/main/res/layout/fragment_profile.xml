@@ -29,6 +29,7 @@
         android:layout_centerInParent="true"
         android:layout_marginStart="89dp"
         android:layout_marginTop="83dp"
+        android:backgroundTint="#00629B"
         android:text="Change Profile Picture" />
 
     <Button
@@ -40,13 +41,15 @@
         android:layout_centerInParent="true"
         android:layout_marginStart="158dp"
         android:layout_marginTop="234dp"
+        android:backgroundTint="#00629B"
         android:text="Logout" />
 
     <TextView
-        android:id="@+id/tvLabel"
+        android:id="@+id/tvUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="User Profile"
+        android:textColor="#000000"
         android:textSize="36sp" />
 
 </RelativeLayout>
