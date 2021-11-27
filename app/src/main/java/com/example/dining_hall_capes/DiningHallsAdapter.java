@@ -1,6 +1,7 @@
 package com.example.dining_hall_capes;
 
 import android.content.Context;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -77,20 +79,19 @@ public class DiningHallsAdapter extends RecyclerView.Adapter<DiningHallsAdapter.
             rvVendors = itemView.findViewById(R.id.rvVendors);
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.M)
         public void bind(DiningHall hall) {
             tvTitle.setText(hall.getName());
             tvDiningHallRating.setText(String.format("%.1f", hall.rating));
-            int color;
             if (hall.rating < 4f) {
-                color = R.color.red;
+                tvDiningHallRating.setTextColor(context.getColor(R.color.red));
             } else if (hall.rating < 6f) {
-                color = R.color.orange;
+                tvDiningHallRating.setTextColor(context.getColor(R.color.orange));
             } else if (hall.rating < 8f) {
-                color = R.color.yellow;
+                tvDiningHallRating.setTextColor(context.getColor(R.color.yellow));
             } else {
-                color = R.color.lime;
+                tvDiningHallRating.setTextColor(context.getColor(R.color.lime));
             }
-            tvDiningHallRating.setTextColor(color);
             rvVendors.setAdapter(hall.vendorsAdapter);
             rvVendors.setLayoutManager(new LinearLayoutManager(context));
         }
