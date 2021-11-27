@@ -9,10 +9,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
 
 public class RegisterAccountActivity extends AppCompatActivity {
@@ -24,6 +26,7 @@ public class RegisterAccountActivity extends AppCompatActivity {
     private EditText etNewPassword;
     private CheckBox cbCheckTerms;
     private Button btnCreateAccount;
+    private ImageButton btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,14 @@ public class RegisterAccountActivity extends AppCompatActivity {
         etNewPassword = findViewById(R.id.etNewPassword);
         cbCheckTerms = findViewById(R.id.cbCheckTerms);
         btnCreateAccount = findViewById(R.id.btnCreateAccount);
+        btnBack = findViewById(R.id.btnBack);
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goLoginActivity();
+            }
+        });
 
         btnCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,7 +58,6 @@ public class RegisterAccountActivity extends AppCompatActivity {
 
                 if(cbCheckTerms.isChecked()){
                     ParseUser user = new ParseUser();
-
                     user.setEmail(email);
                     user.setUsername(username);
                     user.setPassword(password);
@@ -58,14 +68,13 @@ public class RegisterAccountActivity extends AppCompatActivity {
                             if (e == null) {
                                 Log.i(REGISTER_TAG, "Sign up succeeded");
                                 Toast.makeText(RegisterAccountActivity.this, "Sign Up Succeed, use your new credentials now", Toast.LENGTH_LONG).show();
+                                goLoginActivity();
                             } else {
                                 Log.e(REGISTER_TAG, "Sign up failed", e);
-                                Toast.makeText(RegisterAccountActivity.this, "Sign Up Failed", Toast.LENGTH_LONG).show();
-                                return;
+                                Toast.makeText(RegisterAccountActivity.this, "Sign up failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
                             }
                         }
                     });
-                    goLoginActivity();
                 }
                 else{
                     Toast.makeText(RegisterAccountActivity.this, "You must agree to our terms and conditions", Toast.LENGTH_LONG).show();

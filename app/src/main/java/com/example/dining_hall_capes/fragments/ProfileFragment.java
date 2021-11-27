@@ -18,7 +18,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dining_hall_capes.LoginActivity;
@@ -29,6 +31,7 @@ import com.parse.ParseFile;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 import static android.app.Activity.RESULT_OK;
@@ -40,6 +43,7 @@ public class ProfileFragment extends Fragment {
 
     private ParseUser currentUser = ParseUser.getCurrentUser();
 
+    private TextView userName;
     private ImageView ivProfilePic;
     private Button btnSwapPic;
     private Button btnLogout;
@@ -66,18 +70,38 @@ public class ProfileFragment extends Fragment {
         ivProfilePic = view.findViewById(R.id.ivProfilePic);
         btnSwapPic = view.findViewById(R.id.btnSwapPic);
         btnLogout = view.findViewById(R.id.btnLogout);
+        userName = view.findViewById(R.id.tvUser);
 
-        if(currentUser.getParseFile("profilePic") != null) {
-            (currentUser.getParseFile("profilePic")).getDataInBackground(new GetDataCallback() {
+        userName.setText(currentUser.getUsername());
+        if(currentUser.getParseFile("profilePic") == null) {
+            Bitmap bm = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.instagram_user_filled_24);
+            ByteArrayOutputStream byteArrayOutputStream=new ByteArrayOutputStream();
+            bm.compress(Bitmap.CompressFormat.PNG,100,byteArrayOutputStream);
+            byte[] imageByte = byteArrayOutputStream.toByteArray();
+            ParseFile parseFile = new ParseFile("image_file.png",imageByte);
+
+            currentUser.put("profilePic", parseFile);
+            currentUser.saveInBackground(new SaveCallback() {
                 @Override
-                public void done(byte[] data, ParseException e) {
-                    if(e == null){
-                        Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
-                        ivProfilePic.setImageBitmap(bmp);
+                public void done(ParseException e) {
+                    if(e != null){
+                        Log.e(TAG, "Error while saving", e);
+                        Toast.makeText(getContext(), "PFP did not save :(", Toast.LENGTH_LONG).show();
                     }
+                    Toast.makeText(getContext(), "PFP Saved Succeed", Toast.LENGTH_LONG).show();
+                    Log.i(TAG, "PFP save was successful");
                 }
             });
         }
+        currentUser.getParseFile("profilePic").getDataInBackground(new GetDataCallback() {
+            @Override
+            public void done(byte[] data, ParseException e) {
+                if(e == null){
+                    Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
+                    ivProfilePic.setImageBitmap(bmp);
+                }
+            }
+        });
 
 
         btnSwapPic.setOnClickListener(new View.OnClickListener() {
