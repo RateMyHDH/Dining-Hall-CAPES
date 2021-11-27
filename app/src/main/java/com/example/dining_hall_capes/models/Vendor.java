@@ -6,15 +6,15 @@ import com.parse.ParseObject;
 @ParseClassName("Vendor")
 public class Vendor extends ParseObject {
 
-    public static final String KEY_RATING = "rating";
+    public static final String KEY_NAME = "name";
     public static final String KEY_DINING_HALL = "diningHall";
 
-    public double getRating() {
-        return getDouble(KEY_RATING);
+    public String getName() {
+        return getString(KEY_NAME);
     }
 
-    public void setRating(double rating) {
-        put(KEY_RATING, rating);
+    public void setName(String name) {
+        put(KEY_NAME, name);
     }
 
     public ParseObject getDiningHall() {
@@ -24,4 +24,7 @@ public class Vendor extends ParseObject {
     public void setDiningHall(ParseObject diningHall) {
         put(KEY_DINING_HALL, diningHall);
     }
+
+    // The following var does not get stored in Parse
+    public float rating = 0f;
 }

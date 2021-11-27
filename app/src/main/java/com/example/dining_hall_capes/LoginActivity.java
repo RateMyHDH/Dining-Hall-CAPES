@@ -84,6 +84,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void goMainActivity() {
+        //Changed parameter to PostActivity.class for testing, change back to MainActivity.class
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
         finish();
