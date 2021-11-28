@@ -43,6 +43,8 @@ public class StreamFragment extends Fragment {
     HashMap<String, DiningHall> diningHallIndex;
     HashMap<String, Vendor> vendorIndex;
 
+    boolean refreshRatings;
+
     public StreamFragment() {
         // Required empty public constructor
     }
@@ -50,6 +52,7 @@ public class StreamFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        refreshRatings = false;
     }
 
     @Override
@@ -183,6 +186,8 @@ public class StreamFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        queryRatings();
+        if (refreshRatings)
+            queryRatings();
+        refreshRatings = true;
     }
 }

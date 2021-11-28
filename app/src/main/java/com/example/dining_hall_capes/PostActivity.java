@@ -36,10 +36,14 @@ public class PostActivity extends AppCompatActivity {
     RatingBar ratingByUser;
     VendorRating vendorRating;
 
+    boolean refreshPosts;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
+
+        refreshPosts = false;
 
         // Retrieve info sent form parent intent
         // Use info to query for Vendor specific posts
@@ -83,6 +87,7 @@ public class PostActivity extends AppCompatActivity {
                     Log.e(TAG, "Error getting posts: ", e);
                     return;
                 }
+                posts.clear();
                 posts.addAll(fetchedPosts);
                 postsAdapter.notifyDataSetChanged();
             }
@@ -99,20 +104,18 @@ public class PostActivity extends AppCompatActivity {
             public void done(List<VendorRating> fetchedRatings, ParseException e) {
                 if (e != null) {
                     Log.e(TAG, "Error with fetching the user's rating: ", e);
-                }
-                if (fetchedRatings.size() == 0) {
-                    return;
+                } else if (fetchedRatings.size() > 0) {
+                    vendorRating = fetchedRatings.get(0);
+                    ratingByUser.setRating((float) vendorRating.getRating());
+                    // There should only be one rating.
+                    // Duplicates are deleted from the server
+                    // Duplicates are made when an exception is passed into this method
+                    for (int i = 1; i < fetchedRatings.size(); ++i) {
+                        fetchedRatings.get(i).deleteInBackground();
+                    }
                 }
 
-                vendorRating = fetchedRatings.get(0);
-                ratingByUser.setRating((float) vendorRating.getRating());
                 setRatingChangeListener();
-
-                // There should only be one rating.
-                // Duplicates are deleted from the server
-                for (int i = 1; i < fetchedRatings.size(); ++i) {
-                    fetchedRatings.get(i).deleteInBackground();
-                }
             }
         });
     }
@@ -121,6 +124,7 @@ public class PostActivity extends AppCompatActivity {
         ratingByUser.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                Log.i(TAG, "Rating changed by " + ParseUser.getCurrentUser().getUsername());
                 ratingBar.setRating(rating);
                 if (vendorRating == null) {
                     vendorRating = new VendorRating();
@@ -142,11 +146,13 @@ public class PostActivity extends AppCompatActivity {
         });
     }
 
-    // This makes sure the most recent post from the user shows up in the thread.
-    // TODO: manually insert the post into the list to reduce network calls
+    // Refreshes the posts so that recently created posts by the user appear on the thread
+    // TODO: replace by manually adding user posts to reduce network calls
     @Override
     protected void onResume() {
         super.onResume();
-        queryPosts();
+        if (refreshPosts)
+            queryPosts();
+        refreshPosts = true;
     }
 }

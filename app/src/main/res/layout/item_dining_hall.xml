@@ -6,22 +6,24 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="5dp"
     android:layout_marginTop="5dp"
-    android:layout_marginEnd="5dp">
+    android:layout_marginEnd="5dp"
+    android:layout_marginBottom="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clHeading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corners"
-        android:backgroundTint="@color/tritonblue">
+        android:backgroundTint="@color/tritonblue"
+        android:padding="5dp">
 
         <TextView
             android:id="@+id/tvDiningHallName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
             android:text="tvDiningHallName"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="@color/white"
             android:textSize="30sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -30,7 +32,6 @@
             android:id="@+id/tvDiningHallRating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
             android:text="0.0"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textSize="30sp"
