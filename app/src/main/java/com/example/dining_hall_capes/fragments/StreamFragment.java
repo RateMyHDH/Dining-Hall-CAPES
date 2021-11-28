@@ -41,7 +41,7 @@ public class StreamFragment extends Fragment {
     List<DiningHall> diningHalls;
     DiningHallsAdapter diningHallsAdapter;
     HashMap<String, DiningHall> diningHallIndex;
-    // TODO: vendorsIndex for ratings
+    HashMap<String, Vendor> vendorIndex;
 
     public StreamFragment() {
         // Required empty public constructor
@@ -71,6 +71,7 @@ public class StreamFragment extends Fragment {
         rvDiningHalls.setAdapter(diningHallsAdapter);
         rvDiningHalls.setLayoutManager(new LinearLayoutManager(getContext()));
         diningHallIndex = new HashMap<>();
+        vendorIndex = new HashMap<>();
 
         queryDiningHalls();
     }
@@ -108,7 +109,7 @@ public class StreamFragment extends Fragment {
             @Override
             public void done(List<Vendor> fetchedVendors, ParseException e) {
                 if (e != null) {
-                    Log.e(TAG, "Issue with getting vendors");
+                    Log.e(TAG, "Issue with getting vendors", e);
                     return;
                 }
 
@@ -116,12 +117,17 @@ public class StreamFragment extends Fragment {
                     Log.i(TAG, "Vendor: " + v.getName());
 
                     DiningHall hall = (DiningHall) v.getDiningHall();
-                    if (hall == null || !diningHallIndex.containsKey(hall.getObjectId())) {
+                    if (vendorIndex.containsKey(v.getObjectId())
+                            || hall == null
+                            || !diningHallIndex.containsKey(hall.getObjectId())) {
                         Log.e(TAG, "Queried stray vendor: " + v.getName());
                     } else {
-                        hall = diningHallIndex.get(hall.getObjectId());
                         Log.i(TAG, "Got vendor " + v.getName() + " for " + hall.getName());
-                        hall.vendors.add(v);
+                        hall = diningHallIndex.get(hall.getObjectId());
+                        if (hall != null) {
+                            hall.vendors.add(v);
+                        }
+                        vendorIndex.put(v.getObjectId(), v);
                     }
                 }
 
@@ -133,20 +139,25 @@ public class StreamFragment extends Fragment {
     private void queryRatings() {
 
         HashMap<String, Object> params = new HashMap<>();
-        ParseCloud.callFunctionInBackground("getVendorRatings", params, new FunctionCallback<Map<Vendor, Float>>() {
+        ParseCloud.callFunctionInBackground("getVendorRatings", params, new FunctionCallback<Map<String, Float>>() {
             @Override
-            public void done(Map<Vendor, Float> avgRatings, ParseException e) {
+            public void done(Map<String, Float> avgRatings, ParseException e) {
                 if (e != null) {
-                    Log.e(TAG, "Error getting ratings");
+                    Log.e(TAG, "Error getting ratings", e);
                     return;
                 }
 
                 Log.i(TAG, "Got ratings");
-                for (Vendor v : avgRatings.keySet()) {
-                    Float r = avgRatings.get(v);
-                    // TODO: use vendorsIndex (TODO) so the avgRatings will be correctly calculated
-                    v.rating = r == null ? 0 : r;
+                for (String id : avgRatings.keySet()) {
+                    Float r = avgRatings.get(id);
+                    Vendor v = vendorIndex.get(id);
 
+                    if (v == null) {
+                        Log.e(TAG, "Null vendor in rating");
+                        continue;
+                    }
+
+                    v.rating = r == null ? 0 : r;
                     if (r == null) {
                         Log.e(TAG, "Null rating for " + v.getName());
                     }

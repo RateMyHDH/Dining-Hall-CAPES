@@ -9,41 +9,42 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RelativeLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.dining_hall_capes.fragments.StreamFragment;
 import com.example.dining_hall_capes.models.Post;
-import com.example.dining_hall_capes.models.Vendor;
+import com.example.dining_hall_capes.models.VendorRating;
 import com.parse.FindCallback;
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PostActivity extends AppCompatActivity {
-    public String vendorID;
-    public String vendorName;
-    List<Post> allposts;
+
+    public static final String TAG = "PostActivity";
+
+    String vendorID;
+    String vendorName;
+    List<Post> posts;
     PostsAdapter postsAdapter;
-    Vendor vendor;
     Button createPosts;
+    RatingBar ratingByUser;
+    VendorRating vendorRating;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //Retrieve info sent form parent intent
-        //Use info to query for Dining Hall specific posts
-        //Would potentially need Dining hall specified
-    //Get rating for specified dining hall
-    //Retrieve objects where Vendor is specified DH
-        vendorID = getIntent().getExtras().getString(StreamFragment.EXTRA_VENDOR_ID);
-        vendorName = getIntent().getExtras().getString(StreamFragment.EXTRA_VENDOR_NAME);
-        //CHANGE VENDOR NAME
-        //QUERY POSTS THAT MATCH VENDOR ID
-        //vendor = getIntent().getExtras().getParcelable("Vendor");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
+
+        // Retrieve info sent form parent intent
+        // Use info to query for Vendor specific posts
+        // Get user's rating for specified Vendor
+        vendorID = getIntent().getExtras().getString(StreamFragment.EXTRA_VENDOR_ID);
+        vendorName = getIntent().getExtras().getString(StreamFragment.EXTRA_VENDOR_NAME);
 
         TextView dhName = findViewById(R.id.tvDHtitle);
         dhName.setText(vendorName);
@@ -56,47 +57,68 @@ public class PostActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        //do something like in query posts to retrieve the vendor rating
 
         RecyclerView rvPosts = findViewById(R.id.rvPosts);
-        allposts = new ArrayList<>();
-
-
+        posts = new ArrayList<>();
 
         queryPosts();
-        postsAdapter = new PostsAdapter(this,allposts);
+        postsAdapter = new PostsAdapter(this, posts);
 
         rvPosts.setAdapter(postsAdapter);
         rvPosts.setLayoutManager(new LinearLayoutManager(this));
+
+        ratingByUser = findViewById(R.id.ratingByUser);
+        ratingByUser.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                ratingBar.setRating(rating);
+                vendorRating.setRating(rating);
+                vendorRating.saveInBackground();
+            }
+        });
+        queryRatingByUser();
     }
-    public void queryPosts() {
+
+    private void queryPosts() {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.whereEqualTo(Post.KEY_VENDOR_ID, vendorID);
-        //query.include(Post.KEY_AUTHOR);
         query.findInBackground(new FindCallback<Post>() {
             @Override
-            public void done(List<Post> posts, ParseException e) {
+            public void done(List<Post> fetchedPosts, ParseException e) {
                 if(e != null){
-                    Log.e("rrrr","errror");
-                    return ;
-
+                    Log.e(TAG, "Error getting posts: ", e);
+                    return;
                 }
-//                for (Post post:posts) {
-//                    //uncomment if statement and allposts.add(post) once vendor id field is added to posts
-//                    if (post.getVendor().getObjectId().equals(vendorID)) {
-//
-//                        //name is just used for logging purposes
-//
-//                        allposts.add(post);
-//                    }
-                allposts.addAll(posts);
+                posts.addAll(fetchedPosts);
                 postsAdapter.notifyDataSetChanged();
-//                }
-                postsAdapter.notifyDataSetChanged();
-                //postsAdapter.
+            }
+        });
+    }
+
+    private void queryRatingByUser() {
+        ParseQuery<VendorRating> query = ParseQuery.getQuery(VendorRating.class);
+        query.whereEqualTo(VendorRating.KEY_USER, ParseUser.getCurrentUser());
+        query.whereEqualTo(VendorRating.KEY_VENDOR_ID, vendorID);
+        query.addDescendingOrder(VendorRating.KEY_UPDATED_AT);
+        query.findInBackground(new FindCallback<VendorRating>() {
+            @Override
+            public void done(List<VendorRating> fetchedRatings, ParseException e) {
+                if (e != null) {
+                    Log.e(TAG, "Error with fetching the user's rating: ", e);
+                }
+                if (fetchedRatings.size() == 0) {
+                    return;
+                }
+
+                vendorRating = fetchedRatings.get(0);
+                ratingByUser.setRating(vendorRating.getRating());
+
+                // There should only be one rating.
+                // Duplicates are deleted from the server
+                for (int i = 1; i < fetchedRatings.size(); ++i) {
+                    fetchedRatings.get(i).deleteInBackground();
+                }
             }
         });
     }
 }
-
-
