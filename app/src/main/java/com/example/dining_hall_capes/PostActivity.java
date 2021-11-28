@@ -141,4 +141,12 @@ public class PostActivity extends AppCompatActivity {
             }
         });
     }
+
+    // This makes sure the most recent post from the user shows up in the thread.
+    // TODO: manually insert the post into the list to reduce network calls
+    @Override
+    protected void onResume() {
+        super.onResume();
+        queryPosts();
+    }
 }
