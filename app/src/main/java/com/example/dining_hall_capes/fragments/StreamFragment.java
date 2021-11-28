@@ -41,6 +41,7 @@ public class StreamFragment extends Fragment {
     List<DiningHall> diningHalls;
     DiningHallsAdapter diningHallsAdapter;
     HashMap<String, DiningHall> diningHallIndex;
+    // TODO: vendorsIndex for ratings
 
     public StreamFragment() {
         // Required empty public constructor
@@ -143,6 +144,7 @@ public class StreamFragment extends Fragment {
                 Log.i(TAG, "Got ratings");
                 for (Vendor v : avgRatings.keySet()) {
                     Float r = avgRatings.get(v);
+                    // TODO: use vendorsIndex (TODO) so the avgRatings will be correctly calculated
                     v.rating = r == null ? 0 : r;
 
                     if (r == null) {
