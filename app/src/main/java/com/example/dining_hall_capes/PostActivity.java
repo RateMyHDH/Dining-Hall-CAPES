@@ -19,6 +19,7 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,14 +69,7 @@ public class PostActivity extends AppCompatActivity {
         rvPosts.setLayoutManager(new LinearLayoutManager(this));
 
         ratingByUser = findViewById(R.id.ratingByUser);
-        ratingByUser.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                ratingBar.setRating(rating);
-                vendorRating.setRating(rating);
-                vendorRating.saveInBackground();
-            }
-        });
+
         queryRatingByUser();
     }
 
@@ -111,13 +105,39 @@ public class PostActivity extends AppCompatActivity {
                 }
 
                 vendorRating = fetchedRatings.get(0);
-                ratingByUser.setRating(vendorRating.getRating());
+                ratingByUser.setRating((float) vendorRating.getRating());
+                setRatingChangeListener();
 
                 // There should only be one rating.
                 // Duplicates are deleted from the server
                 for (int i = 1; i < fetchedRatings.size(); ++i) {
                     fetchedRatings.get(i).deleteInBackground();
                 }
+            }
+        });
+    }
+
+    private void setRatingChangeListener() {
+        ratingByUser.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                ratingBar.setRating(rating);
+                if (vendorRating == null) {
+                    vendorRating = new VendorRating();
+                    vendorRating.setVendorID(vendorID);
+                    vendorRating.setUser(ParseUser.getCurrentUser());
+                }
+                vendorRating.setRating(rating);
+                vendorRating.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if (e != null) {
+                            Log.e(TAG, "Failed to save rating: ", e);
+                        } else {
+                            Log.i(TAG, "Saved rating for " + ParseUser.getCurrentUser().getUsername());
+                        }
+                    }
+                });
             }
         });
     }

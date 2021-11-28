@@ -16,7 +16,6 @@
         android:layout_alignParentStart="false"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="6dp"
-        android:rating="3.5"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <androidx.recyclerview.widget.RecyclerView

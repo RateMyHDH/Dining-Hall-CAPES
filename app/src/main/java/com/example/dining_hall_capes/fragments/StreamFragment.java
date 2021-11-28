@@ -122,12 +122,13 @@ public class StreamFragment extends Fragment {
                             || !diningHallIndex.containsKey(hall.getObjectId())) {
                         Log.e(TAG, "Queried stray vendor: " + v.getName());
                     } else {
-                        Log.i(TAG, "Got vendor " + v.getName() + " for " + hall.getName());
                         hall = diningHallIndex.get(hall.getObjectId());
                         if (hall != null) {
                             hall.vendors.add(v);
+                            Log.i(TAG, "Got vendor " + v.getName() + " for " + hall.getName());
                         }
                         vendorIndex.put(v.getObjectId(), v);
+
                     }
                 }
 
@@ -139,9 +140,9 @@ public class StreamFragment extends Fragment {
     private void queryRatings() {
 
         HashMap<String, Object> params = new HashMap<>();
-        ParseCloud.callFunctionInBackground("getVendorRatings", params, new FunctionCallback<Map<String, Float>>() {
+        ParseCloud.callFunctionInBackground("getVendorRatings", params, new FunctionCallback<Map<String, Number>>() {
             @Override
-            public void done(Map<String, Float> avgRatings, ParseException e) {
+            public void done(Map<String, Number> avgRatings, ParseException e) {
                 if (e != null) {
                     Log.e(TAG, "Error getting ratings", e);
                     return;
@@ -149,7 +150,9 @@ public class StreamFragment extends Fragment {
 
                 Log.i(TAG, "Got ratings");
                 for (String id : avgRatings.keySet()) {
-                    Float r = avgRatings.get(id);
+                    // The java.lang.Number class can handle either Integer or Double,
+                    // the JS server function can return either.
+                    Number r = avgRatings.get(id);
                     Vendor v = vendorIndex.get(id);
 
                     if (v == null) {
@@ -157,7 +160,7 @@ public class StreamFragment extends Fragment {
                         continue;
                     }
 
-                    v.rating = r == null ? 0 : r;
+                    v.rating = r == null ? 0 : r.floatValue();
                     if (r == null) {
                         Log.e(TAG, "Null rating for " + v.getName());
                     }

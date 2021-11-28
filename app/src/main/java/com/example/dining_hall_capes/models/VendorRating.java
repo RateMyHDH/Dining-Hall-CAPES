@@ -12,11 +12,11 @@ public class VendorRating extends ParseObject {
     public static final String KEY_VENDOR = "vendor";
     public static final String KEY_VENDOR_ID = "vendorID";
 
-    public float getRating() {
+    public double getRating() {
         return getInt(KEY_RATING_VALUE);
     }
 
-    public void setRating(float rating) {
+    public void setRating(double rating) {
         put(KEY_RATING_VALUE, rating);
     }
 
