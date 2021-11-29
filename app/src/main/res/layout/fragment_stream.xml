@@ -5,8 +5,14 @@
     android:layout_height="match_parent"
     tools:context=".fragments.StreamFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvDiningHalls"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/streamSwipeContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvDiningHalls"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </FrameLayout>

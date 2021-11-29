@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,7 +25,6 @@ import com.parse.FunctionCallback;
 import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
-import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,6 +42,7 @@ public class StreamFragment extends Fragment {
     DiningHallsAdapter diningHallsAdapter;
     HashMap<String, DiningHall> diningHallIndex;
     HashMap<String, Vendor> vendorIndex;
+    SwipeRefreshLayout swipeContainer;
 
     boolean refreshRatings;
 
@@ -75,6 +76,15 @@ public class StreamFragment extends Fragment {
         rvDiningHalls.setLayoutManager(new LinearLayoutManager(getContext()));
         diningHallIndex = new HashMap<>();
         vendorIndex = new HashMap<>();
+        swipeContainer = view.findViewById(R.id.streamSwipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.i(TAG, "Fetching new data");
+                queryDiningHalls();
+            }
+        });
+        swipeContainer.setRefreshing(true);
 
         queryDiningHalls();
     }
@@ -98,7 +108,8 @@ public class StreamFragment extends Fragment {
                     hall.vendorsAdapter = new VendorsAdapter(getContext(), hall.vendors);
                 }
 
-                diningHallsAdapter.addAll(fetchedDiningHalls);
+                diningHalls.clear();
+                diningHalls.addAll(fetchedDiningHalls);
                 queryVendors();
             }
         });
@@ -120,18 +131,15 @@ public class StreamFragment extends Fragment {
                     Log.i(TAG, "Vendor: " + v.getName());
 
                     DiningHall hall = (DiningHall) v.getDiningHall();
-                    if (vendorIndex.containsKey(v.getObjectId())
-                            || hall == null
-                            || !diningHallIndex.containsKey(hall.getObjectId())) {
+                    if (hall == null || !diningHallIndex.containsKey(hall.getObjectId())) {
                         Log.e(TAG, "Queried stray vendor: " + v.getName());
                     } else {
                         hall = diningHallIndex.get(hall.getObjectId());
                         if (hall != null) {
                             hall.vendors.add(v);
+                            vendorIndex.put(v.getObjectId(), v);
                             Log.i(TAG, "Got vendor " + v.getName() + " for " + hall.getName());
                         }
-                        vendorIndex.put(v.getObjectId(), v);
-
                     }
                 }
 
@@ -169,18 +177,28 @@ public class StreamFragment extends Fragment {
                     }
                 }
 
-                for (DiningHall dh : diningHalls) {
-                    float ratingSum = 0;
-                    for (Vendor v : dh.vendors) {
-                        ratingSum += v.rating;
-                    }
-
-                    dh.rating = ratingSum / dh.vendors.size();
-                }
-
-                diningHallsAdapter.notifyDataSetChanged();
+                calcDHRatings();
             }
         });
+    }
+
+    private void calcDHRatings() {
+        for (DiningHall dh : diningHalls) {
+            float ratingSum = 0;
+            int numInvalid = 0;
+            for (Vendor v : dh.vendors) {
+                if (v.rating > 0) {
+                    ratingSum += v.rating;
+                } else {
+                    ++numInvalid;
+                }
+            }
+
+            dh.rating = ratingSum == 0 ? 0 : ratingSum / (dh.vendors.size() - numInvalid);
+        }
+
+        diningHallsAdapter.notifyDataSetChanged();
+        swipeContainer.setRefreshing(false);
     }
 
     @Override

@@ -6,8 +6,6 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,11 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dining_hall_capes.fragments.StreamFragment;
 import com.example.dining_hall_capes.models.Vendor;
+import com.example.dining_hall_capes.models.VendorRating;
 
 import java.util.List;
 import java.util.Locale;
 
 public class VendorsAdapter extends RecyclerView.Adapter<VendorsAdapter.ViewHolder> {
+
+    public static final String TAG = "VendorsAdapter";
 
     private Context context;
     private List<Vendor> vendors;
@@ -84,6 +85,11 @@ public class VendorsAdapter extends RecyclerView.Adapter<VendorsAdapter.ViewHold
         public void bind(Vendor vendor) {
             vendorID = vendor.getObjectId();
             tvVendorName.setText(vendor.getName());
+
+            if (vendor.rating == VendorRating.NULL_RATING) {
+                tvVendorRating.setText("");
+                return;
+            }
             tvVendorRating.setText(String.format(Locale.US, "%.1f", vendor.rating));
             if (vendor.rating < 2f) {
                 tvVendorRating.setTextColor(context.getColor(R.color.red));

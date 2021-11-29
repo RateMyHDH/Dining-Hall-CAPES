@@ -2,29 +2,19 @@ package com.example.dining_hall_capes;
 
 import android.content.Context;
 import android.os.Build;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dining_hall_capes.models.DiningHall;
-import com.example.dining_hall_capes.models.Vendor;
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseQuery;
+import com.example.dining_hall_capes.models.VendorRating;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -84,6 +74,13 @@ public class DiningHallsAdapter extends RecyclerView.Adapter<DiningHallsAdapter.
         @RequiresApi(api = Build.VERSION_CODES.M)
         public void bind(DiningHall hall) {
             tvTitle.setText(hall.getName());
+            rvVendors.setAdapter(hall.vendorsAdapter);
+            rvVendors.setLayoutManager(new LinearLayoutManager(context));
+
+            if (hall.rating == VendorRating.NULL_RATING) {
+                tvDiningHallRating.setText("");
+                return;
+            }
             tvDiningHallRating.setText(String.format(Locale.US, "%.1f", hall.rating));
             if (hall.rating < 2f) {
                 tvDiningHallRating.setTextColor(context.getColor(R.color.red));
@@ -94,8 +91,6 @@ public class DiningHallsAdapter extends RecyclerView.Adapter<DiningHallsAdapter.
             } else {
                 tvDiningHallRating.setTextColor(context.getColor(R.color.lime));
             }
-            rvVendors.setAdapter(hall.vendorsAdapter);
-            rvVendors.setLayoutManager(new LinearLayoutManager(context));
         }
     }
 }

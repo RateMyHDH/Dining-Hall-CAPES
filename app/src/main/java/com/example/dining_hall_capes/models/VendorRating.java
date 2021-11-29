@@ -11,6 +11,7 @@ public class VendorRating extends ParseObject {
     public static final String KEY_USER = "user";
     public static final String KEY_VENDOR = "vendor";
     public static final String KEY_VENDOR_ID = "vendorID";
+    public static final float NULL_RATING = 0f;
 
     public double getRating() {
         return getInt(KEY_RATING_VALUE);
