@@ -184,19 +184,8 @@ public class StreamFragment extends Fragment {
 
     private void calcDHRatings() {
         for (DiningHall dh : diningHalls) {
-            float ratingSum = 0;
-            int numInvalid = 0;
-            for (Vendor v : dh.vendors) {
-                if (v.rating > 0) {
-                    ratingSum += v.rating;
-                } else {
-                    ++numInvalid;
-                }
-            }
-
-            dh.rating = ratingSum == 0 ? 0 : ratingSum / (dh.vendors.size() - numInvalid);
+            dh.calcRating();
         }
-
         diningHallsAdapter.notifyDataSetChanged();
         swipeContainer.setRefreshing(false);
     }
