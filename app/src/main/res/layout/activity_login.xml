@@ -8,6 +8,15 @@
         android:layout_marginEnd="20dp"
         tools:context=".LoginActivity">
 
+    <ImageView
+        android:id="@+id/dinSunny"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:layout_above="@+id/etEmail"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/dinsunnydup" />
+
     <EditText
         android:id="@+id/etEmail"
         android:layout_width="match_parent"
@@ -52,4 +61,5 @@
         android:layout_marginTop="20dp"
         android:backgroundTint="#00629B"
         android:text="new to Dining Hall Capes?" />
+
 </RelativeLayout>
