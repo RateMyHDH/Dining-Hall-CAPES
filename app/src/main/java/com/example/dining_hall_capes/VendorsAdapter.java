@@ -2,14 +2,21 @@ package com.example.dining_hall_capes;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dining_hall_capes.fragments.StreamFragment;
@@ -31,6 +38,7 @@ public class VendorsAdapter extends RecyclerView.Adapter<VendorsAdapter.ViewHold
         this.vendors = vendors;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -45,6 +53,7 @@ public class VendorsAdapter extends RecyclerView.Adapter<VendorsAdapter.ViewHold
                 context.startActivity(i);
             }
         });
+
         return vh;
     }
 
@@ -92,13 +101,13 @@ public class VendorsAdapter extends RecyclerView.Adapter<VendorsAdapter.ViewHold
             }
             tvVendorRating.setText(String.format(Locale.US, "%.1f", vendor.rating));
             if (vendor.rating < 2f) {
-                tvVendorRating.setTextColor(context.getColor(R.color.red));
+                tvVendorRating.setBackground(AppCompatResources.getDrawable(context, R.drawable.rounded_corners_rating_red));
             } else if (vendor.rating < 3f) {
-                tvVendorRating.setTextColor(context.getColor(R.color.orange));
+                tvVendorRating.setBackground(AppCompatResources.getDrawable(context, R.drawable.rounded_corners_rating_orange));
             } else if (vendor.rating < 4f) {
-                tvVendorRating.setTextColor(context.getColor(R.color.yellow));
+                tvVendorRating.setBackground(AppCompatResources.getDrawable(context, R.drawable.rounded_corners_rating_yellow));
             } else {
-                tvVendorRating.setTextColor(context.getColor(R.color.lime));
+                tvVendorRating.setBackground(AppCompatResources.getDrawable(context, R.drawable.rounded_corners_rating_lime));
             }
         }
     }

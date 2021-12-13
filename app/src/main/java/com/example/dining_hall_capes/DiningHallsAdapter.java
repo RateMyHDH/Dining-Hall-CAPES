@@ -60,14 +60,12 @@ public class DiningHallsAdapter extends RecyclerView.Adapter<DiningHallsAdapter.
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvTitle;
-        TextView tvDiningHallRating;
         RecyclerView rvVendors;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvTitle = itemView.findViewById(R.id.tvDiningHallName);
-            tvDiningHallRating = itemView.findViewById(R.id.tvDiningHallRating);
             rvVendors = itemView.findViewById(R.id.rvVendors);
         }
 
@@ -76,21 +74,6 @@ public class DiningHallsAdapter extends RecyclerView.Adapter<DiningHallsAdapter.
             tvTitle.setText(hall.getName());
             rvVendors.setAdapter(hall.vendorsAdapter);
             rvVendors.setLayoutManager(new LinearLayoutManager(context));
-
-            if (hall.rating == VendorRating.NULL_RATING) {
-                tvDiningHallRating.setText("");
-                return;
-            }
-            tvDiningHallRating.setText(String.format(Locale.US, "%.1f", hall.rating));
-            if (hall.rating < 2f) {
-                tvDiningHallRating.setTextColor(context.getColor(R.color.red));
-            } else if (hall.rating < 3f) {
-                tvDiningHallRating.setTextColor(context.getColor(R.color.orange));
-            } else if (hall.rating < 4f) {
-                tvDiningHallRating.setTextColor(context.getColor(R.color.yellow));
-            } else {
-                tvDiningHallRating.setTextColor(context.getColor(R.color.lime));
-            }
         }
     }
 }

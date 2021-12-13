@@ -133,14 +133,17 @@ public class StreamFragment extends Fragment {
                     DiningHall hall = (DiningHall) v.getDiningHall();
                     if (hall == null || !diningHallIndex.containsKey(hall.getObjectId())) {
                         Log.e(TAG, "Queried stray vendor: " + v.getName());
-                    } else {
-                        hall = diningHallIndex.get(hall.getObjectId());
-                        if (hall != null) {
-                            hall.vendors.add(v);
-                            vendorIndex.put(v.getObjectId(), v);
-                            Log.i(TAG, "Got vendor " + v.getName() + " for " + hall.getName());
-                        }
+                        return;
                     }
+                    DiningHall indexedHall = diningHallIndex.get(hall.getObjectId());
+                    if (indexedHall == null) {
+                        Log.e(TAG, "Queried vendor " + v.getName() + " with wrong hall");
+                        return;
+                    }
+
+                    indexedHall.vendors.add(v);
+                    vendorIndex.put(v.getObjectId(), v);
+                    Log.i(TAG, "Got vendor " + v.getName() + " for " + indexedHall.getName());
                 }
 
                 queryRatings();
@@ -177,17 +180,9 @@ public class StreamFragment extends Fragment {
                     }
                 }
 
-                calcDHRatings();
+                swipeContainer.setRefreshing(false);
             }
         });
-    }
-
-    private void calcDHRatings() {
-        for (DiningHall dh : diningHalls) {
-            dh.calcRating();
-        }
-        diningHallsAdapter.notifyDataSetChanged();
-        swipeContainer.setRefreshing(false);
     }
 
     @Override
@@ -195,6 +190,7 @@ public class StreamFragment extends Fragment {
         super.onResume();
         if (refreshRatings)
             queryRatings();
-        refreshRatings = true;
+        else
+            refreshRatings = true;
     }
 }
