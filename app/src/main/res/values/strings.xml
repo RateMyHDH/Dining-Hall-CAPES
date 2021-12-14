@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Dining-Hall-Capes</string>
+    <string name="app_name">Rate Your Campus Food</string>
 
     // Parse back4app
     <string name="back4app_server_url">https://parseapi.back4app.com/</string>
