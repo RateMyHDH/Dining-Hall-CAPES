@@ -98,6 +98,7 @@ public class StreamFragment extends Fragment {
             public void done(List<DiningHall> fetchedDiningHalls, ParseException e) {
                 if (e != null) {
                     Log.e(TAG, "Issue with getting dining halls", e);
+                    swipeContainer.setRefreshing(false);
                     return;
                 }
 
@@ -124,6 +125,7 @@ public class StreamFragment extends Fragment {
             public void done(List<Vendor> fetchedVendors, ParseException e) {
                 if (e != null) {
                     Log.e(TAG, "Issue with getting vendors", e);
+                    swipeContainer.setRefreshing(false);
                     return;
                 }
 
@@ -159,6 +161,7 @@ public class StreamFragment extends Fragment {
             public void done(Map<String, Number> avgRatings, ParseException e) {
                 if (e != null) {
                     Log.e(TAG, "Error getting ratings", e);
+                    swipeContainer.setRefreshing(false);
                     return;
                 }
 

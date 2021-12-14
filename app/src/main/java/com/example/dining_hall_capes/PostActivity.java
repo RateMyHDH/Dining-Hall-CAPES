@@ -3,6 +3,7 @@ package com.example.dining_hall_capes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,6 +36,7 @@ public class PostActivity extends AppCompatActivity {
     Button createPosts;
     RatingBar ratingByUser;
     VendorRating vendorRating;
+    SwipeRefreshLayout swipeContainer;
 
     boolean refreshPosts;
 
@@ -74,6 +76,16 @@ public class PostActivity extends AppCompatActivity {
 
         ratingByUser = findViewById(R.id.ratingByUser);
 
+        swipeContainer = findViewById(R.id.postsSwipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.i(TAG, "Refreshing posts");
+                queryPosts();
+            }
+        });
+        swipeContainer.setRefreshing(true);
+
         queryRatingByUser();
     }
 
@@ -86,11 +98,13 @@ public class PostActivity extends AppCompatActivity {
             public void done(List<Post> fetchedPosts, ParseException e) {
                 if(e != null){
                     Log.e(TAG, "Error getting posts: ", e);
+                    swipeContainer.setRefreshing(false);
                     return;
                 }
                 posts.clear();
                 posts.addAll(fetchedPosts);
                 postsAdapter.notifyDataSetChanged();
+                swipeContainer.setRefreshing(false);
             }
         });
     }
