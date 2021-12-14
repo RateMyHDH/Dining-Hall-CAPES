@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ivProfilePic"
         android:layout_alignParentStart="true"
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="89dp"
         android:layout_marginTop="20dp"
         android:backgroundTint="#00629B"
@@ -40,7 +40,7 @@
         android:layout_alignParentStart="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="158dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="10dp"
         android:backgroundTint="#00629B"
         android:text="Logout" />
 
@@ -50,9 +50,10 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
+        android:fontFamily="sans-serif-medium"
         android:text="User Profile"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="#000000"
         android:textSize="36sp" />
 
 </RelativeLayout>
