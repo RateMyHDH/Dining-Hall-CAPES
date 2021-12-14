@@ -23,4 +23,18 @@ public class DiningHall extends ParseObject {
     public List<Vendor> vendors;
     public VendorsAdapter vendorsAdapter;
     public float rating = 0f;
+
+    public void calcRating() {
+        float ratingSum = 0;
+        int numInvalid = 0;
+        for (Vendor v : vendors) {
+            if (v.rating > 0) {
+                ratingSum += v.rating;
+            } else {
+                ++numInvalid;
+            }
+        }
+
+        rating = ratingSum == 0 ? 0 : ratingSum / (vendors.size() - numInvalid);
+    }
 }

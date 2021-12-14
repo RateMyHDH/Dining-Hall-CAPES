@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,7 +25,6 @@ import com.parse.FunctionCallback;
 import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
-import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,11 +34,17 @@ import java.util.Map;
 public class StreamFragment extends Fragment {
 
     public static final String TAG = "StreamFragment";
+    public static final String EXTRA_VENDOR_ID = "id";
+    public static final String EXTRA_VENDOR_NAME = "name";
 
     RecyclerView rvDiningHalls;
     List<DiningHall> diningHalls;
     DiningHallsAdapter diningHallsAdapter;
     HashMap<String, DiningHall> diningHallIndex;
+    HashMap<String, Vendor> vendorIndex;
+    SwipeRefreshLayout swipeContainer;
+
+    boolean refreshRatings;
 
     public StreamFragment() {
         // Required empty public constructor
@@ -47,6 +53,7 @@ public class StreamFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        refreshRatings = false;
     }
 
     @Override
@@ -68,6 +75,16 @@ public class StreamFragment extends Fragment {
         rvDiningHalls.setAdapter(diningHallsAdapter);
         rvDiningHalls.setLayoutManager(new LinearLayoutManager(getContext()));
         diningHallIndex = new HashMap<>();
+        vendorIndex = new HashMap<>();
+        swipeContainer = view.findViewById(R.id.streamSwipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.i(TAG, "Fetching new data");
+                queryDiningHalls();
+            }
+        });
+        swipeContainer.setRefreshing(true);
 
         queryDiningHalls();
     }
@@ -81,6 +98,7 @@ public class StreamFragment extends Fragment {
             public void done(List<DiningHall> fetchedDiningHalls, ParseException e) {
                 if (e != null) {
                     Log.e(TAG, "Issue with getting dining halls", e);
+                    swipeContainer.setRefreshing(false);
                     return;
                 }
 
@@ -91,7 +109,8 @@ public class StreamFragment extends Fragment {
                     hall.vendorsAdapter = new VendorsAdapter(getContext(), hall.vendors);
                 }
 
-                diningHallsAdapter.addAll(fetchedDiningHalls);
+                diningHalls.clear();
+                diningHalls.addAll(fetchedDiningHalls);
                 queryVendors();
             }
         });
@@ -105,7 +124,8 @@ public class StreamFragment extends Fragment {
             @Override
             public void done(List<Vendor> fetchedVendors, ParseException e) {
                 if (e != null) {
-                    Log.e(TAG, "Issue with getting vendors");
+                    Log.e(TAG, "Issue with getting vendors", e);
+                    swipeContainer.setRefreshing(false);
                     return;
                 }
 
@@ -115,11 +135,17 @@ public class StreamFragment extends Fragment {
                     DiningHall hall = (DiningHall) v.getDiningHall();
                     if (hall == null || !diningHallIndex.containsKey(hall.getObjectId())) {
                         Log.e(TAG, "Queried stray vendor: " + v.getName());
-                    } else {
-                        hall = diningHallIndex.get(hall.getObjectId());
-                        Log.i(TAG, "Got vendor " + v.getName() + " for " + hall.getName());
-                        hall.vendors.add(v);
+                        return;
                     }
+                    DiningHall indexedHall = diningHallIndex.get(hall.getObjectId());
+                    if (indexedHall == null) {
+                        Log.e(TAG, "Queried vendor " + v.getName() + " with wrong hall");
+                        return;
+                    }
+
+                    indexedHall.vendors.add(v);
+                    vendorIndex.put(v.getObjectId(), v);
+                    Log.i(TAG, "Got vendor " + v.getName() + " for " + indexedHall.getName());
                 }
 
                 queryRatings();
@@ -130,35 +156,45 @@ public class StreamFragment extends Fragment {
     private void queryRatings() {
 
         HashMap<String, Object> params = new HashMap<>();
-        ParseCloud.callFunctionInBackground("getVendorRatings", params, new FunctionCallback<Map<Vendor, Float>>() {
+        ParseCloud.callFunctionInBackground("getVendorRatings", params, new FunctionCallback<Map<String, Number>>() {
             @Override
-            public void done(Map<Vendor, Float> avgRatings, ParseException e) {
+            public void done(Map<String, Number> avgRatings, ParseException e) {
                 if (e != null) {
-                    Log.e(TAG, "Error getting ratings");
+                    Log.e(TAG, "Error getting ratings", e);
+                    swipeContainer.setRefreshing(false);
                     return;
                 }
 
                 Log.i(TAG, "Got ratings");
-                for (Vendor v : avgRatings.keySet()) {
-                    Float r = avgRatings.get(v);
-                    v.rating = r == null ? 0 : r;
+                for (String id : avgRatings.keySet()) {
+                    // The java.lang.Number class can handle either Integer or Double,
+                    // the JS server function can return either.
+                    Number r = avgRatings.get(id);
+                    Vendor v = vendorIndex.get(id);
 
+                    if (v == null) {
+                        Log.e(TAG, "Null vendor in rating");
+                        continue;
+                    }
+
+                    v.rating = r == null ? 0 : r.floatValue();
                     if (r == null) {
                         Log.e(TAG, "Null rating for " + v.getName());
                     }
                 }
 
-                for (DiningHall dh : diningHalls) {
-                    float ratingSum = 0;
-                    for (Vendor v : dh.vendors) {
-                        ratingSum += v.rating;
-                    }
-
-                    dh.rating = ratingSum / dh.vendors.size();
-                }
-
                 diningHallsAdapter.notifyDataSetChanged();
+                swipeContainer.setRefreshing(false);
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (refreshRatings)
+            queryRatings();
+        else
+            refreshRatings = true;
     }
 }

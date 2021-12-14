@@ -1,29 +1,22 @@
 package com.example.dining_hall_capes;
 
 import android.content.Context;
-import android.util.Log;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dining_hall_capes.models.DiningHall;
-import com.example.dining_hall_capes.models.Vendor;
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseQuery;
+import com.example.dining_hall_capes.models.VendorRating;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class DiningHallsAdapter extends RecyclerView.Adapter<DiningHallsAdapter.ViewHolder> {
 
@@ -44,6 +37,7 @@ public class DiningHallsAdapter extends RecyclerView.Adapter<DiningHallsAdapter.
         return new ViewHolder(view);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.bind(diningHalls.get(position));
@@ -66,31 +60,18 @@ public class DiningHallsAdapter extends RecyclerView.Adapter<DiningHallsAdapter.
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvTitle;
-        TextView tvDiningHallRating;
         RecyclerView rvVendors;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvTitle = itemView.findViewById(R.id.tvDiningHallName);
-            tvDiningHallRating = itemView.findViewById(R.id.tvDiningHallRating);
             rvVendors = itemView.findViewById(R.id.rvVendors);
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.M)
         public void bind(DiningHall hall) {
             tvTitle.setText(hall.getName());
-            tvDiningHallRating.setText(String.format("%.1f", hall.rating));
-            int color;
-            if (hall.rating < 4f) {
-                color = R.color.red;
-            } else if (hall.rating < 6f) {
-                color = R.color.orange;
-            } else if (hall.rating < 8f) {
-                color = R.color.yellow;
-            } else {
-                color = R.color.lime;
-            }
-            tvDiningHallRating.setTextColor(color);
             rvVendors.setAdapter(hall.vendorsAdapter);
             rvVendors.setLayoutManager(new LinearLayoutManager(context));
         }

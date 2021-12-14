@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.dining_hall_capes.fragments.StreamFragment;
 import com.example.dining_hall_capes.models.Post;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -77,12 +78,10 @@ public class CreationActivity extends AppCompatActivity {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         photoFile = getPhotoFileUri(photoFileName);
 
-        Uri fileProvider = FileProvider.getUriForFile(CreationActivity.this, "com.codepath.fileprovider", photoFile);
+        Uri fileProvider = FileProvider.getUriForFile(CreationActivity.this, "com.codepath.fileprovider.pictures", photoFile);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
 
-        if(intent.resolveActivity(CreationActivity.this.getPackageManager()) != null){
-            startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-        }
+        startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 
     }
 
@@ -96,6 +95,7 @@ public class CreationActivity extends AppCompatActivity {
         return new File(mediaStorageDir.getPath() + File.separator + fileName);
     }
 
+
     private void savePost(String review, ParseUser currentUser, File photoFile) {
         Post post = new Post();
         post.setReview(review);
@@ -103,6 +103,7 @@ public class CreationActivity extends AppCompatActivity {
             post.setImage(new ParseFile(photoFile));
         }
         post.setAuthor(currentUser);
+        post.setVendorID(getIntent().getExtras().getString("vendorID"));
         post.saveInBackground(new SaveCallback(){
             @Override
             public void done(ParseException e) {
@@ -113,6 +114,8 @@ public class CreationActivity extends AppCompatActivity {
                 Log.i(TAG, "Post saved successfully");
                 etReview.setText("");
                 ivPostImage.setImageResource(0);
+
+                finish();
             }
         });
     }

@@ -32,22 +32,14 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 Fragment fragment;
                 switch (menuItem.getItemId()) {
-
-                    case R.id.action_reviews:
-                        Toast.makeText(MainActivity.this, "Home!", Toast.LENGTH_SHORT).show();
-                        fragment = new StreamFragment();
-                        break;
-                    /*
-                    case R.id.action_compose:
-                        Toast.makeText(MainActivity.this, "Compose!", Toast.LENGTH_SHORT).show();
-                        fragment = new ComposeFragment();
-                        break;
-
-                     */
                     case R.id.action_profile:
-                    default:
                         Toast.makeText(MainActivity.this, "Profile!", Toast.LENGTH_SHORT).show();
                         fragment = new ProfileFragment();
+                        break;
+                    case R.id.action_reviews:
+                    default:
+                        Toast.makeText(MainActivity.this, "Home!", Toast.LENGTH_SHORT).show();
+                        fragment = new StreamFragment();
                         break;
                 }
                 fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
@@ -55,6 +47,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         // Set default selection
-        bottomNavigationView.setSelectedItemId(R.id.action_profile);
+        bottomNavigationView.setSelectedItemId(R.id.action_reviews);
     }
 }

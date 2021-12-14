@@ -8,15 +8,16 @@ import com.parse.ParseUser;
 public class VendorRating extends ParseObject {
 
     public static final String KEY_RATING_VALUE = "rating";
-    // May remove if we can have the user track their own ratings
     public static final String KEY_USER = "user";
     public static final String KEY_VENDOR = "vendor";
+    public static final String KEY_VENDOR_ID = "vendorID";
+    public static final float NULL_RATING = 0f;
 
-    public int getRating() {
+    public double getRating() {
         return getInt(KEY_RATING_VALUE);
     }
 
-    public void setRating(int rating) {
+    public void setRating(double rating) {
         put(KEY_RATING_VALUE, rating);
     }
 
@@ -34,5 +35,13 @@ public class VendorRating extends ParseObject {
 
     public void setVendor(ParseObject vendor) {
         put(KEY_VENDOR, vendor);
+    }
+
+    public String getVendorID() {
+        return getString(KEY_VENDOR_ID);
+    }
+
+    public void setVendorID(String vendorID) {
+        put(KEY_VENDOR_ID, vendorID);
     }
 }

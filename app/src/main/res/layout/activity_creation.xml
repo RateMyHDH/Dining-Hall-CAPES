@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="20dp"
-    android:layout_marginEnd="20dp"
+    android:layout_margin="20dp"
     tools:context=".CreationActivity">
 
     <EditText
@@ -29,7 +27,7 @@
         android:layout_centerHorizontal="false"
         android:layout_marginTop="10dp"
         android:backgroundTint="#00629B"
-        tools:text="Capture Image (Optional)" />
+        android:text="Capture Image (Optional)" />
 
     <ImageView
         android:id="@+id/ivPostImage"
@@ -45,8 +43,7 @@
         android:id="@+id/btnSubmit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ivPostImage"
+        android:layout_alignParentBottom="true"
         android:backgroundTint="#00629B"
-        android:text="Button"
-        tools:text="Submit" />
+        android:text="Submit" />
 </RelativeLayout>

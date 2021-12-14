@@ -4,44 +4,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.PostsFragment">
+    tools:context=".PostActivity">
 
     <!-- TODO: Update blank fragment layout -->
 
     <RatingBar
-        android:id="@+id/dhRating"
+        android:id="@+id/ratingByUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/tvDHtitle"
+        android:layout_alignParentStart="false"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="73dp"
-        android:layout_marginTop="70dp" />
+        android:layout_marginTop="6dp"
+        tools:ignore="SpeakableTextPresentCheck" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvPosts"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/postsSwipeContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="126dp"
-        android:gravity="center" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ratingByUser"
+        android:layout_margin="5dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPosts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/ratingByUser"
+            android:layout_alignParentStart="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <TextView
         android:id="@+id/tvDHtitle"
         android:layout_width="wrap_content"
-        android:layout_height="53dp"
-        android:layout_alignParentStart="true"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentEnd="false"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:text="Vendor"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/btnCreatePost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginEnd="103dp"
-        android:gravity="center"
-        android:text="Dining Hall"
-        android:textSize="30sp" />
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:text="Post" />
 
 </RelativeLayout>

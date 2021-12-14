@@ -12,9 +12,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="10dp"
         android:layout_toEndOf="@+id/ivProfileImage"
-        android:text="User" />
+        android:text="User"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/ivProfileImage"
@@ -28,26 +30,28 @@
         android:id="@+id/tvTimestamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvUsername"
         android:layout_marginStart="5dp"
         android:layout_toEndOf="@+id/tvUsername"
-        android:text="00:00" />
+        android:text="00:00"
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/tvBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvUsername"
-        android:layout_marginStart="5dp"
-        android:layout_toEndOf="@+id/ivProfileImage"
-        android:text="Review Body" />
+        android:layout_alignStart="@+id/tvUsername"
+        android:layout_marginTop="5dp"
+        android:text="Review Body"
+        android:textColor="@color/black" />
 
     <ImageView
         android:id="@+id/ivReviewImage"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/tvBody"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_toEndOf="@+id/ivProfileImage"
+        android:layout_alignStart="@+id/tvUsername"
+        android:layout_marginTop="15dp"
         tools:srcCompat="@tools:sample/avatars" />
 </RelativeLayout>

@@ -8,8 +8,17 @@
         android:layout_marginEnd="20dp"
         tools:context=".LoginActivity">
 
+    <ImageView
+        android:id="@+id/dinSunny"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:layout_above="@+id/etEmail"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/dinsunnydup" />
+
     <EditText
-        android:id="@+id/etNewEmail"
+        android:id="@+id/etEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -23,7 +32,7 @@
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etNewEmail"
+        android:layout_below="@+id/etEmail"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:ems="10"
@@ -31,13 +40,26 @@
         android:inputType="textPassword"
         android:minHeight="48dp" />
 
-        <Button
-            android:id="@+id/btnLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/etPassword"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="#00629B"
-            android:text="Login" />
-    </RelativeLayout>
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etPassword"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#00629B"
+        android:text="Login" />
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnLogin"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="false"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#00629B"
+        android:text="new to Dining Hall Capes?" />
+
+</RelativeLayout>
