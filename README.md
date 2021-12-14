@@ -146,3 +146,5 @@ CAPEs... but for the dining halls.
 ### Sprint 2 Progress
 <img src='sprint2.gif' title='Sprint 2 Walkthrough' width='' alt='Video Walkthrough' />
 
+### Final Walkthrough
+<img src='DHCAPEs_final.gif' title='Final Walkthrough' width='' alt='Video Walkthrough' />
