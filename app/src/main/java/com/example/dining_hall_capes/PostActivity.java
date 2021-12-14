@@ -58,7 +58,7 @@ public class PostActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(PostActivity.this,CreationActivity.class);
-                i.putExtra("vendorID",vendorID);
+                i.putExtra(Post.KEY_VENDOR_ID, vendorID);
                 startActivity(i);
             }
         });
@@ -80,6 +80,7 @@ public class PostActivity extends AppCompatActivity {
     private void queryPosts() {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.whereEqualTo(Post.KEY_VENDOR_ID, vendorID);
+        query.orderByDescending(Post.KEY_CREATED_AT);
         query.findInBackground(new FindCallback<Post>() {
             @Override
             public void done(List<Post> fetchedPosts, ParseException e) {

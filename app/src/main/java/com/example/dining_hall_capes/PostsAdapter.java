@@ -1,4 +1,6 @@
 package com.example.dining_hall_capes;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.dining_hall_capes.*;
 import com.example.dining_hall_capes.models.*;
 import com.example.*;
@@ -26,8 +28,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
+
     private Context context;
     private List<Post> posts;
+
     //Constructor for posts adapter, takes in context and list of posts to display.
     public PostsAdapter(Context context, List<Post> posts) {
         this.context = context;
@@ -56,13 +60,15 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
         return posts.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder {
+
         private TextView tvUsername;
         private TextView tvComment;
         private ImageView pfpImage;
         private RelativeLayout container;
         private TextView postTime;
-        public ViewHolder(@NonNull View itemView){
+
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             container = itemView.findViewById(R.id.itemContainer);
             tvUsername = itemView.findViewById(R.id.tvUsername);
@@ -70,17 +76,19 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
             pfpImage = itemView.findViewById(R.id.ivPFP);
             postTime = itemView.findViewById(R.id.postTime);
         }
+
         public void bind(Post post) throws ParseException {
             //get post text: tvComment.setText(post.getComment)
-            String name = "";
-            name = post.getAuthor().fetchIfNeeded().getUsername();
-            //Log.i("tttt","Post" + name);
+            String name = post.getAuthor().fetchIfNeeded().getUsername();
             tvUsername.setText(name);
             tvComment.setText(post.getReview());
             postTime.setText(post.getTime());
             // Getting profile picture of user who posted if needed
             if(post.getAuthor().fetchIfNeeded().getParseFile("profilePic") != null){
-                Glide.with(context).load(post.getAuthor().getParseFile("profilePic").getUrl()).into(pfpImage);
+                Glide.with(context)
+                        .load(post.getAuthor().getParseFile("profilePic").getUrl())
+                        .transform(new CenterCrop(), new RoundedCorners(20))
+                        .into(pfpImage);
             }
             container.setOnClickListener(new View.OnClickListener(){
                 @Override

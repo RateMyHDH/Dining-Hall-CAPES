@@ -5,7 +5,11 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
+
 import org.parceler.Parcel;
 
 @ParseClassName("Post")
@@ -16,17 +20,12 @@ public class Post extends ParseObject {
     public static final String KEY_LIKES = "likes";
     public static final String KEY_VENDOR = "vendor";
     public static final String KEY_VENDOR_ID = "vendorID";
-
-
-    //EMPTY CONSTRUCTOR FOR PARCEL
-    public Post(){
-    }
-
     public static final String KEY_REVIEW = "reviewBody";
-
-
     public static final String KEY_CREATED_AT = "createdAt";
 
+    //EMPTY CONSTRUCTOR FOR PARCEL
+    public Post() {
+    }
 
     public ParseUser getAuthor() {
         return getParseUser(KEY_AUTHOR);
@@ -70,7 +69,9 @@ public class Post extends ParseObject {
 
     public void setVendorID(String vendorID) {put(KEY_VENDOR_ID, vendorID); }
 
-    public String getTime(){
-        return getString(KEY_CREATED_AT);
+    public String getTime() {
+        Date date = getCreatedAt();
+        DateFormat df = new SimpleDateFormat("MMM d, yyyy", Locale.US);
+        return df.format(date);
     }
 }
