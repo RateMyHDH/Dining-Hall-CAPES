@@ -183,6 +183,7 @@ public class StreamFragment extends Fragment {
                     }
                 }
 
+                diningHallsAdapter.notifyDataSetChanged();
                 swipeContainer.setRefreshing(false);
             }
         });

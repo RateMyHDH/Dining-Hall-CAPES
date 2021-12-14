@@ -11,7 +11,8 @@ Original App Design Project - README Template
 
 ## Overview
 ### Description
-CAPES... but for the dining halls.
+CAPEs stands for Course And Professor Evaluations. So here we introduce
+CAPEs... but for the dining halls.
 
 ### App Evaluation
 [Evaluation of your app across the following attributes]
