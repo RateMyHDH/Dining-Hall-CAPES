@@ -6,7 +6,7 @@
         android:layout_height="match_parent"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        tools:context=".LoginActivity">
+        tools:context=".activities.LoginActivity">
 
     <ImageView
         android:id="@+id/dinSunny"
@@ -15,7 +15,7 @@
         android:layout_above="@+id/etEmail"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/dinsunnydup" />
+        app:srcCompat="@drawable/dinsunnydup" />
 
     <EditText
         android:id="@+id/etEmail"
