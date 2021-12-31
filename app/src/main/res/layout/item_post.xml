@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="70dp"
     android:layout_margin="5dp"
-    android:background="@drawable/clickable_list_item_background"
+    android:background="@drawable/clickable"
     android:padding="5dp">
 
     <ImageView

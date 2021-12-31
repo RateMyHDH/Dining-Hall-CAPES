@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="20dp"
-    tools:context=".CreationActivity">
+    tools:context=".activities.CreationActivity">
 
     <EditText
         android:id="@+id/etReview"
@@ -26,7 +26,8 @@
         android:layout_below="@+id/etReview"
         android:layout_centerHorizontal="false"
         android:layout_marginTop="10dp"
-        android:backgroundTint="#00629B"
+        android:background="@drawable/clickable_rounded_corners"
+        android:backgroundTint="@color/tritonblue"
         android:text="Capture Image (Optional)" />
 
     <ImageView
@@ -44,6 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:backgroundTint="#00629B"
+        android:background="@drawable/clickable_rounded_corners"
+        android:backgroundTint="@color/tritonblue"
         android:text="Submit" />
 </RelativeLayout>
