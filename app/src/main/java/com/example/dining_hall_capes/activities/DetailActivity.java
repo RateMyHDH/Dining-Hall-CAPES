@@ -1,4 +1,4 @@
-package com.example.dining_hall_capes;
+package com.example.dining_hall_capes.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.example.dining_hall_capes.R;
 import com.example.dining_hall_capes.models.Post;
 
 import org.parceler.Parcels;
@@ -42,8 +43,8 @@ public class DetailActivity extends AppCompatActivity {
                         .into(ivProfileImage);
         }
         tvBody.setText(post.getReview());
-        if(post.getParseFile("image") != null){
-            Glide.with(this).load(post.getParseFile("image").getUrl()).into(ivReviewImage);
+        if(post.getImage() != null){
+            Glide.with(this).load(post.getImage().getUrl()).into(ivReviewImage);
         }
     }
 }

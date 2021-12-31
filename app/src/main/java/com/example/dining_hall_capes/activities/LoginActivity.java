@@ -1,8 +1,6 @@
-package com.example.dining_hall_capes;
+package com.example.dining_hall_capes.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,14 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.dining_hall_capes.R;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
-
-import com.example.dining_hall_capes.models.Post;
-
-import java.util.ArrayList;
-import java.util.List;
 
 // this is the LoginActivity
 public class LoginActivity extends AppCompatActivity {
@@ -77,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 // navigate to main activity if correct credentials
-                Toast.makeText(LoginActivity.this,"Login Success!", Toast.LENGTH_LONG).show();
+                // Toast.makeText(LoginActivity.this,"Login Success!", Toast.LENGTH_LONG).show();
                 goMainActivity();
             }
         });
@@ -97,4 +91,4 @@ public class LoginActivity extends AppCompatActivity {
         finish();
 
     }
-}//DEL EVERYTHING BELOW SCV
+}

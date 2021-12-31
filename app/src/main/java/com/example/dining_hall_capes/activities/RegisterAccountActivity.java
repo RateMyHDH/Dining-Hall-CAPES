@@ -1,4 +1,4 @@
-package com.example.dining_hall_capes;
+package com.example.dining_hall_capes.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,9 +12,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.dining_hall_capes.R;
 import com.parse.ParseException;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
 
 public class RegisterAccountActivity extends AppCompatActivity {
@@ -26,7 +26,6 @@ public class RegisterAccountActivity extends AppCompatActivity {
     private EditText etNewPassword;
     private CheckBox cbCheckTerms;
     private Button btnCreateAccount;
-    private ImageButton btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,14 +38,6 @@ public class RegisterAccountActivity extends AppCompatActivity {
         etNewPassword = findViewById(R.id.etNewPassword);
         cbCheckTerms = findViewById(R.id.cbCheckTerms);
         btnCreateAccount = findViewById(R.id.btnCreateAccount);
-        btnBack = findViewById(R.id.btnBack);
-
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goLoginActivity();
-            }
-        });
 
         btnCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override

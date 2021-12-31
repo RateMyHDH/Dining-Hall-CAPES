@@ -1,13 +1,12 @@
-package com.example.dining_hall_capes;
+package com.example.dining_hall_capes.adapters;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.dining_hall_capes.*;
+import com.example.dining_hall_capes.activities.DetailActivity;
 import com.example.dining_hall_capes.models.*;
-import com.example.*;
+
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcel;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,11 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.parse.ParseException;
-import com.parse.ParseFile;
 
 import org.parceler.Parcels;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
@@ -93,7 +90,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
             container.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view) {
-                    Intent i = new Intent(context,DetailActivity.class);
+                    Intent i = new Intent(context, DetailActivity.class);
                     //MAKE OBJECT INTO A PARCELABLE?
                     i.putExtra("post", Parcels.wrap(post));
                     context.startActivity(i);

@@ -1,4 +1,4 @@
-package com.example.dining_hall_capes;
+package com.example.dining_hall_capes.adapters;
 
 import android.content.Context;
 import android.os.Build;
@@ -12,11 +12,10 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.dining_hall_capes.R;
 import com.example.dining_hall_capes.models.DiningHall;
-import com.example.dining_hall_capes.models.VendorRating;
 
 import java.util.List;
-import java.util.Locale;
 
 public class DiningHallsAdapter extends RecyclerView.Adapter<DiningHallsAdapter.ViewHolder> {
 

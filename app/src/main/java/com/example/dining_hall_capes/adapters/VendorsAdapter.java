@@ -1,15 +1,9 @@
-package com.example.dining_hall_capes;
+package com.example.dining_hall_capes.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -19,6 +13,8 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.dining_hall_capes.activities.PostActivity;
+import com.example.dining_hall_capes.R;
 import com.example.dining_hall_capes.fragments.StreamFragment;
 import com.example.dining_hall_capes.models.Vendor;
 import com.example.dining_hall_capes.models.VendorRating;

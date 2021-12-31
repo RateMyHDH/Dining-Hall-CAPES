@@ -1,4 +1,4 @@
-package com.example.dining_hall_capes;
+package com.example.dining_hall_capes.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,9 +6,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.dining_hall_capes.R;
 import com.example.dining_hall_capes.fragments.ProfileFragment;
 import com.example.dining_hall_capes.fragments.StreamFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -30,15 +32,20 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                if (menuItem.getItemId() == bottomNavigationView.getSelectedItemId()
+                        && fragmentManager.findFragmentById(R.id.flContainer) != null) {
+                    return false;
+                }
+
                 Fragment fragment;
                 switch (menuItem.getItemId()) {
                     case R.id.action_profile:
-                        Toast.makeText(MainActivity.this, "Profile!", Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(MainActivity.this, "Profile!", Toast.LENGTH_SHORT).show();
                         fragment = new ProfileFragment();
                         break;
                     case R.id.action_reviews:
                     default:
-                        Toast.makeText(MainActivity.this, "Home!", Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(MainActivity.this, "Home!", Toast.LENGTH_SHORT).show();
                         fragment = new StreamFragment();
                         break;
                 }

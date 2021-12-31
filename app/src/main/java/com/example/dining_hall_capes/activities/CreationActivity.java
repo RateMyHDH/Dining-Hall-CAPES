@@ -1,7 +1,5 @@
-package com.example.dining_hall_capes;
+package com.example.dining_hall_capes.activities;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
@@ -11,15 +9,13 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.dining_hall_capes.fragments.StreamFragment;
+import com.example.dining_hall_capes.R;
 import com.example.dining_hall_capes.models.Post;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -103,7 +99,7 @@ public class CreationActivity extends AppCompatActivity {
             post.setImage(new ParseFile(photoFile));
         }
         post.setAuthor(currentUser);
-        post.setVendorID(getIntent().getExtras().getString("vendorID"));
+        post.setVendorID(getIntent().getExtras().getString(Post.KEY_VENDOR_ID));
         post.saveInBackground(new SaveCallback(){
             @Override
             public void done(ParseException e) {

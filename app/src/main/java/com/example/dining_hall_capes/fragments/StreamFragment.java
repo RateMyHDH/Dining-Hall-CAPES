@@ -15,10 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.dining_hall_capes.DiningHallsAdapter;
+import com.example.dining_hall_capes.adapters.DiningHallsAdapter;
 import com.example.dining_hall_capes.R;
-import com.example.dining_hall_capes.VendorsAdapter;
+import com.example.dining_hall_capes.adapters.VendorsAdapter;
 import com.example.dining_hall_capes.models.DiningHall;
+import com.example.dining_hall_capes.models.Org;
 import com.example.dining_hall_capes.models.Vendor;
 import com.parse.FindCallback;
 import com.parse.FunctionCallback;
@@ -67,7 +68,7 @@ public class StreamFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Toast.makeText(getContext(), "Stream", Toast.LENGTH_SHORT).show();
+        // Toast.makeText(getContext(), "Stream", Toast.LENGTH_SHORT).show();
 
         diningHalls = new ArrayList<>();
         diningHallsAdapter = new DiningHallsAdapter(getContext(), diningHalls);
