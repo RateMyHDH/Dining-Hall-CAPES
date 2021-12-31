@@ -78,12 +78,9 @@ public class StreamFragment extends Fragment {
         diningHallIndex = new HashMap<>();
         vendorIndex = new HashMap<>();
         swipeContainer = view.findViewById(R.id.streamSwipeContainer);
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                Log.i(TAG, "Fetching new data");
-                queryDiningHalls();
-            }
+        swipeContainer.setOnRefreshListener(() -> {
+            Log.i(TAG, "Fetching new data");
+            queryDiningHalls();
         });
         swipeContainer.setRefreshing(true);
 
@@ -94,26 +91,23 @@ public class StreamFragment extends Fragment {
 
         ParseQuery<DiningHall> hallQuery = ParseQuery.getQuery(DiningHall.class);
         hallQuery.addAscendingOrder(DiningHall.KEY_NAME);
-        hallQuery.findInBackground(new FindCallback<DiningHall>() {
-            @Override
-            public void done(List<DiningHall> fetchedDiningHalls, ParseException e) {
-                if (e != null) {
-                    Log.e(TAG, "Issue with getting dining halls", e);
-                    swipeContainer.setRefreshing(false);
-                    return;
-                }
-
-                for (DiningHall hall : fetchedDiningHalls) {
-                    Log.i(TAG, "Dining Hall: " + hall.getName());
-                    diningHallIndex.put(hall.getObjectId(), hall);
-                    hall.vendors = new ArrayList<>();
-                    hall.vendorsAdapter = new VendorsAdapter(getContext(), hall.vendors);
-                }
-
-                diningHalls.clear();
-                diningHalls.addAll(fetchedDiningHalls);
-                queryVendors();
+        hallQuery.findInBackground((fetchedDiningHalls, e) -> {
+            if (e != null) {
+                Log.e(TAG, "Issue with getting dining halls", e);
+                swipeContainer.setRefreshing(false);
+                return;
             }
+
+            for (DiningHall hall : fetchedDiningHalls) {
+                Log.i(TAG, "Dining Hall: " + hall.getName());
+                diningHallIndex.put(hall.getObjectId(), hall);
+                hall.vendors = new ArrayList<>();
+                hall.vendorsAdapter = new VendorsAdapter(getContext(), hall.vendors);
+            }
+
+            diningHalls.clear();
+            diningHalls.addAll(fetchedDiningHalls);
+            queryVendors();
         });
     }
 
@@ -121,72 +115,66 @@ public class StreamFragment extends Fragment {
 
         ParseQuery<Vendor> vendorQuery = ParseQuery.getQuery(Vendor.class);
         vendorQuery.addAscendingOrder(Vendor.KEY_NAME);
-        vendorQuery.findInBackground(new FindCallback<Vendor>() {
-            @Override
-            public void done(List<Vendor> fetchedVendors, ParseException e) {
-                if (e != null) {
-                    Log.e(TAG, "Issue with getting vendors", e);
-                    swipeContainer.setRefreshing(false);
+        vendorQuery.findInBackground((fetchedVendors, e) -> {
+            if (e != null) {
+                Log.e(TAG, "Issue with getting vendors", e);
+                swipeContainer.setRefreshing(false);
+                return;
+            }
+
+            for (Vendor v : fetchedVendors) {
+                Log.i(TAG, "Vendor: " + v.getName());
+
+                DiningHall hall = (DiningHall) v.getDiningHall();
+                if (hall == null || !diningHallIndex.containsKey(hall.getObjectId())) {
+                    Log.e(TAG, "Queried stray vendor: " + v.getName());
+                    return;
+                }
+                DiningHall indexedHall = diningHallIndex.get(hall.getObjectId());
+                if (indexedHall == null) {
+                    Log.e(TAG, "Queried vendor " + v.getName() + " with wrong hall");
                     return;
                 }
 
-                for (Vendor v : fetchedVendors) {
-                    Log.i(TAG, "Vendor: " + v.getName());
-
-                    DiningHall hall = (DiningHall) v.getDiningHall();
-                    if (hall == null || !diningHallIndex.containsKey(hall.getObjectId())) {
-                        Log.e(TAG, "Queried stray vendor: " + v.getName());
-                        return;
-                    }
-                    DiningHall indexedHall = diningHallIndex.get(hall.getObjectId());
-                    if (indexedHall == null) {
-                        Log.e(TAG, "Queried vendor " + v.getName() + " with wrong hall");
-                        return;
-                    }
-
-                    indexedHall.vendors.add(v);
-                    vendorIndex.put(v.getObjectId(), v);
-                    Log.i(TAG, "Got vendor " + v.getName() + " for " + indexedHall.getName());
-                }
-
-                queryRatings();
+                indexedHall.vendors.add(v);
+                vendorIndex.put(v.getObjectId(), v);
+                Log.i(TAG, "Got vendor " + v.getName() + " for " + indexedHall.getName());
             }
+
+            queryRatings();
         });
     }
 
     private void queryRatings() {
 
         HashMap<String, Object> params = new HashMap<>();
-        ParseCloud.callFunctionInBackground("getVendorRatings", params, new FunctionCallback<Map<String, Number>>() {
-            @Override
-            public void done(Map<String, Number> avgRatings, ParseException e) {
-                if (e != null) {
-                    Log.e(TAG, "Error getting ratings", e);
-                    swipeContainer.setRefreshing(false);
-                    return;
-                }
-
-                Log.i(TAG, "Got ratings");
-                for (String id : avgRatings.keySet()) {
-                    // The java.lang.Number class can handle either Integer or Double,
-                    // the JS server function can return either.
-                    Number r = avgRatings.get(id);
-                    Vendor v = vendorIndex.get(id);
-
-                    if (v == null) {
-                        Log.e(TAG, "Null vendor in rating");
-                        continue;
-                    }
-
-                    v.rating = r == null ? 0 : r.floatValue();
-                    if (r == null) {
-                        Log.e(TAG, "Null rating for " + v.getName());
-                    }
-                }
-
-                diningHallsAdapter.notifyDataSetChanged();
+        ParseCloud.callFunctionInBackground("getVendorRatings", params, (FunctionCallback<Map<String, Number>>) (avgRatings, e) -> {
+            if (e != null) {
+                Log.e(TAG, "Error getting ratings", e);
                 swipeContainer.setRefreshing(false);
+                return;
             }
+
+            Log.i(TAG, "Got ratings");
+            for (String id : avgRatings.keySet()) {
+                // The java.lang.Number class can handle either Integer or Double,
+                // the JS server function can return either.
+                Number r = avgRatings.get(id);
+                Vendor v = vendorIndex.get(id);
+
+                if (v == null) {
+                    Log.e(TAG, "Null vendor in rating");
+                    continue;
+                }
+
+                v.rating = r == null ? 0 : r.floatValue();
+                if (r == null) {
+                    Log.e(TAG, "Null rating for " + v.getName());
+                }
+            }
+
+            diningHallsAdapter.notifyDataSetChanged();
+            swipeContainer.setRefreshing(false);
         });
     }
 

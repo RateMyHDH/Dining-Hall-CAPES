@@ -36,6 +36,7 @@ public class DetailActivity extends AppCompatActivity {
         Post post = Parcels.unwrap(getIntent().getParcelableExtra("post"));
         tvUsername.setText(post.getAuthor().getUsername());
         tvTimestamp.setText(post.getTime());
+
         if(post.getAuthor().getParseFile("profilePic") != null){
             Glide.with(this)
                         .load(post.getAuthor().getParseFile("profilePic").getUrl())

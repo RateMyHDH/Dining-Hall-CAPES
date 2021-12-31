@@ -46,39 +46,30 @@ public class CreationActivity extends AppCompatActivity {
         ivPostImage = findViewById(R.id.ivPostImage);
         btnSubmit = findViewById(R.id.btnSubmit);
 
-        btnCaptureImage.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                launchCamera();
+        btnCaptureImage.setOnClickListener(v -> launchCamera());
+
+        btnSubmit.setOnClickListener(v -> {
+            String review = etReview.getText().toString();
+            if (review.isEmpty()) {
+                Toast.makeText(CreationActivity.this, "Review cannot be empty", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            ParseUser currentUser = ParseUser.getCurrentUser();
+            savePost(review, currentUser, photoFile);
         });
-
-        btnSubmit.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                String review = etReview.getText().toString();
-                if (review.isEmpty()) {
-                    Toast.makeText(CreationActivity.this, "Review cannot be empty", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                ParseUser currentUser = ParseUser.getCurrentUser();
-                savePost(review, currentUser, photoFile);
-            }
-        });
-
-
     }
 
     private void launchCamera() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         photoFile = getPhotoFileUri(photoFileName);
+        // TODO: account for null photoFile
 
         Uri fileProvider = FileProvider.getUriForFile(CreationActivity.this, "com.codepath.fileprovider.pictures", photoFile);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
 
         startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-
+        // TODO: take result and show that picture was taken
     }
 
     private File getPhotoFileUri(String fileName) {
@@ -88,6 +79,7 @@ public class CreationActivity extends AppCompatActivity {
             Log.d(TAG, "failed to create directory");
         }
 
+        // TODO: fix for when the above error occurs
         return new File(mediaStorageDir.getPath() + File.separator + fileName);
     }
 
@@ -95,24 +87,24 @@ public class CreationActivity extends AppCompatActivity {
     private void savePost(String review, ParseUser currentUser, File photoFile) {
         Post post = new Post();
         post.setReview(review);
+
+        // TODO: refactor after finishing the camera activity result
         if(photoFile != null || ivPostImage.getDrawable() != null){
             post.setImage(new ParseFile(photoFile));
         }
+
         post.setAuthor(currentUser);
         post.setVendorID(getIntent().getExtras().getString(Post.KEY_VENDOR_ID));
-        post.saveInBackground(new SaveCallback(){
-            @Override
-            public void done(ParseException e) {
-                if(e != null){
-                    Log.e(TAG, "Error while saving", e);
-                    Toast.makeText(CreationActivity.this, "Error while saving", Toast.LENGTH_SHORT).show();
-                }
-                Log.i(TAG, "Post saved successfully");
-                etReview.setText("");
-                ivPostImage.setImageResource(0);
-
-                finish();
+        post.saveInBackground(e -> {
+            if(e != null){
+                Log.e(TAG, "Error while saving", e);
+                Toast.makeText(CreationActivity.this, "Error while saving", Toast.LENGTH_SHORT).show();
             }
+            Log.i(TAG, "Post saved successfully");
+            etReview.setText("");
+            ivPostImage.setImageResource(0);
+
+            finish();
         });
     }
 }

@@ -41,39 +41,30 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         btnRegister = findViewById(R.id.btnRegister);
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG, "onClick login button");
-                String newEmail = etEmail.getText().toString();
-                String password = etPassword.getText().toString();
-                loginUser(newEmail, password);
-            }
+        btnLogin.setOnClickListener(v -> {
+            Log.i(TAG, "onClick login button");
+            String newEmail = etEmail.getText().toString();
+            String password = etPassword.getText().toString();
+            loginUser(newEmail, password);
         });
 
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG, "Register account button");
-                goRegisterAccountActivity();
-            }
+        btnRegister.setOnClickListener(v -> {
+            Log.i(TAG, "Register account button");
+            goRegisterAccountActivity();
         });
     }
     private void loginUser(String newEmail, String password){
         Log.i(TAG, "Attempting to login user " + newEmail);
-        ParseUser.logInInBackground(newEmail, password, new LogInCallback() {
-            @Override
-            public void done(ParseUser user, ParseException e) {
-                if(e != null){
-                    Log.e(TAG, "Issue with login", e);
-                    Toast.makeText(LoginActivity.this, "Login in Failed, try again", Toast.LENGTH_LONG).show();
-                    return;
-                }
-
-                // navigate to main activity if correct credentials
-                // Toast.makeText(LoginActivity.this,"Login Success!", Toast.LENGTH_LONG).show();
-                goMainActivity();
+        ParseUser.logInInBackground(newEmail, password, (user, e) -> {
+            if(e != null){
+                Log.e(TAG, "Issue with login", e);
+                Toast.makeText(LoginActivity.this, "Login in Failed, try again", Toast.LENGTH_LONG).show();
+                return;
             }
+
+            // navigate to main activity if correct credentials
+            // Toast.makeText(LoginActivity.this,"Login Success!", Toast.LENGTH_LONG).show();
+            goMainActivity();
         });
     }
 

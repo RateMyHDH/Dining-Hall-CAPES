@@ -58,13 +58,10 @@ public class PostActivity extends AppCompatActivity {
         TextView dhName = findViewById(R.id.tvDHtitle);
         dhName.setText(vendorName);
         createPosts = findViewById(R.id.btnCreatePost);
-        createPosts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(PostActivity.this,CreationActivity.class);
-                i.putExtra(Post.KEY_VENDOR_ID, vendorID);
-                startActivity(i);
-            }
+        createPosts.setOnClickListener(view -> {
+            Intent i = new Intent(PostActivity.this,CreationActivity.class);
+            i.putExtra(Post.KEY_VENDOR_ID, vendorID);
+            startActivity(i);
         });
 
         RecyclerView rvPosts = findViewById(R.id.rvPosts);
@@ -79,12 +76,9 @@ public class PostActivity extends AppCompatActivity {
         ratingByUser = findViewById(R.id.ratingByUser);
 
         swipeContainer = findViewById(R.id.postsSwipeContainer);
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                Log.i(TAG, "Refreshing posts");
-                queryPosts();
-            }
+        swipeContainer.setOnRefreshListener(() -> {
+            Log.i(TAG, "Refreshing posts");
+            queryPosts();
         });
         swipeContainer.setRefreshing(true);
 
@@ -95,19 +89,16 @@ public class PostActivity extends AppCompatActivity {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.whereEqualTo(Post.KEY_VENDOR_ID, vendorID);
         query.orderByDescending(Post.KEY_CREATED_AT);
-        query.findInBackground(new FindCallback<Post>() {
-            @Override
-            public void done(List<Post> fetchedPosts, ParseException e) {
-                if(e != null){
-                    Log.e(TAG, "Error getting posts: ", e);
-                    swipeContainer.setRefreshing(false);
-                    return;
-                }
-                posts.clear();
-                posts.addAll(fetchedPosts);
-                postsAdapter.notifyDataSetChanged();
+        query.findInBackground((fetchedPosts, e) -> {
+            if(e != null){
+                Log.e(TAG, "Error getting posts: ", e);
                 swipeContainer.setRefreshing(false);
+                return;
             }
+            posts.clear();
+            posts.addAll(fetchedPosts);
+            postsAdapter.notifyDataSetChanged();
+            swipeContainer.setRefreshing(false);
         });
     }
 
@@ -116,50 +107,41 @@ public class PostActivity extends AppCompatActivity {
         query.whereEqualTo(VendorRating.KEY_USER, ParseUser.getCurrentUser());
         query.whereEqualTo(VendorRating.KEY_VENDOR_ID, vendorID);
         query.addDescendingOrder(VendorRating.KEY_UPDATED_AT);
-        query.findInBackground(new FindCallback<VendorRating>() {
-            @Override
-            public void done(List<VendorRating> fetchedRatings, ParseException e) {
-                if (e != null) {
-                    Log.e(TAG, "Error with fetching the user's rating: ", e);
-                } else if (fetchedRatings.size() > 0) {
-                    vendorRating = fetchedRatings.get(0);
-                    ratingByUser.setRating((float) vendorRating.getRating());
-                    // There should only be one rating.
-                    // Duplicates are deleted from the server
-                    // Duplicates are made when an exception is passed into this method
-                    for (int i = 1; i < fetchedRatings.size(); ++i) {
-                        fetchedRatings.get(i).deleteInBackground();
-                    }
+        query.findInBackground((fetchedRatings, e) -> {
+            if (e != null) {
+                Log.e(TAG, "Error with fetching the user's rating: ", e);
+            } else if (fetchedRatings.size() > 0) {
+                vendorRating = fetchedRatings.get(0);
+                ratingByUser.setRating((float) vendorRating.getRating());
+                // There should only be one rating.
+                // Duplicates are deleted from the server
+                // Duplicates are made when an exception is passed into this method
+                for (int i = 1; i < fetchedRatings.size(); ++i) {
+                    fetchedRatings.get(i).deleteInBackground();
                 }
-
-                setRatingChangeListener();
             }
+
+            setRatingChangeListener();
         });
     }
 
     private void setRatingChangeListener() {
-        ratingByUser.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                Log.i(TAG, "Rating changed by " + ParseUser.getCurrentUser().getUsername());
-                ratingBar.setRating(rating);
-                if (vendorRating == null) {
-                    vendorRating = new VendorRating();
-                    vendorRating.setVendorID(vendorID);
-                    vendorRating.setUser(ParseUser.getCurrentUser());
-                }
-                vendorRating.setRating(rating);
-                vendorRating.saveInBackground(new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        if (e != null) {
-                            Log.e(TAG, "Failed to save rating: ", e);
-                        } else {
-                            Log.i(TAG, "Saved rating for " + ParseUser.getCurrentUser().getUsername());
-                        }
-                    }
-                });
+        ratingByUser.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
+            Log.i(TAG, "Rating changed by " + ParseUser.getCurrentUser().getUsername());
+            ratingBar.setRating(rating);
+            if (vendorRating == null) {
+                vendorRating = new VendorRating();
+                vendorRating.setVendorID(vendorID);
+                vendorRating.setUser(ParseUser.getCurrentUser());
             }
+            vendorRating.setRating(rating);
+            vendorRating.saveInBackground(e -> {
+                if (e != null) {
+                    Log.e(TAG, "Failed to save rating: ", e);
+                } else {
+                    Log.i(TAG, "Saved rating for " + ParseUser.getCurrentUser().getUsername());
+                }
+            });
         });
     }
 

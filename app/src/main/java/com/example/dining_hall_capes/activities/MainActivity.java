@@ -29,29 +29,23 @@ public class MainActivity extends AppCompatActivity {
 
 
         bottomNavigationView = findViewById(R.id.bottomNavigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                if (menuItem.getItemId() == bottomNavigationView.getSelectedItemId()
-                        && fragmentManager.findFragmentById(R.id.flContainer) != null) {
-                    return false;
-                }
+        bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
 
-                Fragment fragment;
-                switch (menuItem.getItemId()) {
-                    case R.id.action_profile:
-                        // Toast.makeText(MainActivity.this, "Profile!", Toast.LENGTH_SHORT).show();
-                        fragment = new ProfileFragment();
-                        break;
-                    case R.id.action_reviews:
-                    default:
-                        // Toast.makeText(MainActivity.this, "Home!", Toast.LENGTH_SHORT).show();
-                        fragment = new StreamFragment();
-                        break;
-                }
-                fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
-                return true;
+            if (menuItem.getItemId() == bottomNavigationView.getSelectedItemId()
+                    && fragmentManager.findFragmentById(R.id.flContainer) != null) {
+                return false;
             }
+
+            Fragment fragment;
+            if (menuItem.getItemId() == R.id.action_profile) {
+                // Toast.makeText(MainActivity.this, "Profile!", Toast.LENGTH_SHORT).show();
+                fragment = new ProfileFragment();
+            } else {
+                // Toast.makeText(MainActivity.this, "Home!", Toast.LENGTH_SHORT).show();
+                fragment = new StreamFragment();
+            }
+            fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
+            return true;
         });
         // Set default selection
         bottomNavigationView.setSelectedItemId(R.id.action_reviews);

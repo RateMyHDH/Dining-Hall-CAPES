@@ -39,37 +39,30 @@ public class RegisterAccountActivity extends AppCompatActivity {
         cbCheckTerms = findViewById(R.id.cbCheckTerms);
         btnCreateAccount = findViewById(R.id.btnCreateAccount);
 
-        btnCreateAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = etEmail.getText().toString();
-                String phone = etNewPhone.getText().toString();
-                String username = etNewUsername.getText().toString();
-                String password = etNewPassword.getText().toString();
+        btnCreateAccount.setOnClickListener(v -> {
+            String email = etEmail.getText().toString();
+            String username = etNewUsername.getText().toString();
+            String password = etNewPassword.getText().toString();
 
-                if(cbCheckTerms.isChecked()){
-                    ParseUser user = new ParseUser();
-                    user.setEmail(email);
-                    user.setUsername(username);
-                    user.setPassword(password);
+            if(cbCheckTerms.isChecked()){
+                ParseUser user = new ParseUser();
+                user.setEmail(email);
+                user.setUsername(username);
+                user.setPassword(password);
 
-                    user.signUpInBackground(new SignUpCallback() {
-                        @Override
-                        public void done(ParseException e) {
-                            if (e == null) {
-                                Log.i(REGISTER_TAG, "Sign up succeeded");
-                                Toast.makeText(RegisterAccountActivity.this, "Sign Up Succeed, use your new credentials now", Toast.LENGTH_LONG).show();
-                                goLoginActivity();
-                            } else {
-                                Log.e(REGISTER_TAG, "Sign up failed", e);
-                                Toast.makeText(RegisterAccountActivity.this, "Sign up failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    });
-                }
-                else{
-                    Toast.makeText(RegisterAccountActivity.this, "You must agree to our terms and conditions", Toast.LENGTH_LONG).show();
-                }
+                user.signUpInBackground(e -> {
+                    if (e == null) {
+                        Log.i(REGISTER_TAG, "Sign up succeeded");
+                        Toast.makeText(RegisterAccountActivity.this, "Sign Up Succeed, use your new credentials now", Toast.LENGTH_LONG).show();
+                        goLoginActivity();
+                    } else {
+                        Log.e(REGISTER_TAG, "Sign up failed", e);
+                        Toast.makeText(RegisterAccountActivity.this, "Sign up failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+            else{
+                Toast.makeText(RegisterAccountActivity.this, "You must agree to our terms and conditions", Toast.LENGTH_LONG).show();
             }
         });
     }
