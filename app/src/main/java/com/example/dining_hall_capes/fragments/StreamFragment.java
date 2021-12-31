@@ -90,6 +90,7 @@ public class StreamFragment extends Fragment {
     private void queryDiningHalls() {
 
         ParseQuery<DiningHall> hallQuery = ParseQuery.getQuery(DiningHall.class);
+        hallQuery.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
         hallQuery.addAscendingOrder(DiningHall.KEY_NAME);
         hallQuery.findInBackground((fetchedDiningHalls, e) -> {
             if (e != null) {
@@ -114,6 +115,7 @@ public class StreamFragment extends Fragment {
     private void queryVendors() {
 
         ParseQuery<Vendor> vendorQuery = ParseQuery.getQuery(Vendor.class);
+        vendorQuery.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
         vendorQuery.addAscendingOrder(Vendor.KEY_NAME);
         vendorQuery.findInBackground((fetchedVendors, e) -> {
             if (e != null) {
