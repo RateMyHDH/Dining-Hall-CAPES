@@ -95,9 +95,7 @@ public class PostActivity extends AppCompatActivity {
                 swipeContainer.setRefreshing(false);
                 return;
             }
-            posts.clear();
-            posts.addAll(fetchedPosts);
-            postsAdapter.notifyDataSetChanged();
+            postsAdapter.replaceAll(fetchedPosts);
             swipeContainer.setRefreshing(false);
         });
     }

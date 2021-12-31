@@ -128,12 +128,12 @@ public class StreamFragment extends Fragment {
                 DiningHall hall = (DiningHall) v.getDiningHall();
                 if (hall == null || !diningHallIndex.containsKey(hall.getObjectId())) {
                     Log.e(TAG, "Queried stray vendor: " + v.getName());
-                    return;
+                    continue;
                 }
                 DiningHall indexedHall = diningHallIndex.get(hall.getObjectId());
                 if (indexedHall == null) {
                     Log.e(TAG, "Queried vendor " + v.getName() + " with wrong hall");
-                    return;
+                    continue;
                 }
 
                 indexedHall.vendors.add(v);

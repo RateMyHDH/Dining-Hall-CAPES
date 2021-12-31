@@ -57,6 +57,20 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
         return posts.size();
     }
 
+    public void clear() {
+        posts.clear();
+    }
+
+    public void addAll(List<Post> newPosts) {
+        posts.addAll(newPosts);
+        notifyDataSetChanged();
+    }
+
+    public void replaceAll(List<Post> newPosts) {
+        clear();
+        addAll(newPosts);
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tvUsername;
@@ -87,22 +101,14 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
                         .transform(new CenterCrop(), new RoundedCorners(20))
                         .into(pfpImage);
             }
-            container.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    Intent i = new Intent(context, DetailActivity.class);
-                    //MAKE OBJECT INTO A PARCELABLE?
-                    i.putExtra("post", Parcels.wrap(post));
-                    context.startActivity(i);
-                }
-
+            container.setOnClickListener(view -> {
+                Intent i = new Intent(context, DetailActivity.class);
+                //MAKE OBJECT INTO A PARCELABLE?
+                i.putExtra("post", Parcels.wrap(post));
+                context.startActivity(i);
             });
 
         }
 
     }
-
-
-
-
 }

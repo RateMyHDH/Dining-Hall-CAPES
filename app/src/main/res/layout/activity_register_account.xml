@@ -15,8 +15,9 @@
         android:layout_alignParentTop="false"
         android:layout_marginTop="200dp"
         android:ems="10"
-        android:hint="Email"
-        android:inputType="textPersonName" />
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/etNewPhone"
@@ -25,8 +26,9 @@
         android:layout_below="@+id/etEmail"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:hint="Phone Number"
-        android:inputType="textPersonName" />
+        android:hint="@string/phone_number"
+        android:inputType="phone"
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/etNewUsername"
@@ -35,8 +37,9 @@
         android:layout_below="@+id/etNewPhone"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:hint="Username"
-        android:inputType="textPersonName" />
+        android:hint="@string/username"
+        android:inputType="textPersonName"
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/etNewPassword"
@@ -45,8 +48,9 @@
         android:layout_below="@+id/etNewUsername"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:hint="Password"
-        android:inputType="textPersonName" />
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:minHeight="48dp" />
 
     <CheckBox
         android:id="@+id/cbCheckTerms"
@@ -54,7 +58,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/etNewPassword"
         android:layout_marginTop="20dp"
-        android:text="Accept Terms and Conditions" />
+        android:minHeight="48dp"
+        android:text="@string/accept_terms_and_conditions" />
 
     <Button
         android:id="@+id/btnCreateAccount"
@@ -63,6 +68,6 @@
         android:layout_below="@+id/cbCheckTerms"
         android:layout_marginTop="20dp"
         android:backgroundTint="#00629B"
-        android:text="Create Account" />
+        android:text="@string/create_account" />
 
 </RelativeLayout>

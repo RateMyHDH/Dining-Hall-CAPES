@@ -40,14 +40,11 @@ public class VendorsAdapter extends RecyclerView.Adapter<VendorsAdapter.ViewHold
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_vendor, parent, false);
         ViewHolder vh = new ViewHolder(view);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(context, PostActivity.class);
-                i.putExtra(StreamFragment.EXTRA_VENDOR_ID, vh.vendorID);
-                i.putExtra(StreamFragment.EXTRA_VENDOR_NAME, vh.tvVendorName.getText());
-                context.startActivity(i);
-            }
+        view.setOnClickListener(v -> {
+            Intent i = new Intent(context, PostActivity.class);
+            i.putExtra(StreamFragment.EXTRA_VENDOR_ID, vh.vendorID);
+            i.putExtra(StreamFragment.EXTRA_VENDOR_NAME, vh.tvVendorName.getText());
+            context.startActivity(i);
         });
 
         return vh;
@@ -86,7 +83,6 @@ public class VendorsAdapter extends RecyclerView.Adapter<VendorsAdapter.ViewHold
             tvVendorRating = itemView.findViewById(R.id.tvVendorRating);
         }
 
-        @RequiresApi(api = Build.VERSION_CODES.M)
         public void bind(Vendor vendor) {
             vendorID = vendor.getObjectId();
             tvVendorName.setText(vendor.getName());

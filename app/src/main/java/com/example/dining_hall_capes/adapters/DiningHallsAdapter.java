@@ -68,7 +68,6 @@ public class DiningHallsAdapter extends RecyclerView.Adapter<DiningHallsAdapter.
             rvVendors = itemView.findViewById(R.id.rvVendors);
         }
 
-        @RequiresApi(api = Build.VERSION_CODES.M)
         public void bind(DiningHall hall) {
             tvTitle.setText(hall.getName());
             rvVendors.setAdapter(hall.vendorsAdapter);

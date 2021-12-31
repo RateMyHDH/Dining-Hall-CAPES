@@ -14,7 +14,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="50dp"
         android:ems="15"
-        android:hint="Review"
+        android:hint="@string/review"
         android:inputType="textPersonName"
         android:maxHeight="200dp"
         tools:ignore="TouchTargetSizeCheck" />
@@ -47,5 +47,5 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/clickable_rounded_corners"
         android:backgroundTint="@color/tritonblue"
-        android:text="Submit" />
+        android:text="@string/submit" />
 </RelativeLayout>
