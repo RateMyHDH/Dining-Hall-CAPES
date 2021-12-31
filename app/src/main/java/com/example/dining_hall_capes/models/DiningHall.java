@@ -1,6 +1,6 @@
 package com.example.dining_hall_capes.models;
 
-import com.example.dining_hall_capes.VendorsAdapter;
+import com.example.dining_hall_capes.adapters.VendorsAdapter;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
@@ -10,6 +10,7 @@ import java.util.List;
 public class DiningHall extends ParseObject {
 
     public static final String KEY_NAME = "name";
+    public static final String KEY_ORG = "org";
 
     public String getName() {
         return getString(KEY_NAME);
@@ -17,6 +18,14 @@ public class DiningHall extends ParseObject {
 
     public void setName(String name) {
         put(KEY_NAME, name);
+    }
+
+    public ParseObject getOrg() {
+        return getParseObject(KEY_ORG);
+    }
+
+    public void setOrg(Org org) {
+        put(KEY_ORG, org);
     }
 
     // The following vars do not get stored in Parse
