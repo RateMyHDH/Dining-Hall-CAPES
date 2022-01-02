@@ -1,6 +1,7 @@
 package com.example.dining_hall_capes.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.dining_hall_capes.R;
 import com.example.dining_hall_capes.adapters.PostsAdapter;
+import com.example.dining_hall_capes.fragments.CreatePostDialogFragment;
 import com.example.dining_hall_capes.fragments.StreamFragment;
 import com.example.dining_hall_capes.models.Post;
 import com.example.dining_hall_capes.models.VendorRating;
@@ -40,6 +42,8 @@ public class PostActivity extends AppCompatActivity {
     VendorRating vendorRating;
     SwipeRefreshLayout swipeContainer;
 
+    private final FragmentManager fragmentManager = getSupportFragmentManager();
+
     boolean refreshPosts;
 
     @Override
@@ -59,9 +63,17 @@ public class PostActivity extends AppCompatActivity {
         dhName.setText(vendorName);
         createPosts = findViewById(R.id.btnCreatePost);
         createPosts.setOnClickListener(view -> {
+            /*
             Intent i = new Intent(PostActivity.this,CreationActivity.class);
             i.putExtra(Post.KEY_VENDOR_ID, vendorID);
             startActivity(i);
+
+            /* ----------------------------------------- */
+
+            CreatePostDialogFragment frag = CreatePostDialogFragment.newInstance(vendorID);
+            frag.show(fragmentManager, "fragment_create_post");
+
+            // */
         });
 
         RecyclerView rvPosts = findViewById(R.id.rvPosts);

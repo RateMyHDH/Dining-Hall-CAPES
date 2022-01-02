@@ -1,14 +1,10 @@
 package com.example.dining_hall_capes.activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.example.dining_hall_capes.R;
 import com.example.dining_hall_capes.fragments.ProfileFragment;

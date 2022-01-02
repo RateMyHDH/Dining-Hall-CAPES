@@ -24,11 +24,8 @@ import android.widget.Toast;
 
 import com.example.dining_hall_capes.activities.LoginActivity;
 import com.example.dining_hall_capes.R;
-import com.parse.GetDataCallback;
-import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

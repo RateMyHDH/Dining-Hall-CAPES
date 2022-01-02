@@ -16,4 +16,7 @@
     <string name="phone_number">Phone Number</string>
     <string name="reviews">Reviews</string>
     <string name="profile">Profile</string>
+    <string name="take_a_picture">Take a picture</string>
+    <string name="enter_review_here">Enter review here</string>
+    <string name="post_review">Post review</string>
 </resources>
