@@ -18,7 +18,6 @@ import com.example.dining_hall_capes.fragments.CreatePostDialogFragment;
 import com.example.dining_hall_capes.fragments.StreamFragment;
 import com.example.dining_hall_capes.models.Post;
 import com.example.dining_hall_capes.models.VendorRating;
-import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
