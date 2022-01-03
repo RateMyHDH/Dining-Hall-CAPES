@@ -6,10 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -20,16 +18,13 @@ import com.example.dining_hall_capes.fragments.CreatePostDialogFragment;
 import com.example.dining_hall_capes.fragments.StreamFragment;
 import com.example.dining_hall_capes.models.Post;
 import com.example.dining_hall_capes.models.VendorRating;
-import com.parse.FindCallback;
-import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PostActivity extends AppCompatActivity {
+public class PostActivity extends AppCompatActivity implements CreatePostDialogFragment.OnCreatePostDialogListener {
 
     public static final String TAG = "PostActivity";
 
@@ -37,6 +32,7 @@ public class PostActivity extends AppCompatActivity {
     String vendorName;
     List<Post> posts;
     PostsAdapter postsAdapter;
+    RecyclerView rvPosts;
     Button createPosts;
     RatingBar ratingByUser;
     VendorRating vendorRating;
@@ -63,20 +59,11 @@ public class PostActivity extends AppCompatActivity {
         dhName.setText(vendorName);
         createPosts = findViewById(R.id.btnCreatePost);
         createPosts.setOnClickListener(view -> {
-            /*
-            Intent i = new Intent(PostActivity.this,CreationActivity.class);
-            i.putExtra(Post.KEY_VENDOR_ID, vendorID);
-            startActivity(i);
-
-            /* ----------------------------------------- */
-
             CreatePostDialogFragment frag = CreatePostDialogFragment.newInstance(vendorID);
-            frag.show(fragmentManager, "fragment_create_post");
-
-            // */
+            frag.show(fragmentManager, CreatePostDialogFragment.TAG);
         });
 
-        RecyclerView rvPosts = findViewById(R.id.rvPosts);
+        rvPosts = findViewById(R.id.rvPosts);
         posts = new ArrayList<>();
 
         queryPosts();
@@ -155,13 +142,10 @@ public class PostActivity extends AppCompatActivity {
         });
     }
 
-    // Refreshes the posts so that recently created posts by the user appear on the thread
-    // TODO: replace by manually adding user posts to reduce network calls
     @Override
-    protected void onResume() {
-        super.onResume();
-        if (refreshPosts)
-            queryPosts();
-        refreshPosts = true;
+    public void onCreatePost(Post post) {
+        posts.add(0, post);
+        postsAdapter.notifyItemInserted(0);
+        rvPosts.smoothScrollToPosition(0);
     }
 }

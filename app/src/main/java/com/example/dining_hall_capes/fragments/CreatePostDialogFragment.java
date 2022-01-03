@@ -46,9 +46,13 @@ public class CreatePostDialogFragment extends DialogFragment {
             Bitmap image = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
             ivImagePreview.setImageBitmap(image);
         } else {
-            Toast.makeText(getContext(), "Failed to save image", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "No image saved", Toast.LENGTH_SHORT).show();
         }
     });
+
+    public interface OnCreatePostDialogListener {
+        void onCreatePost(Post post);
+    }
 
     public CreatePostDialogFragment() {
         // Empty constructor is required for DialogFragment
@@ -132,6 +136,7 @@ public class CreatePostDialogFragment extends DialogFragment {
                 Toast.makeText(getContext(), "Error while saving", Toast.LENGTH_SHORT).show();
                 return;
             }
+            ((OnCreatePostDialogListener) requireContext()).onCreatePost(post);
             dismiss();
         });
     }
