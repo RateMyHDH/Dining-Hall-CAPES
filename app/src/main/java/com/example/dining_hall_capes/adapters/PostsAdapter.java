@@ -1,10 +1,12 @@
 package com.example.dining_hall_capes.adapters;
+
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.dining_hall_capes.*;
 import com.example.dining_hall_capes.activities.DetailActivity;
 import com.example.dining_hall_capes.models.*;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -19,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 
 import org.parceler.Parcels;
 
@@ -61,6 +64,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
         posts.clear();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void addAll(List<Post> newPosts) {
         posts.addAll(newPosts);
         notifyDataSetChanged();
@@ -95,15 +99,15 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
             tvComment.setText(post.getReview());
             postTime.setText(post.getTime());
             // Getting profile picture of user who posted if needed
-            if(post.getAuthor().fetchIfNeeded().getParseFile("profilePic") != null){
+            ParseFile image = post.getAuthor().fetchIfNeeded().getParseFile("profilePic");
+            if (image != null){
                 Glide.with(context)
-                        .load(post.getAuthor().getParseFile("profilePic").getUrl())
+                        .load(image.getUrl())
                         .transform(new CenterCrop(), new RoundedCorners(20))
                         .into(pfpImage);
             }
             container.setOnClickListener(view -> {
                 Intent i = new Intent(context, DetailActivity.class);
-                //MAKE OBJECT INTO A PARCELABLE?
                 i.putExtra("post", Parcels.wrap(post));
                 context.startActivity(i);
             });

@@ -1,5 +1,6 @@
 package com.example.dining_hall_capes.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -34,7 +35,6 @@ public class VendorsAdapter extends RecyclerView.Adapter<VendorsAdapter.ViewHold
         this.vendors = vendors;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -50,7 +50,6 @@ public class VendorsAdapter extends RecyclerView.Adapter<VendorsAdapter.ViewHold
         return vh;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.bind(vendors.get(position));
@@ -65,6 +64,7 @@ public class VendorsAdapter extends RecyclerView.Adapter<VendorsAdapter.ViewHold
         vendors.clear();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void addAll(List<Vendor> newVendors) {
         vendors.addAll(newVendors);
         notifyDataSetChanged();

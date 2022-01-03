@@ -18,19 +18,18 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="50dp"
-        tools:src="@tools:sample/avatars" />
+        android:contentDescription="@string/profile_picture"
+        app:srcCompat="@drawable/instagram_user_filled_24" />
 
     <Button
         android:id="@+id/btnSwapPic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ivProfilePic"
-        android:layout_alignParentStart="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="89dp"
         android:layout_marginTop="20dp"
         android:backgroundTint="#00629B"
-        android:text="Change Profile Picture" />
+        android:text="@string/change_profile_picture" />
 
     <Button
         android:id="@+id/btnLogout"
@@ -42,7 +41,7 @@
         android:layout_marginStart="158dp"
         android:layout_marginTop="10dp"
         android:backgroundTint="#00629B"
-        android:text="Logout" />
+        android:text="@string/logout" />
 
     <TextView
         android:id="@+id/tvUser"
@@ -51,7 +50,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:fontFamily="sans-serif-medium"
-        android:text="User Profile"
+        android:text="@string/user_profile"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="36sp" />

@@ -1,5 +1,6 @@
 package com.example.dining_hall_capes.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -36,7 +37,6 @@ public class DiningHallsAdapter extends RecyclerView.Adapter<DiningHallsAdapter.
         return new ViewHolder(view);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.bind(diningHalls.get(position));
@@ -51,6 +51,7 @@ public class DiningHallsAdapter extends RecyclerView.Adapter<DiningHallsAdapter.
         diningHalls.clear();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void addAll(List<DiningHall> newHalls) {
         diningHalls.addAll(newHalls);
         notifyDataSetChanged();
@@ -58,8 +59,8 @@ public class DiningHallsAdapter extends RecyclerView.Adapter<DiningHallsAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvTitle;
-        RecyclerView rvVendors;
+        private TextView tvTitle;
+        private RecyclerView rvVendors;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

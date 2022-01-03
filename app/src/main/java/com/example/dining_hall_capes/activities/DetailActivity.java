@@ -11,16 +11,17 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.dining_hall_capes.R;
 import com.example.dining_hall_capes.models.Post;
+import com.parse.ParseFile;
 
 import org.parceler.Parcels;
 
 public class DetailActivity extends AppCompatActivity {
 
-    TextView tvUsername;
-    TextView tvTimestamp;
-    ImageView ivProfileImage;
-    TextView tvBody;
-    ImageView ivReviewImage;
+    private TextView tvUsername;
+    private TextView tvTimestamp;
+    private ImageView ivProfileImage;
+    private TextView tvBody;
+    private ImageView ivReviewImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +38,12 @@ public class DetailActivity extends AppCompatActivity {
         tvUsername.setText(post.getAuthor().getUsername());
         tvTimestamp.setText(post.getTime());
 
-        if(post.getAuthor().getParseFile("profilePic") != null){
+        ParseFile image = post.getAuthor().getParseFile("profilePic");
+        if (image != null){
             Glide.with(this)
-                        .load(post.getAuthor().getParseFile("profilePic").getUrl())
-                        .transform(new CenterCrop(), new RoundedCorners(20))
-                        .into(ivProfileImage);
+                    .load(image.getUrl())
+                    .transform(new CenterCrop(), new RoundedCorners(20))
+                    .into(ivProfileImage);
         }
         tvBody.setText(post.getReview());
         if(post.getImage() != null){

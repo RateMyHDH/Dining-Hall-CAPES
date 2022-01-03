@@ -1,5 +1,6 @@
 package com.example.dining_hall_capes.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -38,14 +39,15 @@ public class StreamFragment extends Fragment {
     public static final String EXTRA_VENDOR_ID = "id";
     public static final String EXTRA_VENDOR_NAME = "name";
 
-    RecyclerView rvDiningHalls;
-    List<DiningHall> diningHalls;
-    DiningHallsAdapter diningHallsAdapter;
-    HashMap<String, DiningHall> diningHallIndex;
-    HashMap<String, Vendor> vendorIndex;
-    SwipeRefreshLayout swipeContainer;
-
     boolean refreshRatings;
+
+    private List<DiningHall> diningHalls;
+    private DiningHallsAdapter diningHallsAdapter;
+    private HashMap<String, DiningHall> diningHallIndex;
+    private HashMap<String, Vendor> vendorIndex;
+
+    private RecyclerView rvDiningHalls;
+    private SwipeRefreshLayout swipeContainer;
 
     public StreamFragment() {
         // Required empty public constructor
@@ -70,14 +72,16 @@ public class StreamFragment extends Fragment {
 
         // Toast.makeText(getContext(), "Stream", Toast.LENGTH_SHORT).show();
 
+        rvDiningHalls = view.findViewById(R.id.rvDiningHalls);
+        swipeContainer = view.findViewById(R.id.streamSwipeContainer);
+
         diningHalls = new ArrayList<>();
         diningHallsAdapter = new DiningHallsAdapter(getContext(), diningHalls);
-        rvDiningHalls = view.findViewById(R.id.rvDiningHalls);
-        rvDiningHalls.setAdapter(diningHallsAdapter);
-        rvDiningHalls.setLayoutManager(new LinearLayoutManager(getContext()));
         diningHallIndex = new HashMap<>();
         vendorIndex = new HashMap<>();
-        swipeContainer = view.findViewById(R.id.streamSwipeContainer);
+
+        rvDiningHalls.setAdapter(diningHallsAdapter);
+        rvDiningHalls.setLayoutManager(new LinearLayoutManager(getContext()));
         swipeContainer.setOnRefreshListener(() -> {
             Log.i(TAG, "Fetching new data");
             queryDiningHalls();
@@ -147,6 +151,7 @@ public class StreamFragment extends Fragment {
         });
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private void queryRatings() {
 
         HashMap<String, Object> params = new HashMap<>();

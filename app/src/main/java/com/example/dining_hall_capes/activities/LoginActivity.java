@@ -18,19 +18,17 @@ import com.parse.ParseUser;
 // this is the LoginActivity
 public class LoginActivity extends AppCompatActivity {
 
-
     public static final String TAG = "Login Activity";
+
     private EditText etEmail;
     private EditText etPassword;
     private Button btnLogin;
     private Button btnRegister;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
 
         if(ParseUser.getCurrentUser() != null){
             goMainActivity();
@@ -53,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
             goRegisterAccountActivity();
         });
     }
+
     private void loginUser(String newEmail, String password){
         Log.i(TAG, "Attempting to login user " + newEmail);
         ParseUser.logInInBackground(newEmail, password, (user, e) -> {
@@ -62,23 +61,19 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
 
-            // navigate to main activity if correct credentials
             // Toast.makeText(LoginActivity.this,"Login Success!", Toast.LENGTH_LONG).show();
             goMainActivity();
         });
     }
 
     private void goMainActivity() {
-        //Changed parameter to PostActivity.class for testing, change back to MainActivity.class
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
         finish();
-
     }
 
     private void goRegisterAccountActivity() {
         Intent i = new Intent(this, RegisterAccountActivity.class);
         startActivity(i);
-
     }
 }

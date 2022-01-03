@@ -33,22 +33,24 @@ public class CreatePostDialogFragment extends DialogFragment {
     public static final String TAG = "CreatePostFragment";
     public static final String IMAGE_NAME = "review_image.jpg";
 
+    private String vendorID;
+    private File photoFile;
+
     private EditText etReviewText;
     private ImageButton btnReviewCamera;
     private ImageButton btnPostReview;
     private ImageView ivImagePreview;
 
-    private String vendorID;
-    private File photoFile;
-
-    private final ActivityResultLauncher<Uri> activityTakePhoto = registerForActivityResult(new ActivityResultContracts.TakePicture(), result -> {
-        if (result) {
-            Bitmap image = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
-            ivImagePreview.setImageBitmap(image);
-        } else {
-            Toast.makeText(getContext(), "No image saved", Toast.LENGTH_SHORT).show();
-        }
-    });
+    private final ActivityResultLauncher<Uri> activityTakePhoto = registerForActivityResult (
+            new ActivityResultContracts.TakePicture(),
+            result -> {
+                if (result) {
+                    Bitmap image = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+                    ivImagePreview.setImageBitmap(image);
+                } else {
+                    Toast.makeText(getContext(), "Image not saved", Toast.LENGTH_SHORT).show();
+                }
+            });
 
     public interface OnCreatePostDialogListener {
         void onCreatePost(Post post);
@@ -88,10 +90,9 @@ public class CreatePostDialogFragment extends DialogFragment {
             String review = etReviewText.getText().toString();
             if (review.isEmpty()) {
                 Toast.makeText(getContext(), "Review cannot be empty", Toast.LENGTH_SHORT).show();
-                return;
+            } else {
+                savePost(review, ParseUser.getCurrentUser(), photoFile);
             }
-
-            savePost(review, ParseUser.getCurrentUser(), photoFile);
         });
     }
 

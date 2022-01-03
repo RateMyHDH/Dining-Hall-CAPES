@@ -29,27 +29,25 @@ public class PostActivity extends AppCompatActivity implements CreatePostDialogF
 
     public static final String TAG = "PostActivity";
 
-    String vendorID;
-    String vendorName;
-    List<Post> posts;
-    PostsAdapter postsAdapter;
-    RecyclerView rvPosts;
-    TextView tvDHName;
-    Button createPosts;
-    RatingBar ratingByUser;
-    VendorRating vendorRating;
-    SwipeRefreshLayout swipeContainer;
+    private String vendorID;
+    private String vendorName;
 
+    private List<Post> posts;
+    private PostsAdapter postsAdapter;
+
+    private RecyclerView rvPosts;
+    private TextView tvDHName;
+    private Button createPosts;
+    private RatingBar ratingByUser;
+    private VendorRating vendorRating;
+    private SwipeRefreshLayout swipeContainer;
     private final FragmentManager fragmentManager = getSupportFragmentManager();
 
-    boolean refreshPosts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
-
-        refreshPosts = false;
 
         // Retrieve info sent form parent intent
         // Use info to query for Vendor specific posts
@@ -89,13 +87,12 @@ public class PostActivity extends AppCompatActivity implements CreatePostDialogF
         query.whereEqualTo(Post.KEY_VENDOR_ID, vendorID);
         query.orderByDescending(Post.KEY_CREATED_AT);
         query.findInBackground((fetchedPosts, e) -> {
+            swipeContainer.setRefreshing(false);
             if(e != null){
                 Log.e(TAG, "Error getting posts: ", e);
-                swipeContainer.setRefreshing(false);
                 return;
             }
             postsAdapter.replaceAll(fetchedPosts);
-            swipeContainer.setRefreshing(false);
         });
     }
 
