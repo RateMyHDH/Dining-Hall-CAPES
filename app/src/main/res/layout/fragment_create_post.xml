@@ -3,14 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:layout_editor_absoluteY="25dp">
 
     <EditText
         android:id="@+id/etReviewText"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="16dp"
+        android:layout_height="320dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/rounded_corners"
         android:backgroundTint="@color/light_gray"
         android:ems="10"
@@ -20,16 +23,6 @@
         android:inputType="textMultiLine"
         android:padding="4dp"
         tools:ignore="SpeakableTextPresentCheck" />
-
-    <ImageView
-        android:id="@+id/ivImagePreview"
-        android:layout_width="30dp"
-        android:layout_height="24dp"
-        android:layout_alignStart="@+id/btnReviewCamera"
-        android:layout_alignTop="@+id/btnReviewCamera"
-        android:layout_marginStart="40dp"
-        tools:ignore="contentDescription"
-        tools:srcCompat="@tools:sample/avatars" />
 
     <ImageButton
         android:id="@+id/btnReviewCamera"
@@ -54,5 +47,14 @@
         android:contentDescription="@string/post_review"
         app:srcCompat="@android:drawable/ic_menu_send"
         app:tint="@color/black" />
+
+    <ImageView
+        android:id="@+id/ivImagePreview"
+        android:layout_width="60dp"
+        android:layout_height="48dp"
+        android:layout_alignStart="@+id/btnReviewCamera"
+        android:layout_alignTop="@+id/btnReviewCamera"
+        tools:ignore="contentDescription"
+        tools:srcCompat="@tools:sample/avatars" />
 
 </RelativeLayout>
