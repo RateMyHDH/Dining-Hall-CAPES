@@ -18,6 +18,8 @@ import com.example.dining_hall_capes.fragments.CreatePostDialogFragment;
 import com.example.dining_hall_capes.fragments.StreamFragment;
 import com.example.dining_hall_capes.models.Post;
 import com.example.dining_hall_capes.models.VendorRating;
+import com.parse.FindCallback;
+import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
@@ -33,6 +35,7 @@ public class PostActivity extends AppCompatActivity implements CreatePostDialogF
     List<Post> posts;
     PostsAdapter postsAdapter;
     RecyclerView rvPosts;
+    TextView tvDHName;
     Button createPosts;
     RatingBar ratingByUser;
     VendorRating vendorRating;
@@ -51,36 +54,34 @@ public class PostActivity extends AppCompatActivity implements CreatePostDialogF
 
         // Retrieve info sent form parent intent
         // Use info to query for Vendor specific posts
-        // Get user's rating for specified Vendor
         vendorID = getIntent().getExtras().getString(StreamFragment.EXTRA_VENDOR_ID);
         vendorName = getIntent().getExtras().getString(StreamFragment.EXTRA_VENDOR_NAME);
 
-        TextView dhName = findViewById(R.id.tvDHtitle);
-        dhName.setText(vendorName);
+        tvDHName = findViewById(R.id.tvDHtitle);
         createPosts = findViewById(R.id.btnCreatePost);
+        rvPosts = findViewById(R.id.rvPosts);
+        ratingByUser = findViewById(R.id.ratingByUser);
+        swipeContainer = findViewById(R.id.postsSwipeContainer);
+
+        posts = new ArrayList<>();
+        postsAdapter = new PostsAdapter(this, posts);
+
+        tvDHName.setText(vendorName);
         createPosts.setOnClickListener(view -> {
             CreatePostDialogFragment frag = CreatePostDialogFragment.newInstance(vendorID);
             frag.show(fragmentManager, CreatePostDialogFragment.TAG);
         });
 
-        rvPosts = findViewById(R.id.rvPosts);
-        posts = new ArrayList<>();
-
-        queryPosts();
-        postsAdapter = new PostsAdapter(this, posts);
-
         rvPosts.setAdapter(postsAdapter);
         rvPosts.setLayoutManager(new LinearLayoutManager(this));
 
-        ratingByUser = findViewById(R.id.ratingByUser);
-
-        swipeContainer = findViewById(R.id.postsSwipeContainer);
         swipeContainer.setOnRefreshListener(() -> {
             Log.i(TAG, "Refreshing posts");
             queryPosts();
         });
         swipeContainer.setRefreshing(true);
 
+        queryPosts();
         queryRatingByUser();
     }
 
@@ -104,41 +105,41 @@ public class PostActivity extends AppCompatActivity implements CreatePostDialogF
         query.whereEqualTo(VendorRating.KEY_USER, ParseUser.getCurrentUser());
         query.whereEqualTo(VendorRating.KEY_VENDOR_ID, vendorID);
         query.addDescendingOrder(VendorRating.KEY_UPDATED_AT);
-        query.findInBackground((fetchedRatings, e) -> {
-            if (e != null) {
-                Log.e(TAG, "Error with fetching the user's rating: ", e);
-            } else if (fetchedRatings.size() > 0) {
-                vendorRating = fetchedRatings.get(0);
-                ratingByUser.setRating((float) vendorRating.getRating());
-                // There should only be one rating.
-                // Duplicates are deleted from the server
-                // Duplicates are made when an exception is passed into this method
-                for (int i = 1; i < fetchedRatings.size(); ++i) {
-                    fetchedRatings.get(i).deleteInBackground();
-                }
-            }
-
-            setRatingChangeListener();
-        });
+        query.findInBackground(this::onUserRatingsFetched);
     }
 
-    private void setRatingChangeListener() {
-        ratingByUser.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
-            Log.i(TAG, "Rating changed by " + ParseUser.getCurrentUser().getUsername());
-            ratingBar.setRating(rating);
-            if (vendorRating == null) {
-                vendorRating = new VendorRating();
-                vendorRating.setVendorID(vendorID);
-                vendorRating.setUser(ParseUser.getCurrentUser());
+    private void onUserRatingsFetched(List<VendorRating> fetchedRatings, ParseException e) {
+        if (e != null) {
+            Log.e(TAG, "Error with fetching the user's rating: ", e);
+        } else if (fetchedRatings.size() > 0) {
+            vendorRating = fetchedRatings.get(0);
+            ratingByUser.setRating((float) vendorRating.getRating());
+            // There should only be one rating.
+            // Duplicates are deleted from the server
+            // Duplicates are made when an exception is passed into this method
+            for (int i = 1; i < fetchedRatings.size(); ++i) {
+                fetchedRatings.get(i).deleteInBackground();
             }
-            vendorRating.setRating(rating);
-            vendorRating.saveInBackground(e -> {
-                if (e != null) {
-                    Log.e(TAG, "Failed to save rating: ", e);
-                } else {
-                    Log.i(TAG, "Saved rating for " + ParseUser.getCurrentUser().getUsername());
-                }
-            });
+        }
+
+        ratingByUser.setOnRatingBarChangeListener(this::onRatingChanged);
+    }
+
+    private void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+        Log.i(TAG, "Rating changed by " + ParseUser.getCurrentUser().getUsername());
+        ratingBar.setRating(rating);
+        if (vendorRating == null) {
+            vendorRating = new VendorRating();
+            vendorRating.setVendorID(vendorID);
+            vendorRating.setUser(ParseUser.getCurrentUser());
+        }
+        vendorRating.setRating(rating);
+        vendorRating.saveInBackground(e -> {
+            if (e != null) {
+                Log.e(TAG, "Failed to save rating: ", e);
+            } else {
+                Log.i(TAG, "Saved rating for " + ParseUser.getCurrentUser().getUsername());
+            }
         });
     }
 
