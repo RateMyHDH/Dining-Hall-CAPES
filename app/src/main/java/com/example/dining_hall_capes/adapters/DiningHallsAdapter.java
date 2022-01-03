@@ -1,5 +1,6 @@
-package com.example.dining_hall_capes;
+package com.example.dining_hall_capes.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -12,11 +13,10 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.dining_hall_capes.R;
 import com.example.dining_hall_capes.models.DiningHall;
-import com.example.dining_hall_capes.models.VendorRating;
 
 import java.util.List;
-import java.util.Locale;
 
 public class DiningHallsAdapter extends RecyclerView.Adapter<DiningHallsAdapter.ViewHolder> {
 
@@ -37,7 +37,6 @@ public class DiningHallsAdapter extends RecyclerView.Adapter<DiningHallsAdapter.
         return new ViewHolder(view);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.bind(diningHalls.get(position));
@@ -52,6 +51,7 @@ public class DiningHallsAdapter extends RecyclerView.Adapter<DiningHallsAdapter.
         diningHalls.clear();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void addAll(List<DiningHall> newHalls) {
         diningHalls.addAll(newHalls);
         notifyDataSetChanged();
@@ -59,8 +59,8 @@ public class DiningHallsAdapter extends RecyclerView.Adapter<DiningHallsAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvTitle;
-        RecyclerView rvVendors;
+        private TextView tvTitle;
+        private RecyclerView rvVendors;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -69,7 +69,6 @@ public class DiningHallsAdapter extends RecyclerView.Adapter<DiningHallsAdapter.
             rvVendors = itemView.findViewById(R.id.rvVendors);
         }
 
-        @RequiresApi(api = Build.VERSION_CODES.M)
         public void bind(DiningHall hall) {
             tvTitle.setText(hall.getName());
             rvVendors.setAdapter(hall.vendorsAdapter);

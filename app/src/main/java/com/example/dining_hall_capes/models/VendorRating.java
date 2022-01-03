@@ -14,7 +14,7 @@ public class VendorRating extends ParseObject {
     public static final float NULL_RATING = 0f;
 
     public double getRating() {
-        return getInt(KEY_RATING_VALUE);
+        return getDouble(KEY_RATING_VALUE);
     }
 
     public void setRating(double rating) {

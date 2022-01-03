@@ -3,6 +3,7 @@ package com.example.dining_hall_capes;
 import android.app.Application;
 
 import com.example.dining_hall_capes.models.DiningHall;
+import com.example.dining_hall_capes.models.Org;
 import com.example.dining_hall_capes.models.Post;
 import com.example.dining_hall_capes.models.Vendor;
 import com.example.dining_hall_capes.models.VendorRating;
@@ -14,6 +15,7 @@ public class ParseApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        ParseObject.registerSubclass(Org.class);
         ParseObject.registerSubclass(DiningHall.class);
         ParseObject.registerSubclass(Vendor.class);
         ParseObject.registerSubclass(Post.class);

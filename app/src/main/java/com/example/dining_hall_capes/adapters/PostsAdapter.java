@@ -1,13 +1,14 @@
-package com.example.dining_hall_capes;
+package com.example.dining_hall_capes.adapters;
+
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.dining_hall_capes.*;
+import com.example.dining_hall_capes.activities.DetailActivity;
 import com.example.dining_hall_capes.models.*;
-import com.example.*;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcel;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,6 @@ import com.parse.ParseFile;
 
 import org.parceler.Parcels;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
@@ -60,6 +60,21 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
         return posts.size();
     }
 
+    public void clear() {
+        posts.clear();
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void addAll(List<Post> newPosts) {
+        posts.addAll(newPosts);
+        notifyDataSetChanged();
+    }
+
+    public void replaceAll(List<Post> newPosts) {
+        clear();
+        addAll(newPosts);
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tvUsername;
@@ -84,28 +99,20 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
             tvComment.setText(post.getReview());
             postTime.setText(post.getTime());
             // Getting profile picture of user who posted if needed
-            if(post.getAuthor().fetchIfNeeded().getParseFile("profilePic") != null){
+            ParseFile image = post.getAuthor().fetchIfNeeded().getParseFile("profilePic");
+            if (image != null){
                 Glide.with(context)
-                        .load(post.getAuthor().getParseFile("profilePic").getUrl())
+                        .load(image.getUrl())
                         .transform(new CenterCrop(), new RoundedCorners(20))
                         .into(pfpImage);
             }
-            container.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View view) {
-                    Intent i = new Intent(context,DetailActivity.class);
-                    //MAKE OBJECT INTO A PARCELABLE?
-                    i.putExtra("post", Parcels.wrap(post));
-                    context.startActivity(i);
-                }
-
+            container.setOnClickListener(view -> {
+                Intent i = new Intent(context, DetailActivity.class);
+                i.putExtra("post", Parcels.wrap(post));
+                context.startActivity(i);
             });
 
         }
 
     }
-
-
-
-
 }

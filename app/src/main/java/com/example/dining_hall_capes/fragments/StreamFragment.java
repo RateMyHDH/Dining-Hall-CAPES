@@ -1,5 +1,6 @@
 package com.example.dining_hall_capes.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,10 +16,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.dining_hall_capes.DiningHallsAdapter;
+import com.example.dining_hall_capes.adapters.DiningHallsAdapter;
 import com.example.dining_hall_capes.R;
-import com.example.dining_hall_capes.VendorsAdapter;
+import com.example.dining_hall_capes.adapters.VendorsAdapter;
 import com.example.dining_hall_capes.models.DiningHall;
+import com.example.dining_hall_capes.models.Org;
 import com.example.dining_hall_capes.models.Vendor;
 import com.parse.FindCallback;
 import com.parse.FunctionCallback;
@@ -37,14 +39,15 @@ public class StreamFragment extends Fragment {
     public static final String EXTRA_VENDOR_ID = "id";
     public static final String EXTRA_VENDOR_NAME = "name";
 
-    RecyclerView rvDiningHalls;
-    List<DiningHall> diningHalls;
-    DiningHallsAdapter diningHallsAdapter;
-    HashMap<String, DiningHall> diningHallIndex;
-    HashMap<String, Vendor> vendorIndex;
-    SwipeRefreshLayout swipeContainer;
-
     boolean refreshRatings;
+
+    private List<DiningHall> diningHalls;
+    private DiningHallsAdapter diningHallsAdapter;
+    private HashMap<String, DiningHall> diningHallIndex;
+    private HashMap<String, Vendor> vendorIndex;
+
+    private RecyclerView rvDiningHalls;
+    private SwipeRefreshLayout swipeContainer;
 
     public StreamFragment() {
         // Required empty public constructor
@@ -67,22 +70,21 @@ public class StreamFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Toast.makeText(getContext(), "Stream", Toast.LENGTH_SHORT).show();
+        // Toast.makeText(getContext(), "Stream", Toast.LENGTH_SHORT).show();
+
+        rvDiningHalls = view.findViewById(R.id.rvDiningHalls);
+        swipeContainer = view.findViewById(R.id.streamSwipeContainer);
 
         diningHalls = new ArrayList<>();
         diningHallsAdapter = new DiningHallsAdapter(getContext(), diningHalls);
-        rvDiningHalls = view.findViewById(R.id.rvDiningHalls);
-        rvDiningHalls.setAdapter(diningHallsAdapter);
-        rvDiningHalls.setLayoutManager(new LinearLayoutManager(getContext()));
         diningHallIndex = new HashMap<>();
         vendorIndex = new HashMap<>();
-        swipeContainer = view.findViewById(R.id.streamSwipeContainer);
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                Log.i(TAG, "Fetching new data");
-                queryDiningHalls();
-            }
+
+        rvDiningHalls.setAdapter(diningHallsAdapter);
+        rvDiningHalls.setLayoutManager(new LinearLayoutManager(getContext()));
+        swipeContainer.setOnRefreshListener(() -> {
+            Log.i(TAG, "Fetching new data");
+            queryDiningHalls();
         });
         swipeContainer.setRefreshing(true);
 
@@ -92,100 +94,94 @@ public class StreamFragment extends Fragment {
     private void queryDiningHalls() {
 
         ParseQuery<DiningHall> hallQuery = ParseQuery.getQuery(DiningHall.class);
+        hallQuery.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
         hallQuery.addAscendingOrder(DiningHall.KEY_NAME);
-        hallQuery.findInBackground(new FindCallback<DiningHall>() {
-            @Override
-            public void done(List<DiningHall> fetchedDiningHalls, ParseException e) {
-                if (e != null) {
-                    Log.e(TAG, "Issue with getting dining halls", e);
-                    swipeContainer.setRefreshing(false);
-                    return;
-                }
-
-                for (DiningHall hall : fetchedDiningHalls) {
-                    Log.i(TAG, "Dining Hall: " + hall.getName());
-                    diningHallIndex.put(hall.getObjectId(), hall);
-                    hall.vendors = new ArrayList<>();
-                    hall.vendorsAdapter = new VendorsAdapter(getContext(), hall.vendors);
-                }
-
-                diningHalls.clear();
-                diningHalls.addAll(fetchedDiningHalls);
-                queryVendors();
+        hallQuery.findInBackground((fetchedDiningHalls, e) -> {
+            if (e != null) {
+                Log.e(TAG, "Issue with getting dining halls", e);
+                swipeContainer.setRefreshing(false);
+                return;
             }
+
+            for (DiningHall hall : fetchedDiningHalls) {
+                Log.i(TAG, "Dining Hall: " + hall.getName());
+                diningHallIndex.put(hall.getObjectId(), hall);
+                hall.vendors = new ArrayList<>();
+                hall.vendorsAdapter = new VendorsAdapter(getContext(), hall.vendors);
+            }
+
+            diningHalls.clear();
+            diningHalls.addAll(fetchedDiningHalls);
+            queryVendors();
         });
     }
 
     private void queryVendors() {
 
         ParseQuery<Vendor> vendorQuery = ParseQuery.getQuery(Vendor.class);
+        vendorQuery.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
         vendorQuery.addAscendingOrder(Vendor.KEY_NAME);
-        vendorQuery.findInBackground(new FindCallback<Vendor>() {
-            @Override
-            public void done(List<Vendor> fetchedVendors, ParseException e) {
-                if (e != null) {
-                    Log.e(TAG, "Issue with getting vendors", e);
-                    swipeContainer.setRefreshing(false);
-                    return;
-                }
-
-                for (Vendor v : fetchedVendors) {
-                    Log.i(TAG, "Vendor: " + v.getName());
-
-                    DiningHall hall = (DiningHall) v.getDiningHall();
-                    if (hall == null || !diningHallIndex.containsKey(hall.getObjectId())) {
-                        Log.e(TAG, "Queried stray vendor: " + v.getName());
-                        return;
-                    }
-                    DiningHall indexedHall = diningHallIndex.get(hall.getObjectId());
-                    if (indexedHall == null) {
-                        Log.e(TAG, "Queried vendor " + v.getName() + " with wrong hall");
-                        return;
-                    }
-
-                    indexedHall.vendors.add(v);
-                    vendorIndex.put(v.getObjectId(), v);
-                    Log.i(TAG, "Got vendor " + v.getName() + " for " + indexedHall.getName());
-                }
-
-                queryRatings();
+        vendorQuery.findInBackground((fetchedVendors, e) -> {
+            if (e != null) {
+                Log.e(TAG, "Issue with getting vendors", e);
+                swipeContainer.setRefreshing(false);
+                return;
             }
+
+            for (Vendor v : fetchedVendors) {
+                Log.i(TAG, "Vendor: " + v.getName());
+
+                DiningHall hall = (DiningHall) v.getDiningHall();
+                if (hall == null || !diningHallIndex.containsKey(hall.getObjectId())) {
+                    Log.e(TAG, "Queried stray vendor: " + v.getName());
+                    continue;
+                }
+                DiningHall indexedHall = diningHallIndex.get(hall.getObjectId());
+                if (indexedHall == null) {
+                    Log.e(TAG, "Queried vendor " + v.getName() + " with wrong hall");
+                    continue;
+                }
+
+                indexedHall.vendors.add(v);
+                vendorIndex.put(v.getObjectId(), v);
+                Log.i(TAG, "Got vendor " + v.getName() + " for " + indexedHall.getName());
+            }
+
+            queryRatings();
         });
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private void queryRatings() {
 
         HashMap<String, Object> params = new HashMap<>();
-        ParseCloud.callFunctionInBackground("getVendorRatings", params, new FunctionCallback<Map<String, Number>>() {
-            @Override
-            public void done(Map<String, Number> avgRatings, ParseException e) {
-                if (e != null) {
-                    Log.e(TAG, "Error getting ratings", e);
-                    swipeContainer.setRefreshing(false);
-                    return;
-                }
-
-                Log.i(TAG, "Got ratings");
-                for (String id : avgRatings.keySet()) {
-                    // The java.lang.Number class can handle either Integer or Double,
-                    // the JS server function can return either.
-                    Number r = avgRatings.get(id);
-                    Vendor v = vendorIndex.get(id);
-
-                    if (v == null) {
-                        Log.e(TAG, "Null vendor in rating");
-                        continue;
-                    }
-
-                    v.rating = r == null ? 0 : r.floatValue();
-                    if (r == null) {
-                        Log.e(TAG, "Null rating for " + v.getName());
-                    }
-                }
-
-                diningHallsAdapter.notifyDataSetChanged();
+        ParseCloud.callFunctionInBackground("getVendorRatings", params, (FunctionCallback<Map<String, Number>>) (avgRatings, e) -> {
+            if (e != null) {
+                Log.e(TAG, "Error getting ratings", e);
                 swipeContainer.setRefreshing(false);
+                return;
             }
+
+            Log.i(TAG, "Got ratings");
+            for (String id : avgRatings.keySet()) {
+                // The java.lang.Number class can handle either Integer or Double,
+                // the JS server function can return either.
+                Number r = avgRatings.get(id);
+                Vendor v = vendorIndex.get(id);
+
+                if (v == null) {
+                    Log.e(TAG, "Null vendor in rating");
+                    continue;
+                }
+
+                v.rating = r == null ? 0 : r.floatValue();
+                if (r == null) {
+                    Log.e(TAG, "Null rating for " + v.getName());
+                }
+            }
+
+            diningHallsAdapter.notifyDataSetChanged();
+            swipeContainer.setRefreshing(false);
         });
     }
 

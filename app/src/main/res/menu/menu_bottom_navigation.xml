@@ -5,11 +5,11 @@
     <item
         android:id="@+id/action_reviews"
         android:icon="@android:drawable/ic_menu_edit"
-        android:title="Reviews"
+        android:title="@string/reviews"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_profile"
         android:icon="@drawable/instagram_user_filled_24"
-        android:title="Profile"
+        android:title="@string/profile"
         app:showAsAction="always" />
 </menu>

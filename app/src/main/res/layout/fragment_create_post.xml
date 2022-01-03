@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:layout_editor_absoluteY="25dp">
+
+    <EditText
+        android:id="@+id/etReviewText"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_corners"
+        android:backgroundTint="@color/light_gray"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/enter_review_here"
+        android:importantForAutofill="no"
+        android:inputType="textMultiLine"
+        android:padding="4dp"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/btnReviewCamera"
+        android:layout_width="60dp"
+        android:layout_height="48dp"
+        android:layout_alignStart="@+id/etReviewText"
+        android:layout_alignBottom="@+id/etReviewText"
+        android:background="@drawable/clickable_rounded_corners"
+        android:backgroundTint="@color/light_gray"
+        android:contentDescription="@string/take_a_picture"
+        app:srcCompat="@android:drawable/ic_menu_camera"
+        app:tint="@color/black" />
+
+    <ImageButton
+        android:id="@+id/btnPostReview"
+        android:layout_width="60dp"
+        android:layout_height="48dp"
+        android:layout_alignEnd="@+id/etReviewText"
+        android:layout_alignBottom="@+id/etReviewText"
+        android:background="@drawable/clickable_rounded_corners"
+        android:backgroundTint="@color/light_gray"
+        android:contentDescription="@string/post_review"
+        app:srcCompat="@android:drawable/ic_menu_send"
+        app:tint="@color/black" />
+
+    <ImageView
+        android:id="@+id/ivImagePreview"
+        android:layout_width="60dp"
+        android:layout_height="48dp"
+        android:layout_alignStart="@+id/btnReviewCamera"
+        android:layout_alignTop="@+id/btnReviewCamera"
+        tools:ignore="contentDescription"
+        tools:srcCompat="@tools:sample/avatars" />
+
+</RelativeLayout>

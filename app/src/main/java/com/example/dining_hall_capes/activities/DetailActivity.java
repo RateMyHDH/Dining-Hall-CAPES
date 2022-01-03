@@ -1,4 +1,4 @@
-package com.example.dining_hall_capes;
+package com.example.dining_hall_capes.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,17 +9,19 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.example.dining_hall_capes.R;
 import com.example.dining_hall_capes.models.Post;
+import com.parse.ParseFile;
 
 import org.parceler.Parcels;
 
 public class DetailActivity extends AppCompatActivity {
 
-    TextView tvUsername;
-    TextView tvTimestamp;
-    ImageView ivProfileImage;
-    TextView tvBody;
-    ImageView ivReviewImage;
+    private TextView tvUsername;
+    private TextView tvTimestamp;
+    private ImageView ivProfileImage;
+    private TextView tvBody;
+    private ImageView ivReviewImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,15 +37,17 @@ public class DetailActivity extends AppCompatActivity {
         Post post = Parcels.unwrap(getIntent().getParcelableExtra("post"));
         tvUsername.setText(post.getAuthor().getUsername());
         tvTimestamp.setText(post.getTime());
-        if(post.getAuthor().getParseFile("profilePic") != null){
+
+        ParseFile image = post.getAuthor().getParseFile("profilePic");
+        if (image != null){
             Glide.with(this)
-                        .load(post.getAuthor().getParseFile("profilePic").getUrl())
-                        .transform(new CenterCrop(), new RoundedCorners(20))
-                        .into(ivProfileImage);
+                    .load(image.getUrl())
+                    .transform(new CenterCrop(), new RoundedCorners(20))
+                    .into(ivProfileImage);
         }
         tvBody.setText(post.getReview());
-        if(post.getParseFile("image") != null){
-            Glide.with(this).load(post.getParseFile("image").getUrl()).into(ivReviewImage);
+        if(post.getImage() != null){
+            Glide.with(this).load(post.getImage().getUrl()).into(ivReviewImage);
         }
     }
 }
