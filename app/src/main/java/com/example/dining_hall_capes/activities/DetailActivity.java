@@ -10,6 +10,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.dining_hall_capes.R;
+import com.example.dining_hall_capes.fragments.StreamFragment;
+import com.example.dining_hall_capes.models.AppUser;
 import com.example.dining_hall_capes.models.Post;
 import com.parse.ParseFile;
 
@@ -34,11 +36,11 @@ public class DetailActivity extends AppCompatActivity {
         tvBody = findViewById(R.id.tvBody);
         ivReviewImage = findViewById(R.id.ivReviewImage);
 
-        Post post = Parcels.unwrap(getIntent().getParcelableExtra("post"));
+        Post post = Parcels.unwrap(getIntent().getParcelableExtra(PostActivity.EXTRA_POST));
         tvUsername.setText(post.getAuthor().getUsername());
         tvTimestamp.setText(post.getTime());
 
-        ParseFile image = post.getAuthor().getParseFile("profilePic");
+        ParseFile image = AppUser.getProfilePicture(post.getAuthor());
         if (image != null){
             Glide.with(this)
                     .load(image.getUrl())
@@ -46,7 +48,7 @@ public class DetailActivity extends AppCompatActivity {
                     .into(ivProfileImage);
         }
         tvBody.setText(post.getReview());
-        if(post.getImage() != null){
+        if (post.getImage() != null) {
             Glide.with(this).load(post.getImage().getUrl()).into(ivReviewImage);
         }
     }

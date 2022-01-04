@@ -28,6 +28,7 @@ import java.util.List;
 public class PostActivity extends AppCompatActivity implements CreatePostDialogFragment.OnCreatePostDialogListener {
 
     public static final String TAG = "PostActivity";
+    public static final String EXTRA_POST = "post";
 
     private String vendorID;
     private String vendorName;
@@ -65,7 +66,7 @@ public class PostActivity extends AppCompatActivity implements CreatePostDialogF
 
         tvDHName.setText(vendorName);
         createPosts.setOnClickListener(view -> {
-            CreatePostDialogFragment frag = CreatePostDialogFragment.newInstance(vendorID);
+            CreatePostDialogFragment frag = CreatePostDialogFragment.newInstance(this, vendorID);
             frag.show(fragmentManager, CreatePostDialogFragment.TAG);
         });
 

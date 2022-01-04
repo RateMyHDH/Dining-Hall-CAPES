@@ -1,8 +1,6 @@
 package com.example.dining_hall_capes.fragments;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -28,12 +26,10 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.dining_hall_capes.activities.LoginActivity;
 import com.example.dining_hall_capes.R;
-import com.parse.ParseException;
+import com.example.dining_hall_capes.models.AppUser;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 public class ProfileFragment extends Fragment {
@@ -53,14 +49,17 @@ public class ProfileFragment extends Fragment {
             new ActivityResultContracts.TakePicture(),
             result -> {
                 if (result) {
-                    Bitmap image = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
-                    ivProfilePic.setImageBitmap(image);
-                    currentUser.put("profilePic", new ParseFile(photoFile));
+                    AppUser.setProfilePicture(currentUser, new ParseFile(photoFile));
                     currentUser.saveInBackground(e -> {
                         if(e != null){
                             Log.e(TAG, "Error while saving", e);
                             Toast.makeText(getContext(), "Image not saved", Toast.LENGTH_LONG).show();
+                            return;
                         }
+                        Glide.with(requireContext())
+                                .load(photoFile)
+                                .transform(new CenterCrop(), new RoundedCorners(20))
+                                .into(ivProfilePic);
                     });
                 } else {
                     Toast.makeText(getContext(), "Image not saved", Toast.LENGTH_SHORT).show();
@@ -87,7 +86,7 @@ public class ProfileFragment extends Fragment {
         userName = view.findViewById(R.id.tvUser);
 
         userName.setText(currentUser.getUsername());
-        ParseFile image = currentUser.getParseFile("profilePic");
+        ParseFile image = AppUser.getProfilePicture(currentUser);
         if(image != null) {
             Glide.with(requireContext())
                     .load(image.getUrl())

@@ -4,6 +4,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.dining_hall_capes.*;
 import com.example.dining_hall_capes.activities.DetailActivity;
+import com.example.dining_hall_capes.activities.PostActivity;
 import com.example.dining_hall_capes.models.*;
 
 import android.annotation.SuppressLint;
@@ -99,8 +100,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
             tvComment.setText(post.getReview());
             postTime.setText(post.getTime());
             // Getting profile picture of user who posted if needed
-            ParseFile image = post.getAuthor().fetchIfNeeded().getParseFile("profilePic");
-            if (image != null){
+            ParseFile image = AppUser.getProfilePicture(post.getAuthor());
+            if (image != null) {
                 Glide.with(context)
                         .load(image.getUrl())
                         .transform(new CenterCrop(), new RoundedCorners(20))
@@ -108,7 +109,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder>{
             }
             container.setOnClickListener(view -> {
                 Intent i = new Intent(context, DetailActivity.class);
-                i.putExtra("post", Parcels.wrap(post));
+                i.putExtra(PostActivity.EXTRA_POST, Parcels.wrap(post));
                 context.startActivity(i);
             });
 

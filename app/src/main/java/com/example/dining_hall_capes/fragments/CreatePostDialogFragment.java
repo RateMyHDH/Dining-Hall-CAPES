@@ -1,7 +1,5 @@
 package com.example.dining_hall_capes.fragments;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -21,6 +19,9 @@ import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.DialogFragment;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.dining_hall_capes.R;
 import com.example.dining_hall_capes.models.Post;
 import com.parse.ParseFile;
@@ -33,6 +34,7 @@ public class CreatePostDialogFragment extends DialogFragment {
     public static final String TAG = "CreatePostFragment";
     public static final String IMAGE_NAME = "review_image.jpg";
 
+    private OnCreatePostDialogListener context;
     private String vendorID;
     private File photoFile;
 
@@ -45,8 +47,10 @@ public class CreatePostDialogFragment extends DialogFragment {
             new ActivityResultContracts.TakePicture(),
             result -> {
                 if (result) {
-                    Bitmap image = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
-                    ivImagePreview.setImageBitmap(image);
+                    Glide.with(requireContext())
+                            .load(photoFile)
+                            .transform(new CenterCrop(), new RoundedCorners(20))
+                            .into(ivImagePreview);
                 } else {
                     Toast.makeText(getContext(), "Image not saved", Toast.LENGTH_SHORT).show();
                 }
@@ -60,11 +64,10 @@ public class CreatePostDialogFragment extends DialogFragment {
         // Empty constructor is required for DialogFragment
     }
 
-    public static CreatePostDialogFragment newInstance(String vendorID) {
+    public static CreatePostDialogFragment newInstance(OnCreatePostDialogListener context, String vendorID) {
         CreatePostDialogFragment frag = new CreatePostDialogFragment();
-        Bundle args = new Bundle();
-        args.putString(Post.KEY_VENDOR_ID, vendorID);
-        frag.setArguments(args);
+        frag.context = context;
+        frag.vendorID = vendorID;
         return frag;
     }
 
@@ -77,8 +80,6 @@ public class CreatePostDialogFragment extends DialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        vendorID = requireArguments().getString(Post.KEY_VENDOR_ID);
 
         etReviewText = view.findViewById(R.id.etReviewText);
         btnReviewCamera = view.findViewById(R.id.btnReviewCamera);
@@ -137,7 +138,7 @@ public class CreatePostDialogFragment extends DialogFragment {
                 Toast.makeText(getContext(), "Error while saving", Toast.LENGTH_SHORT).show();
                 return;
             }
-            ((OnCreatePostDialogListener) requireContext()).onCreatePost(post);
+            context.onCreatePost(post);
             dismiss();
         });
     }

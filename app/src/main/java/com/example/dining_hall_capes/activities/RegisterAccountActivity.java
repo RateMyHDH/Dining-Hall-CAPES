@@ -17,7 +17,7 @@ import com.parse.ParseUser;
 
 public class RegisterAccountActivity extends AppCompatActivity {
 
-    public static final String REGISTER_TAG = "Register Activity";
+    public static final String TAG = "RegisterActivity";
 
     private EditText etEmail;
     private EditText etNewPhone;
@@ -61,11 +61,11 @@ public class RegisterAccountActivity extends AppCompatActivity {
 
     private void onUserSignUp(ParseException e) {
         if (e == null) {
-            Log.i(REGISTER_TAG, "Sign up succeeded");
+            Log.i(TAG, "Sign up succeeded");
             Toast.makeText(RegisterAccountActivity.this, "Sign Up Success", Toast.LENGTH_LONG).show();
             goLoginActivity();
         } else {
-            Log.e(REGISTER_TAG, "Sign up failed", e);
+            Log.e(TAG, "Sign up failed", e);
             Toast.makeText(RegisterAccountActivity.this, "Sign up failed", Toast.LENGTH_LONG).show();
         }
     }
